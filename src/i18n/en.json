@@ -1,7 +1,7 @@
 {
     "hero": {
       "portfolio": "Portfolio",
-      "subtitle": "Software Engineer ·",
+      "subtitle": "Software Developer ·",
       "description": "Fullstack developer focused on building scalable applications, automation pipelines, and AI-powered solutions using modern Cloud and DevOps practices.",
       "viewWork": "View my work",
       "contact": "Contact"
@@ -74,6 +74,7 @@
     },
     "typewriter": {
       "roles": [
+        "Software Engineering & Architecture",
         "Fullstack Developer",
         "CI/CD & DevOps",
         "Kubernetes & Docker",
