@@ -1,5 +1,7 @@
 # Francisco — Portfolio
 
+**Idioma / Language:** 🇪🇸 [Español](README.md) · 🇬🇧 [English](README.en.md)
+
 [![Astro](https://img.shields.io/badge/Astro-5.x-FF5D01?logo=astro)](https://astro.build)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.x-38B2AC?logo=tailwind-css)](https://tailwindcss.com)
 [![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://vercel.com)
