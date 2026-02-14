@@ -10,7 +10,7 @@ const roles = lang === 'es'
 
 <section class="min-h-screen flex items-center justify-center px-4 pb-8 sm:pb-12 relative overflow-hidden">
   <div class="max-w-5xl w-full flex flex-col md:flex-row md:items-center md:justify-between gap-10 md:gap-12 relative z-10">
-    <!-- Imagen de perfil: arriba en móvil, a la derecha en desktop -->
+    <!-- Imagen de perfil: aparece primero -->
     <div class="order-first md:order-last flex justify-center md:justify-end shrink-0 hero-photo-wrap">
       <img
         src={imagenPerfil.src}
@@ -23,13 +23,13 @@ const roles = lang === 'es'
     </div>
     <div class="flex flex-col gap-10 min-w-0">
     <div class="space-y-4">
-      <p class="text-xs sm:text-sm uppercase tracking-[0.2em] text-muted font-mono mb-2" data-i18n="hero.portfolio">
+      <p class="hero-anim hero-from-left text-xs sm:text-sm uppercase tracking-[0.2em] text-muted font-mono mb-2" data-i18n="hero.portfolio" style="animation-delay: 0.35s">
         {t('hero.portfolio')}
       </p>
 
-      <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold leading-[1.1] tracking-tight">
+      <h1 class="hero-anim hero-from-left text-5xl sm:text-6xl md:text-7xl font-bold leading-[1.1] tracking-tight" style="animation-delay: 0.5s">
         <span class="block text-text">Francisco Tébar Navarro</span>
-        <span class="block text-accent font-mono text-xl sm:text-2xl md:text-3xl mt-3 sm:mt-4">
+        <span class="block hero-anim hero-from-right text-accent font-mono text-xl sm:text-2xl md:text-3xl mt-3 sm:mt-4" style="animation-delay: 0.65s">
           <span data-i18n="hero.subtitle">{t('hero.subtitle')} </span>
           <span
             id="typewriter"
@@ -41,12 +41,12 @@ const roles = lang === 'es'
         </span>
       </h1>
 
-      <p class="text-base sm:text-lg text-muted max-w-xl leading-relaxed" data-i18n="hero.description">
+      <p class="hero-anim hero-from-left text-base sm:text-lg text-muted max-w-xl leading-relaxed" data-i18n="hero.description" style="animation-delay: 0.8s">
         {t('hero.description')}
       </p>
     </div>
 
-    <div class="flex flex-col sm:flex-row gap-4 sm:items-center">
+    <div class="hero-anim hero-from-bottom flex flex-col sm:flex-row gap-4 sm:items-center" style="animation-delay: 1s">
       <a
         href="#projects"
         class="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-accent text-white font-semibold text-sm sm:text-base hover:opacity-90 transition-all hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] shadow-lg"
@@ -125,29 +125,77 @@ const roles = lang === 'es'
   </script>
 
   <style>
+    /* Imagen: aparece primero (0.5s) */
     .hero-photo-wrap {
-      animation: hero-photo-in 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      animation: hero-photo-in 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
     @keyframes hero-photo-in {
       from {
         opacity: 0;
-        transform: translate(1.5rem, 0);
+        transform: translate(1.5rem, 0) scale(0.95);
       }
       to {
         opacity: 1;
-        transform: translate(0, 0);
+        transform: translate(0, 0) scale(1);
       }
     }
     @media (max-width: 767px) {
       @keyframes hero-photo-in {
         from {
           opacity: 0;
-          transform: translate(0, -1rem);
+          transform: translate(0, -1rem) scale(0.95);
         }
         to {
           opacity: 1;
-          transform: translate(0, 0);
+          transform: translate(0, 0) scale(1);
         }
+      }
+    }
+
+    /* Texto: entra después, desde distintos lados */
+    .hero-anim {
+      opacity: 0;
+      animation-duration: 0.55s;
+      animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      animation-fill-mode: forwards;
+    }
+    .hero-from-left {
+      animation-name: hero-from-left;
+    }
+    .hero-from-right {
+      animation-name: hero-from-right;
+    }
+    .hero-from-bottom {
+      animation-name: hero-from-bottom;
+    }
+    @keyframes hero-from-left {
+      from {
+        opacity: 0;
+        transform: translate(-1.25rem, 0);
+      }
+      to {
+        opacity: 1;
+        transform: translate(0, 0);
+      }
+    }
+    @keyframes hero-from-right {
+      from {
+        opacity: 0;
+        transform: translate(1.25rem, 0);
+      }
+      to {
+        opacity: 1;
+        transform: translate(0, 0);
+      }
+    }
+    @keyframes hero-from-bottom {
+      from {
+        opacity: 0;
+        transform: translate(0, 1rem);
+      }
+      to {
+        opacity: 1;
+        transform: translate(0, 0);
       }
     }
     .hero-gradient {

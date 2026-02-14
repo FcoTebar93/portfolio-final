@@ -1,6 +1,9 @@
 # Francisco — Portfolio
 
-**Idioma / Language:** 🇪🇸 [Español](README.md) · 🇬🇧 [English](README.en.md)
+<p align="center">
+  <a href="README.es.md" style="display: inline-block; padding: 0.4em 1em; margin: 0 2px; background: #238636; color: white; text-decoration: none; border-radius: 6px; font-weight: 600;">🇪🇸 Español</a>
+  <a href="README.en.md" style="display: inline-block; padding: 0.4em 1em; margin: 0 2px; background: #21262d; color: #8b949e; text-decoration: none; border-radius: 6px; border: 1px solid #30363d;">🇬🇧 English</a>
+</p>
 
 [![Astro](https://img.shields.io/badge/Astro-5.x-FF5D01?logo=astro)](https://astro.build)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.x-38B2AC?logo=tailwind-css)](https://tailwindcss.com)
