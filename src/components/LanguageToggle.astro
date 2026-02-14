@@ -50,11 +50,11 @@
       }
     };
 
-    const t = (key) => {
+    const t = (key: string): string => {
       const keys = key.split('.');
-      let value = translations[lang];
+      let value: unknown = translations[lang];
       for (const k of keys) {
-        value = value?.[k];
+        value = (value as Record<string, unknown>)?.[k];
         if (value === undefined) return key;
       }
       return typeof value === 'string' ? value : key;
@@ -129,7 +129,6 @@
   }
 
   if (typeof window !== 'undefined') {
-    const lang = getLanguage();
     updateLanguageDisplay();
 
     document.getElementById('language-toggle')?.addEventListener('click', () => {
