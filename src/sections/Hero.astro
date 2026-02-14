@@ -1,0 +1,147 @@
+---
+import { t, getLanguage } from '../utils/i18n.ts';
+
+const lang = getLanguage();
+const roles = lang === 'es' 
+  ? ["Desarrollador Fullstack", "CI/CD & DevOps", "Kubernetes & Docker", "Cloud & GCP", "Despliegue de LLM", "Automatización e Integraciones"]
+  : ["Fullstack Developer", "CI/CD & DevOps", "Kubernetes & Docker", "Cloud & GCP", "LLM Deployment", "Automation & Integrations"];
+---
+
+<section class="min-h-screen flex items-center justify-center px-4 pb-8 sm:pb-12 relative overflow-hidden">
+  <div class="max-w-4xl w-full flex flex-col gap-10 relative z-10">
+    <div class="space-y-4">
+      <p class="text-xs sm:text-sm uppercase tracking-[0.2em] text-muted font-mono mb-2" data-i18n="hero.portfolio">
+        {t('hero.portfolio')}
+      </p>
+
+      <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold leading-[1.1] tracking-tight">
+        <span class="block text-text">Francisco Tébar Navarro</span>
+        <span class="block text-accent font-mono text-xl sm:text-2xl md:text-3xl mt-3 sm:mt-4">
+          <span data-i18n="hero.subtitle">{t('hero.subtitle')} </span>
+          <span
+            id="typewriter"
+            class="border-r-2 border-accent pr-1"
+            data-roles={JSON.stringify(roles)}
+          >
+            {roles[0]}
+          </span>
+        </span>
+      </h1>
+
+      <p class="text-base sm:text-lg text-muted max-w-xl leading-relaxed" data-i18n="hero.description">
+        {t('hero.description')}
+      </p>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-4 sm:items-center">
+      <a
+        href="#projects"
+        class="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-accent text-white font-semibold text-sm sm:text-base hover:opacity-90 transition-all hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] shadow-lg"
+        data-i18n="hero.viewWork"
+      >
+        {t('hero.viewWork')}
+      </a>
+
+      <div class="flex items-center gap-4 text-sm text-muted">
+        <a
+          href="https://github.com/FcoTebar93"
+          target="_blank"
+          rel="noreferrer"
+          class="hover:text-accent transition-colors font-medium"
+        >
+          GitHub
+        </a>
+        <span class="w-[1px] h-4 bg-muted/30" />
+        <a
+          href="https://www.linkedin.com/in/francisco-jos%C3%A9-t%C3%A9bar-navarro-5a858a23a/"
+          target="_blank"
+          rel="noreferrer"
+          class="hover:text-accent transition-colors font-medium"
+        >
+          LinkedIn
+        </a>
+        <span class="w-[1px] h-4 bg-muted/30" />
+        <a
+          href="mailto:fcotebar93@gmail.com"
+          class="hover:text-accent transition-colors font-medium"
+          data-i18n="hero.contact"
+        >
+          {t('hero.contact')}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="pointer-events-none fixed inset-0 -z-10 hero-gradient"></div>
+
+  <script is:inline>
+    const el = document.getElementById("typewriter");
+    if (el) {
+      const roles = JSON.parse(el.dataset.roles || "[]");
+      let index = 0;
+      let charIndex = 0;
+      let deleting = false;
+
+      const type = () => {
+        const current = roles[index] || "";
+
+        if (!deleting) {
+          el.textContent = current.slice(0, charIndex + 1);
+          charIndex++;
+          if (charIndex === current.length) {
+            deleting = true;
+            setTimeout(type, 1200);
+            return;
+          }
+        } else {
+          el.textContent = current.slice(0, charIndex - 1);
+          charIndex--;
+          if (charIndex === 0) {
+            deleting = false;
+            index = (index + 1) % roles.length;
+          }
+        }
+
+        const speed = deleting ? 40 : 90;
+        setTimeout(type, speed);
+      };
+
+      type();
+    }
+  </script>
+
+  <style>
+    .hero-gradient {
+      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.18) 0%, transparent 60%),
+                  radial-gradient(circle at bottom, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 1) 100%);
+    }
+
+    [data-theme="light"] section {
+      background: var(--color-primary);
+    }
+
+    [data-theme="light"] .hero-gradient {
+      background: transparent;
+    }
+
+    [data-theme="light"] .text-muted {
+      color: #525252;
+    }
+
+    [data-theme="light"] .text-text {
+      color: #1A1A1A;
+    }
+
+    [data-theme="light"] h1 .text-text {
+      color: #0A0A0A;
+    }
+
+    [data-theme="light"] .bg-accent {
+      background-color: var(--color-accent);
+    }
+
+    [data-theme="light"] a.hover\:text-accent:hover {
+      color: var(--color-accent);
+    }
+  </style>
+</section>

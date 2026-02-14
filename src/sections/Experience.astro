@@ -1,0 +1,158 @@
+---
+import { t } from '../utils/i18n.ts';
+---
+
+<section id="experience" class="px-4 py-16 sm:py-24 bg-secondary/40">
+  <div class="max-w-5xl mx-auto relative">
+    <h2 class="text-base sm:text-lg uppercase tracking-[0.15em] text-accent font-mono mb-12 font-semibold" data-i18n="experience.title">{t('experience.title')}</h2>
+
+    <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-muted/40 -translate-x-1/2 experience-line"></div>
+
+    <div class="space-y-12 md:space-y-16">
+      <article class="experience-item relative grid md:grid-cols-2 gap-y-4 opacity-0 translate-y-8 transition-all duration-700 experience-card">
+        <div class="hidden md:block absolute left-1/2 top-4 w-4 h-4 rounded-full border-2 border-accent bg-primary -translate-x-1/2"></div>
+
+        <div class="hidden md:block"></div>
+
+        <div class="space-y-2 md:pl-10">
+          <header class="flex flex-col items-start md:items-start gap-1">
+            <h3 class="text-lg sm:text-xl font-semibold text-text" data-i18n="experience.roles.softwareDeveloper">{t('experience.roles.softwareDeveloper')}</h3>
+            <span class="text-xs sm:text-sm text-muted font-mono">Mar 2024 - Jan 2026</span>
+          </header>
+
+          <p class="text-sm sm:text-base text-muted" data-i18n="experience.locations.aunoa">{t('experience.locations.aunoa')}</p>
+
+          <ul class="mt-4 space-y-3 text-sm sm:text-base text-muted leading-relaxed">
+            <li data-i18n="experience.descriptions.softwareDev1">{t('experience.descriptions.softwareDev1')}</li>
+            <li data-i18n="experience.descriptions.softwareDev2">{t('experience.descriptions.softwareDev2')}</li>
+            <li data-i18n="experience.descriptions.softwareDev3">{t('experience.descriptions.softwareDev3')}</li>
+          </ul>
+
+          <p class="mt-2 text-xs sm:text-sm text-muted/80 font-mono">Tech: Angular, Node.js, Docker, Kubernetes, GCP, Jenkins, SQL, LLMs, Slim PHP, Vault, Redis, RabbitMQ, Clickhouse</p>
+        </div>
+      </article>
+
+      <article class="experience-item relative grid md:grid-cols-2 gap-y-4 opacity-0 translate-y-8 transition-all duration-700 delay-150 experience-card">
+        <div class="hidden md:block absolute left-1/2 top-4 w-4 h-4 rounded-full border-2 border-accent bg-primary -translate-x-1/2"></div>
+
+        <div class="space-y-2 md:text-right md:pr-10">
+          <header class="flex flex-col items-start md:items-end gap-1">
+            <h3 class="text-lg sm:text-xl font-semibold text-text" data-i18n="experience.roles.chatbotDeveloper">{t('experience.roles.chatbotDeveloper')}</h3>
+            <span class="text-xs sm:text-sm text-muted font-mono">Nov 2023 – Mar 2024</span>
+          </header>
+
+          <p class="text-sm sm:text-base text-muted" data-i18n="experience.locations.aunoa">{t('experience.locations.aunoa')}</p>
+
+          <ul class="mt-4 space-y-3 text-sm sm:text-base text-muted leading-relaxed">
+            <li data-i18n="experience.descriptions.chatbotDev1">{t('experience.descriptions.chatbotDev1')}</li>
+            <li data-i18n="experience.descriptions.chatbotDev2">{t('experience.descriptions.chatbotDev2')}</li>
+          </ul>
+
+          <p class="mt-2 text-xs sm:text-sm text-muted/80 font-mono">Tech: Aunoa's own platform, Javascript, SQLite, Prompt Engineering, Workflow Design, Generative AI, NLP, Statistical Software</p>
+        </div>
+
+        <div class="hidden md:block"></div>
+      </article>
+
+      <article class="experience-item relative grid md:grid-cols-2 gap-y-4 opacity-0 translate-y-8 transition-all duration-700 delay-300 experience-card">
+        <div class="hidden md:block absolute left-1/2 top-4 w-4 h-4 rounded-full border-2 border-accent bg-primary -translate-x-1/2"></div>
+
+        <div class="hidden md:block"></div>
+
+        <div class="space-y-2 md:pl-10">
+          <header class="flex flex-col items-start md:items-start gap-1">
+            <h3 class="text-lg sm:text-xl font-semibold text-text" data-i18n="experience.roles.backendDeveloper">{t('experience.roles.backendDeveloper')}</h3>
+            <span class="text-xs sm:text-sm text-muted font-mono">march 2023 - may 2023</span>
+          </header>
+
+          <p class="text-sm sm:text-base text-muted" data-i18n="experience.locations.mimacom">{t('experience.locations.mimacom')}</p>
+
+          <ul class="mt-4 space-y-3 text-sm sm:text-base text-muted leading-relaxed">
+            <li data-i18n="experience.descriptions.backendDev1">{t('experience.descriptions.backendDev1')}</li>
+            <li data-i18n="experience.descriptions.backendDev2">{t('experience.descriptions.backendDev2')}</li>
+          </ul>
+
+          <p class="mt-2 text-xs sm:text-sm text-muted/80 font-mono">Tech: Javascript, Spring Boot, Flowable, SQL, REST APIs, CI/CD, Docker, Kubernetes, BPM (Business Processes Management), SCRUM, Customer Care</p>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <script is:inline>
+    (function () {
+      function initExperienceAnimation() {
+        var items = document.querySelectorAll(".experience-item");
+        if (!items.length) return;
+
+        var observerOptions = {
+          threshold: 0.1,
+          rootMargin: "0px 0px -80px 0px",
+        };
+
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("animate-in");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          observerOptions
+        );
+
+        items.forEach(function (item) {
+          observer.observe(item);
+        });
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initExperienceAnimation);
+      } else {
+        initExperienceAnimation();
+      }
+    })();
+  </script>
+  <style>
+    .experience-item {
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    .experience-item.animate-in {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+
+    [data-theme="light"] #experience {
+      background: var(--color-secondary);
+    }
+
+    [data-theme="light"] .experience-card {
+      background: var(--color-surface);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      border: 1.5px solid var(--color-border);
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="light"] .experience-card:hover {
+      box-shadow: 0 8px 24px rgba(2, 132, 199, 0.12);
+      transform: translateY(-4px);
+      border-color: var(--color-accent);
+    }
+
+    [data-theme="light"] .experience-line {
+      background: var(--color-border);
+      opacity: 0.5;
+    }
+
+    [data-theme="light"] .experience-card .text-text {
+      color: #1A1A1A;
+    }
+
+    [data-theme="light"] .experience-card .text-muted {
+      color: #525252;
+    }
+  </style>
+</section>

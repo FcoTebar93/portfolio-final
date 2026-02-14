@@ -1,0 +1,37 @@
+---
+import { t } from '../utils/i18n.ts';
+---
+
+<section id="about" class="px-4 py-16 sm:py-24">
+    <div class="max-w-4xl mx-auto space-y-6">
+        <h2 class="text-base sm:text-lg uppercase tracking-[0.15em] text-accent font-mono font-semibold mb-4" data-i18n="about.title">
+            {t('about.title')}
+        </h2>
+
+        <p class="text-2xl sm:text-3xl font-semibold text-text leading-tight" data-i18n="about.heading">
+            {t('about.heading')}
+        </p>
+
+        <p class="text-base leading-relaxed text-text/90" data-i18n="about.paragraph1">
+            {t('about.paragraph1')}
+        </p>
+
+        <p class="text-base sm:text-lg text-muted leading-relaxed" data-i18n="about.paragraph2">
+            {t('about.paragraph2')}
+        </p>
+    </div>
+</section>
+
+<style>
+    [data-theme="light"] #about {
+        background: var(--color-primary);
+    }
+    
+    [data-theme="light"] #about .text-text {
+        color: #1A1A1A;
+    }
+
+    [data-theme="light"] #about .text-muted {
+        color: #525252;
+    }
+</style>

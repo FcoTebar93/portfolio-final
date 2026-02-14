@@ -1,0 +1,159 @@
+---
+---
+<button
+  id="language-toggle"
+  class="px-3 py-2.5 rounded-xl bg-secondary/60 hover:bg-secondary transition-all text-muted hover:text-accent text-sm font-medium backdrop-blur-sm border border-transparent hover:border-accent/20 language-toggle-btn"
+  aria-label="Toggle language"
+>
+  <span id="lang-text">EN</span>
+</button>
+
+<script>
+  function getLanguage() {
+    if (typeof window === 'undefined') return 'en';
+    const saved = localStorage.getItem('language');
+    if (saved === 'es' || saved === 'en') {
+      return saved;
+    }
+    const browserLang = navigator.language.split('-')[0];
+    return browserLang === 'es' ? 'es' : 'en';
+  }
+
+  function updateLanguageDisplay() {
+    const lang = getLanguage();
+    const langText = document.getElementById('lang-text');
+    if (langText) {
+      langText.textContent = lang.toUpperCase();
+    }
+  }
+
+  function updatePageContent() {
+    if (typeof window === 'undefined') return;
+    
+    const lang = getLanguage();
+    const translations = {
+      en: {
+        hero: { portfolio: "Portfolio", subtitle: "Software Engineer ·", description: "Fullstack developer focused on building scalable applications, automation pipelines, and AI-powered solutions using modern Cloud and DevOps practices.", viewWork: "View my work", contact: "Contact" },
+        about: { title: "About", heading: "I build reliable, automated systems from backend to cloud.", paragraph1: "I'm a fullstack developer with experience in Angular, Nodejs, SQL, Redis, RabbitMQ, Jenkins, Docker, Kubernetes and Google Cloud. I enjoy designing and implementing CI/CD pipelines, integrating external services, and deploying LLM-based features into production environments.", paragraph2: "My focus is on creating maintainable architectures, automating repetitive processes, and collaborating closely with teams to ship high quality software faster and more safely." },
+        experience: { title: "Experience", roles: { softwareDeveloper: "Software developer", chatbotDeveloper: "Chatbot Developer", backendDeveloper: "Backend Developer" }, locations: { aunoa: "Aunoa · Valencia", mimacom: "Mimacom · Valencia" }, descriptions: { softwareDev1: "Maintained and extended a large‑scale communication platform across the full stack (Angular, Node.js, Slim PHP, Docker, Kubernetes, GCP, Jenkins, SQL, Vault, Redis, RabbitMQ, ClickHouse, LLMs), implementing and debugging REST APIs, frontend features and data‑warehouse integrations.", softwareDev2: "Led a revamp of the WhatsApp bulk template creation and sending flow, redesigning the UX and backend logic to make campaign configuration faster, more reliable and easier to operate from the platform.", softwareDev3: "Contributed to the development of a VoIP contact center with an OpenAI Whisper‑powered voicebot and seamless handoff to human agents, exposing configuration and feature toggles through a self‑service interface within the platform.", chatbotDev1: "Designed, built and maintained conversational chatbots using workflow‑based automation with embedded JavaScript functions, integrating SOAP and REST APIs, NLP models and SQLite databases to deliver end‑to‑end solutions.", chatbotDev2: "Led prompt engineering and conversational AI tuning, created analytics and reporting for chatbot performance, and provided customer support to continuously improve workflows and user experience.", backendDev1: "Designed and implemented the end‑to‑end business logic for a recycling supply‑chain platform, covering the full flow from material collection to transformation into reusable products.", backendDev2: "Proactively aligned frontend, backend, business and support teams, establishing communication bridges and workflows that enabled the product to be delivered on time." } },
+        skills: { title: "Skills", filters: { all: "All", frontend: "Frontend", backend: "Backend", devops: "DevOps / Cloud", ai: "AI / Data" } },
+        contact: { title: "Contact", heading: "Let's work together. Send me a message and I'll get back to you.", email: "Email", social: "Social", form: { name: "Name", email: "Email", subject: "Subject", message: "Message", send: "Send Message", namePlaceholder: "Your name", emailPlaceholder: "your.email@example.com", subjectPlaceholder: "What's this about?", messagePlaceholder: "Tell me about your project..." } },
+        footer: { copyright: "© 2026 Francisco Tebar. All rights reserved." }
+      },
+      es: {
+        hero: { portfolio: "Portafolio", subtitle: "Ingeniero de Software ·", description: "Desarrollador fullstack enfocado en construir aplicaciones escalables, pipelines de automatización y soluciones impulsadas por IA usando prácticas modernas de Cloud y DevOps.", viewWork: "Ver mi trabajo", contact: "Contacto" },
+        about: { title: "Sobre mí", heading: "Construyo sistemas confiables y automatizados desde el backend hasta la nube.", paragraph1: "Soy un desarrollador fullstack con experiencia en Angular, Nodejs, SQL, Redis, RabbitMQ, Jenkins, Docker, Kubernetes y Google Cloud. Disfruto diseñando e implementando pipelines de CI/CD, integrando servicios externos y desplegando características basadas en LLM en entornos de producción.", paragraph2: "Mi enfoque está en crear arquitecturas mantenibles, automatizar procesos repetitivos y colaborar estrechamente con equipos para entregar software de alta calidad más rápido y de forma más segura." },
+        experience: { title: "Experiencia", roles: { softwareDeveloper: "Desarrollador de software", chatbotDeveloper: "Desarrollador de Chatbots", backendDeveloper: "Desarrollador Backend" }, locations: { aunoa: "Aunoa · Valencia", mimacom: "Mimacom · Valencia" }, descriptions: { softwareDev1: "Mantuve y extendí una plataforma de comunicación a gran escala en toda la pila (Angular, Node.js, Slim PHP, Docker, Kubernetes, GCP, Jenkins, SQL, Vault, Redis, RabbitMQ, ClickHouse, LLMs), implementando y depurando APIs REST, características frontend e integraciones de almacenes de datos.", softwareDev2: "Lideré una renovación del flujo de creación y envío masivo de plantillas de WhatsApp, rediseñando la UX y la lógica del backend para hacer la configuración de campañas más rápida, confiable y fácil de operar desde la plataforma.", softwareDev3: "Contribuí al desarrollo de un centro de contacto VoIP con un voicebot impulsado por OpenAI Whisper y transferencia fluida a agentes humanos, exponiendo configuración y toggles de características a través de una interfaz de autoservicio dentro de la plataforma.", chatbotDev1: "Diseñé, construí y mantuve chatbots conversacionales usando automatización basada en flujos de trabajo con funciones JavaScript integradas, integrando APIs SOAP y REST, modelos NLP y bases de datos SQLite para entregar soluciones de extremo a extremo.", chatbotDev2: "Lideré la ingeniería de prompts y el ajuste de IA conversacional, creé análisis e informes para el rendimiento del chatbot y proporcioné soporte al cliente para mejorar continuamente los flujos de trabajo y la experiencia del usuario.", backendDev1: "Diseñé e implementé la lógica de negocio de extremo a extremo para una plataforma de cadena de suministro de reciclaje, cubriendo el flujo completo desde la recolección de materiales hasta la transformación en productos reutilizables.", backendDev2: "Alineé proactivamente equipos de frontend, backend, negocio y soporte, estableciendo puentes de comunicación y flujos de trabajo que permitieron que el producto se entregara a tiempo." } },
+        skills: { title: "Habilidades", filters: { all: "Todos", frontend: "Frontend", backend: "Backend", devops: "DevOps / Cloud", ai: "IA / Datos" } },
+        contact: { title: "Contacto", heading: "Trabajemos juntos. Envíame un mensaje y te responderé.", email: "Correo", social: "Social", form: { name: "Nombre", email: "Email", subject: "Asunto", message: "Mensaje", send: "Enviar Mensaje", namePlaceholder: "Tu nombre", emailPlaceholder: "tu.email@ejemplo.com", subjectPlaceholder: "¿De qué se trata?", messagePlaceholder: "Cuéntame sobre tu proyecto..." } },
+        footer: { copyright: "© 2026 Francisco Tebar. Todos los derechos reservados." }
+      }
+    };
+
+    const t = (key) => {
+      const keys = key.split('.');
+      let value = translations[lang];
+      for (const k of keys) {
+        value = value?.[k];
+        if (value === undefined) return key;
+      }
+      return typeof value === 'string' ? value : key;
+    };
+
+    const translationsMap = {
+      'hero.portfolio': t('hero.portfolio'),
+      'hero.subtitle': t('hero.subtitle'),
+      'hero.description': t('hero.description'),
+      'hero.viewWork': t('hero.viewWork'),
+      'hero.contact': t('hero.contact'),
+      'about.title': t('about.title'),
+      'about.heading': t('about.heading'),
+      'about.paragraph1': t('about.paragraph1'),
+      'about.paragraph2': t('about.paragraph2'),
+      'experience.title': t('experience.title'),
+      'experience.roles.softwareDeveloper': t('experience.roles.softwareDeveloper'),
+      'experience.roles.chatbotDeveloper': t('experience.roles.chatbotDeveloper'),
+      'experience.roles.backendDeveloper': t('experience.roles.backendDeveloper'),
+      'experience.locations.aunoa': t('experience.locations.aunoa'),
+      'experience.locations.mimacom': t('experience.locations.mimacom'),
+      'experience.descriptions.softwareDev1': t('experience.descriptions.softwareDev1'),
+      'experience.descriptions.softwareDev2': t('experience.descriptions.softwareDev2'),
+      'experience.descriptions.softwareDev3': t('experience.descriptions.softwareDev3'),
+      'experience.descriptions.chatbotDev1': t('experience.descriptions.chatbotDev1'),
+      'experience.descriptions.chatbotDev2': t('experience.descriptions.chatbotDev2'),
+      'experience.descriptions.backendDev1': t('experience.descriptions.backendDev1'),
+      'experience.descriptions.backendDev2': t('experience.descriptions.backendDev2'),
+      'skills.title': t('skills.title'),
+      'skills.filters.all': t('skills.filters.all'),
+      'skills.filters.frontend': t('skills.filters.frontend'),
+      'skills.filters.backend': t('skills.filters.backend'),
+      'skills.filters.devops': t('skills.filters.devops'),
+      'skills.filters.ai': t('skills.filters.ai'),
+      'contact.title': t('contact.title'),
+      'contact.heading': t('contact.heading'),
+      'contact.email': t('contact.email'),
+      'contact.social': t('contact.social'),
+      'contact.form.name': t('contact.form.name'),
+      'contact.form.email': t('contact.form.email'),
+      'contact.form.subject': t('contact.form.subject'),
+      'contact.form.message': t('contact.form.message'),
+      'contact.form.send': t('contact.form.send'),
+      'contact.form.namePlaceholder': t('contact.form.namePlaceholder'),
+      'contact.form.emailPlaceholder': t('contact.form.emailPlaceholder'),
+      'contact.form.subjectPlaceholder': t('contact.form.subjectPlaceholder'),
+      'contact.form.messagePlaceholder': t('contact.form.messagePlaceholder'),
+      'footer.copyright': t('footer.copyright'),
+    };
+
+    Object.entries(translationsMap).forEach(([key, value]) => {
+      const elements = document.querySelectorAll(`[data-i18n="${key}"]`);
+      elements.forEach((el) => {
+        el.textContent = value;
+      });
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (key && (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement)) {
+        el.placeholder = t(key);
+      }
+    });
+
+    const typewriter = document.getElementById('typewriter');
+    if (typewriter) {
+      const roles = lang === 'es' 
+        ? ["Desarrollador Fullstack", "CI/CD & DevOps", "Kubernetes & Docker", "Cloud & GCP", "Despliegue de LLM", "Automatización e Integraciones"]
+        : ["Fullstack Developer", "CI/CD & DevOps", "Kubernetes & Docker", "Cloud & GCP", "LLM Deployment", "Automation & Integrations"];
+      typewriter.setAttribute('data-roles', JSON.stringify(roles));
+    }
+  }
+
+  if (typeof window !== 'undefined') {
+    const lang = getLanguage();
+    updateLanguageDisplay();
+
+    document.getElementById('language-toggle')?.addEventListener('click', () => {
+      const currentLang = getLanguage();
+      const newLang = currentLang === 'en' ? 'es' : 'en';
+      localStorage.setItem('language', newLang);
+      document.documentElement.lang = newLang;
+      updateLanguageDisplay();
+      updatePageContent();
+    });
+  }
+</script>
+
+<style>
+    [data-theme="light"] .language-toggle-btn {
+        background: var(--color-surface);
+        border-color: var(--color-border);
+        box-shadow: none;
+        color: var(--color-text);
+    }
+
+    [data-theme="light"] .language-toggle-btn:hover {
+        box-shadow: none;
+        background: var(--color-hover);
+        color: var(--color-accent);
+    }
+</style>

@@ -1,0 +1,304 @@
+---
+import { t } from '../utils/i18n.ts';
+---
+
+<section id="skills" class="px-4 py-16 sm:py-24 bg-secondary/40">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-base sm:text-lg uppercase tracking-[0.15em] text-accent font-mono mb-12 font-semibold" data-i18n="skills.title">{t('skills.title')}</h2>
+
+    <div class="flex flex-wrap gap-2 mb-8">
+      <button class="filter-btn active px-4 py-2 rounded-full bg-accent text-white text-sm font-medium transition-all hover:scale-105 active:scale-95" data-category="all" data-i18n="skills.filters.all">{t('skills.filters.all')}</button>
+      <button class="filter-btn px-4 py-2 rounded-full bg-secondary/60 text-muted text-sm hover:bg-secondary transition-all hover:scale-105 active:scale-95" data-category="frontend" data-i18n="skills.filters.frontend">{t('skills.filters.frontend')}</button>
+      <button class="filter-btn px-4 py-2 rounded-full bg-secondary/60 text-muted text-sm hover:bg-secondary transition-all hover:scale-105 active:scale-95" data-category="backend" data-i18n="skills.filters.backend">{t('skills.filters.backend')}</button>
+      <button class="filter-btn px-4 py-2 rounded-full bg-secondary/60 text-muted text-sm hover:bg-secondary transition-all hover:scale-105 active:scale-95" data-category="devops" data-i18n="skills.filters.devops">{t('skills.filters.devops')}</button>
+      <button class="filter-btn px-4 py-2 rounded-full bg-secondary/60 text-muted text-sm hover:bg-secondary transition-all hover:scale-105 active:scale-95" data-category="ai" data-i18n="skills.filters.ai">{t('skills.filters.ai')}</button>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="skill-card skill-frontend" data-category="frontend">
+        <div class="flex items-center gap-3">
+          <img src="https://api.iconify.design/logos/angular-icon.svg" alt="Angular" class="w-6 h-6 object-contain" />
+          <div>
+            <p class="text-sm font-medium text-text">Angular</p>
+            <p class="text-xs text-muted">Advanced</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card skill-frontend" data-category="frontend">
+        <div class="flex items-center gap-3">
+          <img src="https://api.iconify.design/logos/typescript-icon.svg" alt="TypeScript" class="w-6 h-6 object-contain" />
+          <div>
+            <p class="text-sm font-medium text-text">TypeScript</p>
+            <p class="text-xs text-muted">Intermediate</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card skill-backend" data-category="backend">
+        <div class="flex items-center gap-3">
+          <img src="https://api.iconify.design/logos/javascript.svg" alt="JavaScript" class="w-6 h-6 object-contain" />
+          <div>
+            <p class="text-sm font-medium text-text">JavaScript</p>
+            <p class="text-xs text-muted">Advanced</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card skill-backend" data-category="backend">
+        <div class="flex items-center gap-3">
+          <img src="https://api.iconify.design/logos/php.svg" alt="Slim PHP" class="w-6 h-6 object-contain" />
+          <div>
+            <p class="text-sm font-medium text-text">Slim PHP</p>
+            <p class="text-xs text-muted">Intermediate</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card skill-backend" data-category="backend">
+        <div class="flex items-center gap-3">
+          <img src="https://api.iconify.design/logos/java.svg" alt="Java" class="w-6 h-6 object-contain" />
+          <div>
+            <p class="text-sm font-medium text-text">Java</p>
+            <p class="text-xs text-muted">Intermediate</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card skill-backend" data-category="backend">
+        <div class="flex items-center gap-3">
+          <img src="https://api.iconify.design/logos/spring-icon.svg" alt="Spring Boot" class="w-6 h-6 object-contain" />
+          <div>
+            <p class="text-sm font-medium text-text">Spring Boot</p>
+            <p class="text-xs text-muted">Familiar</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card skill-backend" data-category="backend">
+        <div class="flex items-center gap-3">
+          <img src="https://api.iconify.design/logos/nodejs-icon.svg" alt="Node.js" class="w-6 h-6 object-contain" />
+          <div>
+            <p class="text-sm font-medium text-text">Node.js</p>
+            <p class="text-xs text-muted">Advanced</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card skill-backend" data-category="backend">
+        <div class="flex items-center gap-3">
+          <img src="https://api.iconify.design/mdi/database.svg" alt="SQL" class="w-6 h-6 object-contain" />
+          <div>
+            <p class="text-sm font-medium text-text">SQL</p>
+            <p class="text-xs text-muted">Advanced</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card skill-devops" data-category="devops">
+        <div class="flex items-center gap-3">
+          <img src="https://api.iconify.design/logos/vault.svg" alt="HashiCorp Vault" class="w-6 h-6 object-contain" />
+          <div>
+            <p class="text-sm font-medium text-text">HashiCorp Vault</p>
+            <p class="text-xs text-muted">Familiar</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card skill-devops" data-category="devops">
+        <div class="flex items-center gap-3">
+          <img src="https://api.iconify.design/logos/redis.svg" alt="Redis" class="w-6 h-6 object-contain" />
+          <div>
+            <p class="text-sm font-medium text-text">Redis</p>
+            <p class="text-xs text-muted">Intermediate</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card skill-devops" data-category="devops">
+        <div class="flex items-center gap-3">
+          <img src="https://api.iconify.design/logos/rabbitmq-icon.svg" alt="RabbitMQ" class="w-6 h-6 object-contain" />
+          <div>
+            <p class="text-sm font-medium text-text">RabbitMQ</p>
+            <p class="text-xs text-muted">Intermediate</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card skill-devops" data-category="devops">
+        <div class="flex items-center gap-3">
+          <img src="https://cdn.simpleicons.org/clickhouse/FFCC02" alt="ClickHouse" class="w-6 h-6 object-contain" />
+          <div>
+            <p class="text-sm font-medium text-text">ClickHouse</p>
+            <p class="text-xs text-muted">Intermediate</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card skill-devops" data-category="devops">
+        <div class="flex items-center gap-3">
+          <img src="https://api.iconify.design/logos/docker-icon.svg" alt="Docker" class="w-6 h-6 object-contain" />
+          <div>
+            <p class="text-sm font-medium text-text">Docker</p>
+            <p class="text-xs text-muted">Advanced</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card skill-devops" data-category="devops">
+        <div class="flex items-center gap-3">
+          <img src="https://api.iconify.design/logos/kubernetes.svg" alt="Kubernetes" class="w-6 h-6 object-contain" />
+          <div>
+            <p class="text-sm font-medium text-text">Kubernetes</p>
+            <p class="text-xs text-muted">Intermediate</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card skill-devops" data-category="devops">
+        <div class="flex items-center gap-3">
+          <img src="https://api.iconify.design/logos/google-cloud.svg" alt="Google Cloud" class="w-6 h-6 object-contain" />
+          <div>
+            <p class="text-sm font-medium text-text">Google Cloud</p>
+            <p class="text-xs text-muted">Intermediate</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card skill-ai" data-category="ai">
+        <div class="flex items-center gap-3">
+          <img src="https://api.iconify.design/mdi/brain.svg" alt="LLM Deployment" class="w-6 h-6 object-contain" />
+          <div>
+            <p class="text-sm font-medium text-text">LLM Deployment</p>
+            <p class="text-xs text-muted">Intermediate</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-card skill-ai" data-category="ai">
+        <div class="flex items-center gap-3">
+          <img src="https://api.iconify.design/mdi/chat-processing.svg" alt="Prompt Engineering" class="w-6 h-6 object-contain" />
+          <div>
+            <p class="text-sm font-medium text-text">Prompt Engineering</p>
+            <p class="text-xs text-muted">Advanced</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    const buttons = document.querySelectorAll(".filter-btn");
+    const cards = document.querySelectorAll(".skill-card");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const cat = btn.dataset.category || "all";
+
+        buttons.forEach((b) => {
+          b.classList.remove("active", "bg-accent", "text-white");
+          b.classList.add("bg-secondary/60", "text-muted");
+        });
+        btn.classList.add("active", "bg-accent", "text-white");
+        btn.classList.remove("bg-secondary/60", "text-muted");
+
+        cards.forEach((card) => {
+          const c = card.dataset.category;
+          const show = cat === "all" || c === cat;
+          card.style.opacity = show ? "1" : "0.15";
+          card.style.transform = show ? "scale(1)" : "scale(0.97)";
+        });
+      });
+    });
+  </script>
+
+  <style>
+    .skill-card {
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      border-width: 1px;
+      background-color: color-mix(in srgb, var(--color-secondary) 80%, transparent);
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .skill-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(56, 189, 248, 0.15);
+    }
+
+    [data-theme="light"] #skills {
+      background: var(--color-secondary);
+    }
+
+    [data-theme="light"] .skill-card {
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-border);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      backdrop-filter: blur(10px);
+    }
+
+    [data-theme="light"] .skill-card:hover {
+      box-shadow: 0 8px 24px rgba(2, 132, 199, 0.12);
+      border-color: var(--color-accent);
+      background: var(--color-surface);
+      transform: translateY(-4px);
+    }
+
+    [data-theme="light"] .skill-card .text-text,
+    [data-theme="light"] .skill-card:hover .text-text {
+      color: #1A1A1A;
+    }
+
+    [data-theme="light"] .skill-card .text-muted,
+    [data-theme="light"] .skill-card:hover .text-muted {
+      color: #525252;
+    }
+
+    [data-theme="light"] #skills .filter-btn:not(.active) {
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-border);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      color: var(--color-text);
+      font-weight: 500;
+    }
+
+    [data-theme="light"] #skills .filter-btn:not(.active):hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      background: var(--color-surface);
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    [data-theme="light"] .skill-frontend {
+      border-color: rgba(2, 132, 199, 0.3);
+    }
+
+    [data-theme="light"] .skill-backend {
+      border-color: rgba(99, 102, 241, 0.3);
+    }
+
+    [data-theme="light"] .skill-devops {
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    [data-theme="light"] .skill-ai {
+      border-color: rgba(236, 72, 153, 0.3);
+    }
+
+    .skill-frontend {
+      border-color: rgba(56, 189, 248, 0.5);
+    }
+
+    .skill-backend {
+      border-color: rgba(129, 140, 248, 0.5);
+    }
+
+    .skill-devops {
+      border-color: rgba(52, 211, 153, 0.5);
+    }
+
+    .skill-ai {
+      border-color: rgba(244, 114, 182, 0.5);
+    }
+  </style>
+</section>

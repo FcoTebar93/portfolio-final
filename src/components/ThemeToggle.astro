@@ -1,0 +1,128 @@
+---
+---
+<button
+  id="theme-toggle"
+  class="theme-toggle-btn p-2.5 rounded-xl bg-secondary/60 hover:bg-secondary transition-all text-muted hover:text-accent backdrop-blur-sm border border-transparent hover:border-accent/20"
+  aria-label="Toggle theme"
+  title="Toggle theme"
+>
+  <svg id="sun-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+  </svg>
+  <svg id="moon-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+  </svg>
+</button>
+
+<script is:inline>
+(function () {
+  var buttonEnabled = true;
+  var scrollY = 0;
+
+  function getTheme() {
+    var saved = localStorage.getItem('theme');
+    if (saved === 'light' || saved === 'dark') return saved;
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  }
+
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    var sunIcon = document.getElementById('sun-icon');
+    var moonIcon = document.getElementById('moon-icon');
+    if (theme === 'light') {
+      if (sunIcon) sunIcon.classList.remove('hidden');
+      if (moonIcon) moonIcon.classList.add('hidden');
+    } else {
+      if (sunIcon) sunIcon.classList.add('hidden');
+      if (moonIcon) moonIcon.classList.remove('hidden');
+    }
+  }
+
+  function updateIconsInEl(container, theme) {
+    var sun = container.querySelector('#sun-icon');
+    var moon = container.querySelector('#moon-icon');
+    if (!sun || !moon) return;
+    if (theme === 'light') {
+      sun.classList.remove('hidden');
+      moon.classList.add('hidden');
+    } else {
+      sun.classList.add('hidden');
+      moon.classList.remove('hidden');
+    }
+  }
+
+  function init() {
+    setTheme(getTheme());
+
+    document.getElementById('theme-toggle').addEventListener('click', function () {
+      if (!buttonEnabled) return;
+      buttonEnabled = false;
+
+      var appContainer = document.getElementById('app-container');
+      var clipEl = document.getElementById('theme-clip');
+      var btn = document.getElementById('theme-toggle');
+      if (!appContainer || !clipEl || !btn) {
+        buttonEnabled = true;
+        return;
+      }
+
+      scrollY = window.scrollY;
+      var rect = btn.getBoundingClientRect();
+      var centerX = rect.left + rect.width / 2;
+      var centerY = rect.top + rect.height / 2;
+
+      var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      var newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+      var wrapper = document.createElement('div');
+      wrapper.setAttribute('data-theme', newTheme);
+      wrapper.className = 'theme-clip__inner';
+
+      var clone = appContainer.cloneNode(true);
+      clone.style.transform = 'translateY(-' + scrollY + 'px)';
+      clone.style.transformOrigin = '0 0';
+      wrapper.appendChild(clone);
+      updateIconsInEl(clone, newTheme);
+
+      clipEl.innerHTML = '';
+      clipEl.style.setProperty('--clip-x', centerX + 'px');
+      clipEl.style.setProperty('--clip-y', centerY + 'px');
+      clipEl.appendChild(wrapper);
+      clipEl.classList.add('theme-clip--anim');
+
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      setTheme(newTheme);
+
+      setTimeout(function () {
+        window.scrollTo(0, scrollY);
+        clipEl.innerHTML = '';
+        clipEl.classList.remove('theme-clip--anim');
+        buttonEnabled = true;
+      }, 580);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+<style>
+    [data-theme="light"] .theme-toggle-btn {
+        background: var(--color-surface);
+        border-color: var(--color-border);
+        box-shadow: none;
+        color: var(--color-text);
+    }
+
+    [data-theme="light"] .theme-toggle-btn:hover {
+        box-shadow: none;
+        background: var(--color-hover);
+        color: var(--color-accent);
+    }
+</style>

@@ -1,0 +1,85 @@
+{
+    "hero": {
+      "portfolio": "Portafolio",
+      "subtitle": "Ingeniero de Software ·",
+      "description": "Desarrollador fullstack enfocado en construir aplicaciones escalables, pipelines de automatización y soluciones impulsadas por IA usando prácticas modernas de Cloud y DevOps.",
+      "viewWork": "Ver mi trabajo",
+      "contact": "Contacto"
+    },
+    "about": {
+      "title": "Sobre mí",
+      "heading": "Construyo sistemas confiables y automatizados desde el backend hasta la nube.",
+      "paragraph1": "Soy un desarrollador fullstack con experiencia en Angular, Nodejs, SQL, Redis, RabbitMQ, Jenkins, Docker, Kubernetes y Google Cloud. Disfruto diseñando e implementando pipelines de CI/CD, integrando servicios externos y desplegando características basadas en LLM en entornos de producción.",
+      "paragraph2": "Mi enfoque está en crear arquitecturas mantenibles, automatizar procesos repetitivos y colaborar estrechamente con equipos para entregar software de alta calidad más rápido y de forma más segura."
+    },
+    "experience": {
+      "title": "Experiencia",
+      "roles": {
+        "softwareDeveloper": "Desarrollador de software",
+        "chatbotDeveloper": "Desarrollador de Chatbots",
+        "backendDeveloper": "Desarrollador Backend"
+      },
+      "locations": {
+        "aunoa": "Aunoa · Valencia",
+        "mimacom": "Mimacom · Valencia"
+      },
+      "descriptions": {
+        "softwareDev1": "Mantuve y extendí una plataforma de comunicación a gran escala en toda la pila (Angular, Node.js, Slim PHP, Docker, Kubernetes, GCP, Jenkins, SQL, Vault, Redis, RabbitMQ, ClickHouse, LLMs), implementando y depurando APIs REST, características frontend e integraciones de almacenes de datos.",
+        "softwareDev2": "Lideré una renovación del flujo de creación y envío masivo de plantillas de WhatsApp, rediseñando la UX y la lógica del backend para hacer la configuración de campañas más rápida, confiable y fácil de operar desde la plataforma.",
+        "softwareDev3": "Contribuí al desarrollo de un centro de contacto VoIP con un voicebot impulsado por OpenAI Whisper y transferencia fluida a agentes humanos, exponiendo configuración y toggles de características a través de una interfaz de autoservicio dentro de la plataforma.",
+        "chatbotDev1": "Diseñé, construí y mantuve chatbots conversacionales usando automatización basada en flujos de trabajo con funciones JavaScript integradas, integrando APIs SOAP y REST, modelos NLP y bases de datos SQLite para entregar soluciones de extremo a extremo.",
+        "chatbotDev2": "Lideré la ingeniería de prompts y el ajuste de IA conversacional, creé análisis e informes para el rendimiento del chatbot y proporcioné soporte al cliente para mejorar continuamente los flujos de trabajo y la experiencia del usuario.",
+        "backendDev1": "Diseñé e implementé la lógica de negocio de extremo a extremo para una plataforma de cadena de suministro de reciclaje, cubriendo el flujo completo desde la recolección de materiales hasta la transformación en productos reutilizables.",
+        "backendDev2": "Alineé proactivamente equipos de frontend, backend, negocio y soporte, estableciendo puentes de comunicación y flujos de trabajo que permitieron que el producto se entregara a tiempo."
+      }
+    },
+    "skills": {
+      "title": "Habilidades",
+      "filters": {
+        "all": "Todos",
+        "frontend": "Frontend",
+        "backend": "Backend",
+        "devops": "DevOps / Cloud",
+        "ai": "IA / Datos"
+      },
+      "levels": {
+        "advanced": "Avanzado",
+        "intermediate": "Intermedio",
+        "familiar": "Familiar"
+      }
+    },
+    "contact": {
+      "title": "Contacto",
+      "heading": "Trabajemos juntos. Envíame un mensaje y te responderé.",
+      "email": "Correo",
+      "social": "Social",
+      "form": {
+        "name": "Nombre",
+        "namePlaceholder": "Tu nombre",
+        "email": "Email",
+        "emailPlaceholder": "tu.email@ejemplo.com",
+        "subject": "Asunto",
+        "subjectPlaceholder": "¿De qué se trata?",
+        "message": "Mensaje",
+        "messagePlaceholder": "Cuéntame sobre tu proyecto...",
+        "send": "Enviar Mensaje",
+        "sending": "Enviando...",
+        "success": "✓ ¡Mensaje enviado con éxito! Te responderé pronto.",
+        "error": "Algo salió mal. Por favor envíame un correo directamente a fcotebar93@gmail.com",
+        "fillAll": "Por favor completa todos los campos."
+      }
+    },
+    "footer": {
+      "copyright": "© 2026 Francisco Tebar. Todos los derechos reservados."
+    },
+    "typewriter": {
+      "roles": [
+        "Desarrollador Fullstack",
+        "CI/CD & DevOps",
+        "Kubernetes & Docker",
+        "Cloud & GCP",
+        "Despliegue de LLM",
+        "Automatización e Integraciones"
+      ]
+    }
+  }
