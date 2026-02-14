@@ -12,7 +12,7 @@ Portfolio personal como **Desarrollador de Software** — sitio estático rápid
 |--------|-----|
 | **Portfolio en vivo** | [portfolio-final-one-iota.vercel.app](https://portfolio-final-one-iota.vercel.app/) |
 | **LinkedIn** | [linkedin.com/in/francisco-josé-tébar-navarro](https://www.linkedin.com/in/francisco-jos%C3%A9-t%C3%A9bar-navarro-5a858a23a/) |
-| **Mail** | fcotebar93@gmail.com |
+| **Mail** | [fcotebar93@gmail.com](mailto:fcotebar93@gmail.com) |
 
 ---
 
