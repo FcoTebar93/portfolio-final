@@ -37,7 +37,7 @@ Portfolio personal como **Desarrollador de Software** — sitio estático rápid
 
 ### Por qué Astro
 
-Elegí Astro para este portfolio porque:
+Elegí Astro para crear mi portafolio por las siguientes razones:
 
 - **Rendimiento**: genera HTML estático por defecto (zero JS en el cliente si no lo necesitas), ideal para un sitio de presentación que debe cargar rápido en cualquier dispositivo.
 - **Adecuado al problema**: un portfolio es contenido mayormente estático; no requiere un SPA completo, así que evito el uso de un framework para dicha tarea.
@@ -71,6 +71,9 @@ npm run dev
 | `npm run preview` | Vista previa del build antes de desplegar |
 | `npm run lint` | Ejecutar ESLint (Astro + código) |
 | `npm run check` | Typecheck con Astro (TypeScript + componentes) |
+| `npm run validate` | **Lint + typecheck** (recomendado antes de commit o deploy) |
+
+**Pre-commit (Husky):** en cada `git commit` se ejecuta `npm run validate` automáticamente. Si lint o typecheck fallan, el commit se aborta. Tras `npm install`, el hook queda registrado gracias al script `prepare`.
 
 ---
 
@@ -87,6 +90,7 @@ npm run dev
 │   ├── sections/     # Hero, About, Experience, Skills, Contact
 │   ├── styles/       # global.css
 │   └── utils/        # i18n.ts
+├── .husky/          # Git hooks (pre-commit → validate)
 ├── astro.config.mjs
 └── package.json
 ```
@@ -95,11 +99,13 @@ npm run dev
 
 ## 🌐 Despliegue en Vercel
 
-El proyecto está preparado para [Vercel](https://vercel.com). Vercel detecta Astro automáticamente.
+El proyecto está preparado para [Vercel](https://vercel.com). Vercel detecta Astro automáticamente, la cual es otra razón para decidirnos por esta plataforma.
 
 1. Conecta este repositorio en [vercel.com](https://vercel.com).
-2. Deja los valores por defecto (build: `npm run build`, output: `dist`).
-3. Despliega.
+2. **Build command** recomendado: `npm run validate && npm run build` — así el deploy falla si hay errores de lint o tipos.
+3. Output: `dist`. Despliega.
+
+*Si prefieres no bloquear el deploy por validate, deja el build en `npm run build` y ejecuta `npm run validate` en local antes de hacer push.*
 
 Para despliegues desde la CLI:
 

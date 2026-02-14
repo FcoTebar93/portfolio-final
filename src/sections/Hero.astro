@@ -1,5 +1,6 @@
 ---
 import { t, getLanguage } from '../utils/i18n.ts';
+import imagenPerfil from '../img/imagen_perfil.jpeg';
 
 const lang = getLanguage();
 const roles = lang === 'es' 
@@ -8,7 +9,19 @@ const roles = lang === 'es'
 ---
 
 <section class="min-h-screen flex items-center justify-center px-4 pb-8 sm:pb-12 relative overflow-hidden">
-  <div class="max-w-4xl w-full flex flex-col gap-10 relative z-10">
+  <div class="max-w-5xl w-full flex flex-col md:flex-row md:items-center md:justify-between gap-10 md:gap-12 relative z-10">
+    <!-- Imagen de perfil: arriba en móvil, a la derecha en desktop -->
+    <div class="order-first md:order-last flex justify-center md:justify-end shrink-0 hero-photo-wrap">
+      <img
+        src={imagenPerfil.src}
+        alt="Francisco Tébar"
+        width={imagenPerfil.width}
+        height={imagenPerfil.height}
+        class="hero-photo w-40 h-40 sm:w-52 sm:h-52 md:w-64 md:h-64 rounded-full object-cover border-4 border-accent/30 shadow-xl"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="flex flex-col gap-10 min-w-0">
     <div class="space-y-4">
       <p class="text-xs sm:text-sm uppercase tracking-[0.2em] text-muted font-mono mb-2" data-i18n="hero.portfolio">
         {t('hero.portfolio')}
@@ -70,6 +83,7 @@ const roles = lang === 'es'
         </a>
       </div>
     </div>
+    </div>
   </div>
 
   <div class="pointer-events-none fixed inset-0 -z-10 hero-gradient"></div>
@@ -111,6 +125,31 @@ const roles = lang === 'es'
   </script>
 
   <style>
+    .hero-photo-wrap {
+      animation: hero-photo-in 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    @keyframes hero-photo-in {
+      from {
+        opacity: 0;
+        transform: translate(1.5rem, 0);
+      }
+      to {
+        opacity: 1;
+        transform: translate(0, 0);
+      }
+    }
+    @media (max-width: 767px) {
+      @keyframes hero-photo-in {
+        from {
+          opacity: 0;
+          transform: translate(0, -1rem);
+        }
+        to {
+          opacity: 1;
+          transform: translate(0, 0);
+        }
+      }
+    }
     .hero-gradient {
       background: radial-gradient(circle at top, rgba(56, 189, 248, 0.18) 0%, transparent 60%),
                   radial-gradient(circle at bottom, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 1) 100%);
@@ -142,6 +181,10 @@ const roles = lang === 'es'
 
     [data-theme="light"] a.hover\:text-accent:hover {
       color: var(--color-accent);
+    }
+    [data-theme="light"] .hero-photo {
+      border-color: rgba(2, 132, 199, 0.35);
+      box-shadow: var(--shadow-xl);
     }
   </style>
 </section>
