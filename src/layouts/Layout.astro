@@ -77,6 +77,10 @@ if (typeof window !== 'undefined') {
         background: var(--color-primary);
     }
 
+    :root .theme-clip__inner {
+        background: var(--gradient-subtle);
+    }
+
     .theme-clip--anim .theme-clip__inner {
         will-change: clip-path;
         animation: theme-reveal 0.55s cubic-bezier(0.33, 1, 0.68, 1) forwards;
