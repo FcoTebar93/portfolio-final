@@ -48,6 +48,10 @@ export function t(key: string): string {
   return typeof value === 'string' ? value : key;
 }
 
+if (typeof window !== 'undefined') {
+  (window as any).t = t;
+}
+
 function updatePageContent() {
   if (typeof window === 'undefined') return;
   

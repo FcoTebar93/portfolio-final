@@ -91,5 +91,38 @@
         "Despliegue de LLM",
         "Automatización e Integraciones"
       ]
+    },
+    "projects": {
+      "title": "Proyectos",
+      "subtitle": "Algunos proyectos recientes en los que he trabajado.",
+      "items": {
+        "eventix": {
+          "name": "Eventix",
+          "role": "Plataforma de compraventa de tickets",
+          "short": "Plataforma moderna para compraventa de entradas con foco en UX, pagos seguros y gestión de eventos en tiempo real.",
+          "long": "Eventix es una plataforma pensada para organizadores y asistentes. Permite crear eventos, gestionar aforos, controlar accesos mediante códigos QR y procesar pagos de forma segura. El foco está en ofrecer una experiencia muy fluida, con analítica básica para organizadores y un flujo de compra sin fricción para usuarios finales."
+        },
+        "agentic-code-reviewer": {
+          "name": "Agentic Code Reviewer",
+          "role": "Sistema agéntico de revisión de código",
+          "short": "Sistema agéntico con planeador, desarrollador y agentes especializados en QA y seguridad que generan pull requests revisables.",
+          "long": "Agentic Code Reviewer coordina varios agentes especializados: un planeador que descompone tareas, un desarrollador que propone cambios de código y agentes de QA y seguridad que validan la solución. El sistema genera pull requests listos para revisar y aprobar manualmente en GitHub, integrándose en el flujo habitual de desarrollo."
+        },
+        "ftn": {
+          "name": "FTN",
+          "role": "DSL para automatización e integraciones",
+          "short": "Lenguaje específico de dominio (DSL) diseñado para describir flujos y automatizaciones de forma declarativa.",
+          "long": "FTN es un lenguaje específico de dominio (DSL) orientado a describir integraciones y flujos de trabajo de forma declarativa. Permite definir pasos, condiciones y efectos secundarios de manera clara, lo que facilita automatizar procesos repetitivos, documentar integraciones y reducir la complejidad de la lógica imperativa."
+        }
+      },
+      "ui": {
+        "cardViewDetails": "Ver detalles",
+        "cardModalLabel": "Modal",
+        "modalDetails": "Detalles",
+        "modalTechnologies": "Tecnologías",
+        "modalGithub": "Ver código en GitHub",
+        "modalLive": "Ver despliegue",
+        "modalBack": "Volver"
+      }
     }
   }

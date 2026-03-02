@@ -91,5 +91,38 @@
         "LLM Deployment",
         "Automation & Integrations"
       ]
+    },
+    "projects": {
+      "title": "Projects",
+      "subtitle": "Some recent projects I've been working on.",
+      "items": {
+        "eventix": {
+          "name": "Eventix",
+          "role": "Ticket marketplace platform",
+          "short": "Modern ticket marketplace focused on UX, secure payments and real‑time event management.",
+          "long": "Eventix is a platform designed for both organizers and attendees. It allows creating events, managing capacity, controlling access via QR codes and processing payments securely. The main focus is providing a very smooth experience, with basic analytics for organizers and a frictionless purchase flow for end users."
+        },
+        "agentic-code-reviewer": {
+          "name": "Agentic Code Reviewer",
+          "role": "Agentic code review system",
+          "short": "Agentic system with planner, developer and QA/Security agents that propose code changes through reviewable pull requests.",
+          "long": "Agentic Code Reviewer coordinates several specialized agents: a planner that breaks down tasks, a developer that proposes code changes, and QA/Security agents that validate the solution. The system generates pull requests ready to be reviewed and manually approved in GitHub, integrating into a normal development workflow."
+        },
+        "ftn": {
+          "name": "FTN",
+          "role": "DSL for automation and integrations",
+          "short": "Domain‑specific language (DSL) designed to describe flows and automations in a declarative way.",
+          "long": "FTN is a domain‑specific language (DSL) focused on describing integrations and workflows declaratively. It lets you define steps, conditions and side effects clearly, making it easier to automate repetitive processes, document integrations and reduce the complexity of imperative logic."
+        }
+      },
+      "ui": {
+        "cardViewDetails": "View details",
+        "cardModalLabel": "Modal",
+        "modalDetails": "Details",
+        "modalTechnologies": "Technologies",
+        "modalGithub": "View code on GitHub",
+        "modalLive": "View live",
+        "modalBack": "Back"
+      }
     }
   }
