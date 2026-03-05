@@ -50,6 +50,8 @@ export function t(key: string): string {
 
 if (typeof window !== 'undefined') {
   (window as any).t = t;
+  (window as any).setLanguage = setLanguage;
+  (window as any).getLanguage = getLanguage;
 }
 
 function updatePageContent() {
@@ -109,6 +111,23 @@ function updatePageContent() {
     'contact.form.subjectPlaceholder': t('contact.form.subjectPlaceholder'),
     'contact.form.messagePlaceholder': t('contact.form.messagePlaceholder'),
     'footer.copyright': t('footer.copyright'),
+    'projects.title': t('projects.title'),
+    'projects.subtitle': t('projects.subtitle'),
+    'projects.items.eventix.name': t('projects.items.eventix.name'),
+    'projects.items.eventix.role': t('projects.items.eventix.role'),
+    'projects.items.eventix.short': t('projects.items.eventix.short'),
+    'projects.items.agentic-code-reviewer.name': t('projects.items.agentic-code-reviewer.name'),
+    'projects.items.agentic-code-reviewer.role': t('projects.items.agentic-code-reviewer.role'),
+    'projects.items.agentic-code-reviewer.short': t('projects.items.agentic-code-reviewer.short'),
+    'projects.items.ftn.name': t('projects.items.ftn.name'),
+    'projects.items.ftn.role': t('projects.items.ftn.role'),
+    'projects.items.ftn.short': t('projects.items.ftn.short'),
+    'projects.ui.cardViewDetails': t('projects.ui.cardViewDetails'),
+    'projects.ui.modalDetails': t('projects.ui.modalDetails'),
+    'projects.ui.modalTechnologies': t('projects.ui.modalTechnologies'),
+    'projects.ui.modalGithub': t('projects.ui.modalGithub'),
+    'projects.ui.modalLive': t('projects.ui.modalLive'),
+    'projects.ui.modalBack': t('projects.ui.modalBack'),
   };
 
   Object.entries(translationsMap).forEach(([key, value]) => {
@@ -135,6 +154,17 @@ function updatePageContent() {
       typewriter.textContent = roles[0];
     }
   }
+
+  const projectCards = document.querySelectorAll<HTMLElement>('[data-project-id]');
+  projectCards.forEach((card) => {
+    const id = card.getAttribute('data-project-id');
+    if (!id) return;
+
+    card.setAttribute('data-name', t(`projects.items.${id}.name`));
+    card.setAttribute('data-role', t(`projects.items.${id}.role`));
+    card.setAttribute('data-short', t(`projects.items.${id}.short`));
+    card.setAttribute('data-long', t(`projects.items.${id}.long`));
+  });
 }
 
 if (typeof window !== 'undefined') {
