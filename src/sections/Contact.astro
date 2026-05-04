@@ -77,15 +77,19 @@ import { t } from '../utils/i18n.ts';
   </div>
 </footer>
 
-<script is:inline>
-  import { t } from '../utils/i18n.ts';
+<script>
+  import { t } from "../utils/i18n.ts";
 
   const form = document.getElementById("contact-form");
   const status = document.getElementById("form-status");
-  const submitBtn = form.querySelector('button[type="submit"]');
+  const submitBtn = form?.querySelector('button[type="submit"]') ?? null;
   const subjectInput = document.getElementById("subject");
   const formSubject = document.getElementById("form-subject");
   const formFromName = document.getElementById("form-from-name");
+
+  if (!form || !status || !submitBtn || !subjectInput || !formSubject || !formFromName) {
+    throw new Error("Contact form: missing DOM nodes");
+  }
 
   function showStatus(text, type) {
     status.textContent = text;
