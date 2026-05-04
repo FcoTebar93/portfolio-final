@@ -1,11 +1,11 @@
 ---
 import { t, getLanguage } from '../utils/i18n.ts';
 import imagenPerfil from '../img/imagen_perfil.jpeg';
+import en from '../i18n/en.json';
+import es from '../i18n/es.json';
 
 const lang = getLanguage();
-const roles = lang === 'es' 
-  ? ["Desarrollador Fullstack", "CI/CD & DevOps", "Kubernetes & Docker", "Cloud & GCP", "Despliegue de LLM", "Automatización e Integraciones"]
-  : ["Fullstack Developer", "CI/CD & DevOps", "Kubernetes & Docker", "Cloud & GCP", "LLM Deployment", "Automation & Integrations"];
+const roles = lang === 'es' ? es.typewriter.roles : en.typewriter.roles;
 ---
 
 <section class="min-h-screen flex items-center justify-center px-4 pb-8 sm:pb-12 relative overflow-hidden bg-secondary/40">

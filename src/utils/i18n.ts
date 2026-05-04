@@ -104,6 +104,9 @@ function updatePageContent() {
     'skills.filters.backend': t('skills.filters.backend'),
     'skills.filters.devops': t('skills.filters.devops'),
     'skills.filters.ai': t('skills.filters.ai'),
+    'skills.levels.advanced': t('skills.levels.advanced'),
+    'skills.levels.intermediate': t('skills.levels.intermediate'),
+    'skills.levels.familiar': t('skills.levels.familiar'),
     'contact.title': t('contact.title'),
     'contact.heading': t('contact.heading'),
     'contact.email': t('contact.email'),
@@ -137,6 +140,11 @@ function updatePageContent() {
     'projects.ui.modalBack': t('projects.ui.modalBack'),
   };
 
+  const projectModal = document.getElementById('project-modal');
+  if (projectModal) {
+    projectModal.setAttribute('aria-label', t('projects.ui.cardModalLabel'));
+  }
+
   Object.entries(translationsMap).forEach(([key, value]) => {
     const elements = document.querySelectorAll(`[data-i18n="${key}"]`);
     elements.forEach((el) => {
@@ -153,9 +161,7 @@ function updatePageContent() {
 
   const typewriter = document.getElementById('typewriter');
   if (typewriter) {
-    const roles = lang === 'es' 
-      ? ["Desarrollador Fullstack", "CI/CD & DevOps", "Kubernetes & Docker", "Cloud & GCP", "Despliegue de LLM", "Automatización e Integraciones"]
-      : ["Fullstack Developer", "CI/CD & DevOps", "Kubernetes & Docker", "Cloud & GCP", "LLM Deployment", "Automation & Integrations"];
+    const roles = translations[lang].typewriter.roles;
     typewriter.setAttribute('data-roles', JSON.stringify(roles));
     if (!typewriter.textContent || typewriter.textContent.length < 5) {
       typewriter.textContent = roles[0];
@@ -172,6 +178,20 @@ function updatePageContent() {
     card.setAttribute('data-short', t(`projects.items.${id}.short`));
     card.setAttribute('data-long', t(`projects.items.${id}.long`));
   });
+
+  const enWrap = document.getElementById('lang-flag-en');
+  const esWrap = document.getElementById('lang-flag-es');
+  const langBtn = document.getElementById('language-toggle');
+  if (enWrap && esWrap) {
+    enWrap.classList.toggle('hidden', lang !== 'en');
+    esWrap.classList.toggle('hidden', lang !== 'es');
+  }
+  if (langBtn) {
+    langBtn.setAttribute(
+      'aria-label',
+      lang === 'es' ? t('language.toggleAriaToEnglish') : t('language.toggleAriaToSpanish')
+    );
+  }
 }
 
 if (typeof window !== 'undefined') {

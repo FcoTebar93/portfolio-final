@@ -1,4 +1,8 @@
 {
+    "language": {
+      "toggleAriaToSpanish": "Cambiar idioma a español",
+      "toggleAriaToEnglish": "Cambiar idioma a inglés"
+    },
     "hero": {
       "portfolio": "Portafolio",
       "subtitle": "Desarrollador de Software ·",
@@ -117,7 +121,7 @@
       },
       "ui": {
         "cardViewDetails": "Ver detalles",
-        "cardModalLabel": "Modal",
+        "cardModalLabel": "Detalles del proyecto",
         "modalDetails": "Detalles",
         "modalTechnologies": "Tecnologías",
         "modalGithub": "Ver código en GitHub",
