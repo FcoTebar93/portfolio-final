@@ -83,8 +83,6 @@ npm run dev
 | `npm run check` | Typecheck con Astro (TypeScript + componentes) |
 | `npm run validate` | **Lint + typecheck** (recomendado antes de commit o deploy) |
 
-**Pre-commit (Husky):** en cada `git commit` se ejecuta `npm run validate` automáticamente. Si lint o typecheck fallan, el commit se aborta. Tras `npm install`, el hook queda registrado gracias al script `prepare`.
-
 ---
 
 ## 📁 Estructura del proyecto
@@ -100,7 +98,6 @@ npm run dev
 │   ├── sections/     # Hero, About, Experience, Skills, Contact
 │   ├── styles/       # global.css
 │   └── utils/        # i18n.ts
-├── .husky/          # Git hooks (pre-commit → validate)
 ├── astro.config.mjs
 └── package.json
 ```
@@ -220,8 +217,6 @@ npm run dev
 | `npm run check` | Typecheck with Astro (TypeScript + components) |
 | `npm run validate` | **Lint + typecheck** (recommended before commit or deploy) |
 
-**Pre-commit (Husky):** on each `git commit`, `npm run validate` runs automatically. If lint or typecheck fails, the commit is aborted. After `npm install`, the hook is registered via the `prepare` script.
-
 ---
 
 ## Project structure
@@ -237,7 +232,6 @@ npm run dev
 │   ├── sections/     # Hero, About, Experience, Skills, Contact
 │   ├── styles/       # global.css
 │   └── utils/        # i18n.ts
-├── .husky/          # Git hooks (pre-commit → validate)
 ├── astro.config.mjs
 └── package.json
 ```

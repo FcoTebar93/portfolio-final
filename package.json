@@ -3,7 +3,6 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "prepare": "husky",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
@@ -22,7 +21,6 @@
     "@typescript-eslint/parser": "^8.0.0",
     "eslint": "^9.0.0",
     "eslint-plugin-astro": "^1.6.0",
-    "husky": "^9.1.7",
     "typescript": "^5.0.0"
   }
 }
