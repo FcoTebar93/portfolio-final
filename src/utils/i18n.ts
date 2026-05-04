@@ -11,6 +11,43 @@ const translations: Record<Language, Translations> = {
 
 let currentLang: Language = 'en';
 
+/** Keys like projects.items.agentic-code-reviewer.name must not use naive split('.') */
+function translateForLang(lang: Language, key: string): string {
+  const root = translations[lang] as Record<string, unknown>;
+  const projectField = /^projects\.items\.(.+)\.(name|role|short|long)$/.exec(key);
+  if (projectField) {
+    const [, id, field] = projectField;
+    const projects = root.projects as Record<string, unknown> | undefined;
+    const items = projects?.items as Record<string, Record<string, string>> | undefined;
+    const str = items?.[id]?.[field];
+    return typeof str === 'string' ? str : key;
+  }
+  const keys = key.split('.');
+  let value: unknown = root;
+  for (const k of keys) {
+    value = (value as Record<string, unknown>)?.[k];
+    if (value === undefined) return key;
+  }
+  return typeof value === 'string' ? value : key;
+}
+
+function refreshProjectModalIfOpen(lang: Language) {
+  const modal = document.getElementById('project-modal');
+  const projectId = modal?.getAttribute('data-active-project-id');
+  if (!modal || !projectId || modal.classList.contains('hidden')) return;
+
+  const tr = (k: string) => translateForLang(lang, k);
+  const titleEl = document.getElementById('project-modal-title');
+  const roleEl = document.getElementById('project-modal-role');
+  const shortEl = document.getElementById('project-modal-short');
+  const longEl = document.getElementById('project-modal-long');
+  const base = `projects.items.${projectId}.`;
+  if (titleEl) titleEl.textContent = tr(`${base}name`);
+  if (roleEl) roleEl.textContent = tr(`${base}role`);
+  if (shortEl) shortEl.textContent = tr(`${base}short`);
+  if (longEl) longEl.textContent = tr(`${base}long`);
+}
+
 export function setLanguage(lang: Language) {
   currentLang = lang;
   if (typeof window !== 'undefined') {
@@ -37,15 +74,7 @@ export function getLanguage(): Language {
 }
 
 export function t(key: string): string {
-  const keys = key.split('.');
-  let value: any = translations[currentLang];
-  
-  for (const k of keys) {
-    value = value?.[k];
-    if (value === undefined) return key;
-  }
-  
-  return typeof value === 'string' ? value : key;
+  return translateForLang(currentLang, key);
 }
 
 if (typeof window !== 'undefined') {
@@ -58,15 +87,7 @@ function updatePageContent() {
   if (typeof window === 'undefined') return;
   
   const lang = getLanguage();
-  const t = (key: string) => {
-    const keys = key.split('.');
-    let value: any = translations[lang];
-    for (const k of keys) {
-      value = value?.[k];
-      if (value === undefined) return key;
-    }
-    return typeof value === 'string' ? value : key;
-  };
+  const t = (key: string) => translateForLang(lang, key);
 
   const translationsMap: Record<string, string> = {
     'hero.portfolio': t('hero.portfolio'),
@@ -126,12 +147,15 @@ function updatePageContent() {
     'projects.items.eventix.name': t('projects.items.eventix.name'),
     'projects.items.eventix.role': t('projects.items.eventix.role'),
     'projects.items.eventix.short': t('projects.items.eventix.short'),
+    'projects.items.eventix.long': t('projects.items.eventix.long'),
     'projects.items.agentic-code-reviewer.name': t('projects.items.agentic-code-reviewer.name'),
     'projects.items.agentic-code-reviewer.role': t('projects.items.agentic-code-reviewer.role'),
     'projects.items.agentic-code-reviewer.short': t('projects.items.agentic-code-reviewer.short'),
+    'projects.items.agentic-code-reviewer.long': t('projects.items.agentic-code-reviewer.long'),
     'projects.items.ftn.name': t('projects.items.ftn.name'),
     'projects.items.ftn.role': t('projects.items.ftn.role'),
     'projects.items.ftn.short': t('projects.items.ftn.short'),
+    'projects.items.ftn.long': t('projects.items.ftn.long'),
     'projects.ui.cardViewDetails': t('projects.ui.cardViewDetails'),
     'projects.ui.modalDetails': t('projects.ui.modalDetails'),
     'projects.ui.modalTechnologies': t('projects.ui.modalTechnologies'),
@@ -183,8 +207,8 @@ function updatePageContent() {
   const esWrap = document.getElementById('lang-flag-es');
   const langBtn = document.getElementById('language-toggle');
   if (enWrap && esWrap) {
-    enWrap.classList.toggle('hidden', lang !== 'en');
-    esWrap.classList.toggle('hidden', lang !== 'es');
+    enWrap.classList.toggle('is-current', lang === 'en');
+    esWrap.classList.toggle('is-current', lang === 'es');
   }
   if (langBtn) {
     langBtn.setAttribute(
@@ -192,6 +216,8 @@ function updatePageContent() {
       lang === 'es' ? t('language.toggleAriaToEnglish') : t('language.toggleAriaToSpanish')
     );
   }
+
+  refreshProjectModalIfOpen(lang);
 }
 
 if (typeof window !== 'undefined') {

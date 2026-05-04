@@ -6,21 +6,24 @@
   class="px-3 py-2.5 rounded-xl bg-secondary/60 hover:bg-secondary transition-all text-muted hover:text-accent backdrop-blur-sm border border-transparent hover:border-accent/20 language-toggle-btn inline-flex items-center justify-center"
   aria-label=""
 >
-  <span id="lang-flag-en" class="lang-flag" aria-hidden="true">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" class="lang-flag-svg" preserveAspectRatio="xMidYMid slice">
-      <clipPath id="language-toggle-uk-clip"><path d="M0,0 h60 v30 h-60 z"/></clipPath>
-      <path fill="#012169" d="M0,0 h60 v30 h-60 z"/>
-      <path stroke="#fff" stroke-width="6" d="M0,0 L60,30 M60,0 L0,30"/>
-      <path stroke="#c8102e" stroke-width="4" d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#language-toggle-uk-clip)"/>
-      <path stroke="#fff" stroke-width="10" d="M30,0 v30 M0,15 h60"/>
-      <path stroke="#c8102e" stroke-width="6" d="M30,0 v30 M0,15 h60"/>
-    </svg>
-  </span>
-  <span id="lang-flag-es" class="lang-flag hidden" aria-hidden="true">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" class="lang-flag-svg" preserveAspectRatio="xMidYMid slice">
-      <rect width="3" height="2" fill="#aa151b"/>
-      <rect width="3" height="1" y="0.5" fill="#f1bf00"/>
-    </svg>
+  <!-- Solo una bandera visible: la del idioma activo (is-current la pone i18n al cargar / al cambiar) -->
+  <span class="lang-flag-slot" aria-hidden="true">
+    <span id="lang-flag-en" class="lang-flag is-current">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" class="lang-flag-svg" preserveAspectRatio="xMidYMid slice">
+        <clipPath id="language-toggle-uk-clip"><path d="M0,0 h60 v30 h-60 z"/></clipPath>
+        <path fill="#012169" d="M0,0 h60 v30 h-60 z"/>
+        <path stroke="#fff" stroke-width="6" d="M0,0 L60,30 M60,0 L0,30"/>
+        <path stroke="#c8102e" stroke-width="4" d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#language-toggle-uk-clip)"/>
+        <path stroke="#fff" stroke-width="10" d="M30,0 v30 M0,15 h60"/>
+        <path stroke="#c8102e" stroke-width="6" d="M30,0 v30 M0,15 h60"/>
+      </svg>
+    </span>
+    <span id="lang-flag-es" class="lang-flag">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2" class="lang-flag-svg" preserveAspectRatio="xMidYMid slice">
+        <rect width="3" height="2" fill="#aa151b"/>
+        <rect width="3" height="1" y="0.5" fill="#f1bf00"/>
+      </svg>
+    </span>
   </span>
 </button>
 
@@ -58,14 +61,31 @@
 </script>
 
 <style>
+    .lang-flag-slot {
+        position: relative;
+        width: 1.75rem;
+        height: 1.125rem;
+        flex-shrink: 0;
+    }
+
     .lang-flag {
-        display: inline-flex;
+        position: absolute;
+        inset: 0;
+        display: flex;
         align-items: center;
         justify-content: center;
         line-height: 0;
         border-radius: 4px;
         overflow: hidden;
         box-shadow: 0 0 0 1px color-mix(in srgb, currentColor 12%, transparent);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.15s ease;
+    }
+
+    .lang-flag.is-current {
+        opacity: 1;
+        pointer-events: auto;
     }
 
     .lang-flag-svg {

@@ -216,8 +216,8 @@ const projects = [
             </a>
             <button
               type="button"
+              id="project-modal-close"
               class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-secondary text-muted text-xs sm:text-sm font-semibold border border-accent/40 hover:border-accent hover:text-accent hover:bg-primary/60 cursor-pointer transition-all hover:shadow-md hover:scale-[1.02] active:scale-[0.98]"
-              onclick="(function(){var m=document.getElementById('project-modal');if(m){m.classList.add('hidden');m.classList.remove('is-open');m.setAttribute('aria-hidden','true');}document.body.style.overflow='';})();"
               data-i18n="projects.ui.modalBack"
             >
               {t('projects.ui.modalBack')}
@@ -248,6 +248,7 @@ const projects = [
         var tFn = (window && window.t) ? window.t : function (k) { return k; };
 
         if (projectId) {
+          modal.setAttribute("data-active-project-id", projectId);
           if (titleEl) titleEl.textContent = tFn("projects.items." + projectId + ".name");
           if (roleEl) roleEl.textContent = tFn("projects.items." + projectId + ".role");
           if (shortEl) shortEl.textContent = tFn("projects.items." + projectId + ".short");
@@ -287,6 +288,7 @@ const projects = [
       }
 
       function closeModal() {
+        modal.removeAttribute("data-active-project-id");
         modal.classList.add("hidden");
         modal.classList.remove("is-open");
         modal.setAttribute("aria-hidden", "true");
@@ -298,6 +300,8 @@ const projects = [
           openModal(card);
         });
       });
+
+      document.getElementById("project-modal-close")?.addEventListener("click", closeModal);
 
       document.addEventListener("keydown", function (event) {
         if (event.key === "Escape" && !modal.classList.contains("hidden")) {
