@@ -202,8 +202,9 @@ const projects = [
 
   <script is:inline>
     (function () {
+      var projectsSection = document.getElementById("projects");
       var modal = document.getElementById("project-modal");
-      if (!modal) return;
+      if (!modal || !projectsSection) return;
 
       var titleEl = document.getElementById("project-modal-title");
       var roleEl = document.getElementById("project-modal-role");
@@ -290,6 +291,32 @@ const projects = [
           closeModal();
         }
       });
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        projectsSection.classList.add("projects-visible");
+        return;
+      }
+
+      if (!("IntersectionObserver" in window)) {
+        projectsSection.classList.add("projects-visible");
+        return;
+      }
+
+      var hasAnimatedProjects = false;
+      var projectsObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting && !hasAnimatedProjects) {
+              hasAnimatedProjects = true;
+              projectsSection.classList.add("projects-visible");
+              projectsObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.28 }
+      );
+
+      projectsObserver.observe(projectsSection);
     })();
   </script>
 
@@ -301,12 +328,15 @@ const projects = [
     }
 
     /* Entrada de cards: de derecha a izquierda, una a una */
-    .project-card {
+    #projects .project-card {
       opacity: 0;
       transform: translate(72px, 0) scale(0.98);
+      will-change: transform, opacity;
+    }
+
+    #projects.projects-visible .project-card {
       animation: project-card-enter 0.54s cubic-bezier(0.22, 0.88, 0.3, 1) forwards;
       animation-delay: calc(120ms + (var(--card-enter-order, 0) * 130ms));
-      will-change: transform, opacity;
     }
 
     @keyframes project-card-enter {
