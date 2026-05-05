@@ -64,10 +64,11 @@ const projects = [
       </div>
 
     <div class="grid gap-6 md:gap-8 md:grid-cols-3">
-      {projects.map((project) => (
+      {projects.map((project, columnIndex) => (
         <article
           class="project-card group cursor-pointer rounded-2xl border border-accent/15 bg-secondary overflow-hidden flex flex-col hover:border-accent hover:shadow-xl transition-all duration-300"
           data-project-id={project.id}
+          data-modal-enter-col={columnIndex}
           data-name={t(`projects.items.${project.id}.name`)}
           data-role={t(`projects.items.${project.id}.role`)}
           data-short={t(`projects.items.${project.id}.short`)}
@@ -251,14 +252,27 @@ const projects = [
           liveEl.href = cardEl.getAttribute("data-live-url") || "#";
         }
 
+        var enterCol = cardEl.getAttribute("data-modal-enter-col");
+        if (enterCol === "0" || enterCol === "1" || enterCol === "2") {
+          modal.setAttribute("data-enter-col", enterCol);
+        } else {
+          modal.removeAttribute("data-enter-col");
+        }
+
         modal.classList.remove("hidden");
-        modal.classList.add("is-open");
+        modal.classList.remove("is-open");
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            modal.classList.add("is-open");
+          });
+        });
         modal.setAttribute("aria-hidden", "false");
         document.body.style.overflow = "hidden";
       }
 
       function closeModal() {
         modal.removeAttribute("data-active-project-id");
+        modal.removeAttribute("data-enter-col");
         modal.classList.add("hidden");
         modal.classList.remove("is-open");
         modal.setAttribute("aria-hidden", "true");
@@ -311,7 +325,7 @@ const projects = [
     .project-modal {
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.2s ease-out;
+      transition: opacity 0.34s ease-out;
     }
 
     .project-modal.is-open {
@@ -319,13 +333,37 @@ const projects = [
       pointer-events: auto;
     }
 
+    /* Entrada desde la derecha: tarjeta izquierda (col 0) recorre más; la derecha (col 2), menos */
     .project-modal .modal-content {
-      transform: translateY(12px) scale(0.97);
-      transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translate(0, 12px) scale(0.97);
+      transition: transform 0.38s cubic-bezier(0.34, 1.1, 0.42, 1);
+    }
+
+    .project-modal[data-enter-col="0"] .modal-content {
+      transform: translate(min(82vw, 420px), 12px) scale(0.97);
+    }
+
+    .project-modal[data-enter-col="1"] .modal-content {
+      transform: translate(min(46vw, 220px), 12px) scale(0.97);
+    }
+
+    .project-modal[data-enter-col="2"] .modal-content {
+      transform: translate(min(18vw, 72px), 12px) scale(0.97);
     }
 
     .project-modal.is-open .modal-content {
-      transform: translateY(0) scale(1);
+      transform: translate(0, 0) scale(1);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .project-modal .modal-content {
+        transform: translate(0, 0) scale(1) !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .project-modal {
+        transition-duration: 0.01ms !important;
+      }
     }
 
     @media (max-width: 768px) {
