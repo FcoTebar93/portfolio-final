@@ -261,11 +261,8 @@ const projects = [
 
         modal.classList.remove("hidden");
         modal.classList.remove("is-open");
-        requestAnimationFrame(function () {
-          requestAnimationFrame(function () {
-            modal.classList.add("is-open");
-          });
-        });
+        void modal.offsetWidth;
+        modal.classList.add("is-open");
         modal.setAttribute("aria-hidden", "false");
         document.body.style.overflow = "hidden";
       }
@@ -323,6 +320,7 @@ const projects = [
     }
 
     .project-modal {
+      --modal-start-x: min(28vw, 140px);
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.34s ease-out;
@@ -335,30 +333,38 @@ const projects = [
 
     /* Entrada desde la derecha: tarjeta izquierda (col 0) recorre más; la derecha (col 2), menos */
     .project-modal .modal-content {
-      transform: translate(0, 12px) scale(0.97);
-      transition: transform 0.38s cubic-bezier(0.34, 1.1, 0.42, 1);
+      transform: translate(0, 0) scale(1);
     }
 
-    .project-modal[data-enter-col="0"] .modal-content {
-      transform: translate(min(82vw, 420px), 12px) scale(0.97);
+    .project-modal[data-enter-col="0"] {
+      --modal-start-x: min(88vw, 520px);
     }
 
-    .project-modal[data-enter-col="1"] .modal-content {
-      transform: translate(min(46vw, 220px), 12px) scale(0.97);
+    .project-modal[data-enter-col="1"] {
+      --modal-start-x: min(56vw, 320px);
     }
 
-    .project-modal[data-enter-col="2"] .modal-content {
-      transform: translate(min(18vw, 72px), 12px) scale(0.97);
+    .project-modal[data-enter-col="2"] {
+      --modal-start-x: min(30vw, 160px);
     }
 
     .project-modal.is-open .modal-content {
-      transform: translate(0, 0) scale(1);
+      animation: project-modal-enter 0.46s cubic-bezier(0.22, 0.88, 0.3, 1) both;
+    }
+
+    @keyframes project-modal-enter {
+      from {
+        transform: translate(var(--modal-start-x), 12px) scale(0.97);
+      }
+      to {
+        transform: translate(0, 0) scale(1);
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .project-modal .modal-content {
         transform: translate(0, 0) scale(1) !important;
-        transition-duration: 0.01ms !important;
+        animation: none !important;
       }
 
       .project-modal {
