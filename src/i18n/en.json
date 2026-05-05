@@ -120,7 +120,6 @@
         }
       },
       "ui": {
-        "cardViewDetails": "View details",
         "cardModalLabel": "Project details",
         "modalDetails": "Details",
         "modalTechnologies": "Technologies",

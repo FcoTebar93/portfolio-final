@@ -156,7 +156,6 @@ function updatePageContent() {
     'projects.items.ftn.role': t('projects.items.ftn.role'),
     'projects.items.ftn.short': t('projects.items.ftn.short'),
     'projects.items.ftn.long': t('projects.items.ftn.long'),
-    'projects.ui.cardViewDetails': t('projects.ui.cardViewDetails'),
     'projects.ui.modalDetails': t('projects.ui.modalDetails'),
     'projects.ui.modalTechnologies': t('projects.ui.modalTechnologies'),
     'projects.ui.modalGithub': t('projects.ui.modalGithub'),
