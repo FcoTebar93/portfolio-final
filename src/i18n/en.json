@@ -37,12 +37,12 @@
         "backendDev2": "Proactively aligned frontend, backend, business and support teams, establishing communication bridges and workflows that enabled the product to be delivered on time."
       },
       "achievements": {
-        "softwareDev1": "Maintained and extended a large‑scale communication platform implementing and debugging REST APIs, frontend features and data‑warehouse integrations.",
+        "softwareDev1": "Maintained the platform end-to-end, implemented, updated and debugged REST APIs, frontend features, cloud integrations and more.",
         "softwareDev2": "Led a revamp of the WhatsApp bulk template creation and sending flow, making campaign configuration faster, more reliable and easier to operate.",
         "softwareDev3": "Contributed to the development of a VoIP contact center with an OpenAI Whisper‑powered voicebot and seamless handoff to human agents.",
-        "chatbotDev1": "Designed, built and maintained conversational chatbots using workflow‑based automation with embedded JavaScript functions.",
+        "chatbotDev1": "Created bots via workflows using a wide variety of integrations, created Whatsapp Campaigns, personalized customer service, used NLP and LLM models and more.",
         "chatbotDev2": "Led prompt engineering and conversational AI tuning, creating analytics and reporting for chatbot performance.",
-        "backendDev1": "Designed and implemented the end‑to‑end business logic for a recycling supply‑chain platform.",
+        "backendDev1": "Implemented business logic using Java, Spring Boot and Flowable.",
         "backendDev2": "Proactively aligned frontend, backend, business and support teams, establishing communication bridges that enabled on‑time delivery."
       }
     },
