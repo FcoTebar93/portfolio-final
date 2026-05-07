@@ -28,18 +28,17 @@ const roles = lang === 'es' ? es.typewriter.roles : en.typewriter.roles;
       </p>
 
       <h1 class="hero-anim hero-from-left text-5xl sm:text-6xl md:text-7xl font-bold leading-[1.1] tracking-tight" style="animation-delay: 0.5s">
-        <span class="block text-text">Francisco Tébar Navarro</span>
-        <span class="block hero-anim hero-from-right text-accent font-mono text-xl sm:text-2xl md:text-3xl mt-3 sm:mt-4" style="animation-delay: 0.65s">
-          <span data-i18n="hero.subtitle">{t('hero.subtitle')} </span>
-          <span
-            id="typewriter"
-            class="border-r-2 border-accent pr-1"
-            data-roles={JSON.stringify(roles)}
-          >
-            {roles[0]}
-          </span>
-        </span>
+        <span class="block text-text">Francisco Tebar Navarro</span>
       </h1>
+      <div class="hero-anim hero-from-right text-accent font-mono text-xl sm:text-2xl md:text-3xl mt-1 sm:mt-2" style="animation-delay: 0.65s">
+        <span
+          id="typewriter"
+          class="typewriter-role inline-block"
+          data-roles={JSON.stringify(roles)}
+        >
+          {roles[0]}
+        </span>
+      </div>
 
       <p class="hero-anim hero-from-left text-base sm:text-lg text-muted max-w-xl leading-relaxed" data-i18n="hero.description" style="animation-delay: 0.8s">
         {t('hero.description')}
@@ -93,34 +92,34 @@ const roles = lang === 'es' ? es.typewriter.roles : en.typewriter.roles;
     if (el) {
       const roles = JSON.parse(el.dataset.roles || "[]");
       let index = 0;
-      let charIndex = 0;
-      let deleting = false;
+      const ENTER_MS = 400;
+      const HOLD_MS = 2000;
+      const EXIT_MS = 400;
 
-      const type = () => {
-        const current = roles[index] || "";
+      if (roles.length > 0) {
+        el.textContent = roles[0];
+      }
 
-        if (!deleting) {
-          el.textContent = current.slice(0, charIndex + 1);
-          charIndex++;
-          if (charIndex === current.length) {
-            deleting = true;
-            setTimeout(type, 1200);
-            return;
-          }
-        } else {
-          el.textContent = current.slice(0, charIndex - 1);
-          charIndex--;
-          if (charIndex === 0) {
-            deleting = false;
+      const loop = () => {
+        el.classList.remove("role-enter", "role-exit");
+        void el.offsetWidth;
+        el.classList.add("role-enter");
+
+        setTimeout(() => {
+          el.classList.remove("role-enter");
+          el.classList.add("role-exit");
+
+          setTimeout(() => {
             index = (index + 1) % roles.length;
-          }
-        }
-
-        const speed = deleting ? 40 : 90;
-        setTimeout(type, speed);
+            el.textContent = roles[index] || "";
+            loop();
+          }, EXIT_MS);
+        }, ENTER_MS + HOLD_MS);
       };
 
-      type();
+      if (roles.length > 1) {
+        loop();
+      }
     }
   </script>
 
@@ -199,6 +198,35 @@ const roles = lang === 'es' ? es.typewriter.roles : en.typewriter.roles;
     .hero-gradient {
       background: radial-gradient(circle at top, rgba(56, 189, 248, 0.18) 0%, transparent 60%),
                   radial-gradient(circle at bottom, color-mix(in srgb, var(--color-primary) 92%, transparent) 0%, var(--color-primary) 100%);
+    }
+    .typewriter-role {
+      will-change: transform, opacity;
+    }
+    .role-enter {
+      animation: role-enter-up 0.4s ease-out forwards;
+    }
+    .role-exit {
+      animation: role-exit-up 0.4s ease-in forwards;
+    }
+    @keyframes role-enter-up {
+      from {
+        opacity: 0;
+        transform: translateY(0.9rem);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes role-exit-up {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(-0.9rem);
+      }
     }
 
     [data-theme="light"] section {
