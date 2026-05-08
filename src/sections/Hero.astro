@@ -116,6 +116,7 @@ const cvText = lang === 'es'
     id="cv-modal"
     class="fixed inset-0 z-50 hidden items-center justify-center p-4"
     aria-hidden="true"
+    data-missing-message={cvText.missingFile}
   >
     <button
       id="cv-modal-overlay"
@@ -200,7 +201,8 @@ const cvText = lang === 'es'
       es: "",
       en: "",
     };
-    const missingFileMessage = {JSON.stringify(cvText.missingFile)};
+    const missingFileMessage = cvModal?.getAttribute("data-missing-message")
+      || "Resume not available yet.";
 
     const openCvModal = () => {
       if (!cvModal) return;
