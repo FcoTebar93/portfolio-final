@@ -13,7 +13,7 @@
     "about": {
       "title": "About",
       "heading": "I build reliable, automated systems from backend to cloud.",
-      "paragraph1": "I'm a fullstack developer with experience in Angular, Nodejs, SQL, Redis, RabbitMQ, Jenkins, Docker, Kubernetes and Google Cloud. I enjoy designing and implementing CI/CD pipelines, integrating external services, and deploying LLM-based features into production environments.",
+      "paragraph1": "I'm a fullstack developer with experience across the entire software development lifecycle, from requirements definition to final delivery and ongoing maintenance.",
       "paragraph2": "My focus is on creating maintainable architectures, automating repetitive processes, and collaborating closely with teams to ship high quality software faster and more safely."
     },
     "experience": {
