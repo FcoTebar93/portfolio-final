@@ -6,6 +6,25 @@ import es from '../i18n/es.json';
 
 const lang = getLanguage();
 const roles = lang === 'es' ? es.typewriter.roles : en.typewriter.roles;
+const cvText = lang === 'es'
+  ? {
+      openButton: 'Curriculum',
+      modalTitle: 'Descargar curriculum',
+      modalDescription: 'Elige el idioma de descarga.',
+      spanish: 'Espanol',
+      english: 'Ingles',
+      cancel: 'Cancelar',
+      missingFile: 'Aun no he subido este curriculum. Estara disponible pronto.',
+    }
+  : {
+      openButton: 'Resume',
+      modalTitle: 'Download resume',
+      modalDescription: 'Choose your download language.',
+      spanish: 'Spanish',
+      english: 'English',
+      cancel: 'Cancel',
+      missingFile: 'This resume is not uploaded yet. It will be available soon.',
+    };
 ---
 
 <section class="min-h-screen flex items-center justify-center px-4 pb-8 sm:pb-12 relative overflow-hidden bg-secondary/40">
@@ -80,8 +99,58 @@ const roles = lang === 'es' ? es.typewriter.roles : en.typewriter.roles;
         >
           {t('hero.contact')}
         </a>
+        <span class="w-[1px] h-4 bg-muted/30" />
+        <button
+          id="open-cv-modal"
+          type="button"
+          class="hover:text-accent transition-colors font-medium"
+        >
+          {cvText.openButton}
+        </button>
       </div>
     </div>
+    </div>
+  </div>
+
+  <div
+    id="cv-modal"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4"
+    aria-hidden="true"
+  >
+    <button
+      id="cv-modal-overlay"
+      type="button"
+      class="absolute inset-0 bg-black/60"
+      aria-label="Close modal"
+    />
+    <div class="relative w-full max-w-md rounded-2xl border border-white/10 bg-primary p-6 shadow-2xl">
+      <h2 class="text-xl font-semibold text-text">{cvText.modalTitle}</h2>
+      <p class="mt-2 text-sm text-muted">{cvText.modalDescription}</p>
+
+      <div class="mt-6 flex flex-col gap-3">
+        <button
+          type="button"
+          class="cv-download-btn inline-flex items-center justify-center rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+          data-cv-lang="es"
+        >
+          {cvText.spanish}
+        </button>
+        <button
+          type="button"
+          class="cv-download-btn inline-flex items-center justify-center rounded-full border border-muted/40 px-5 py-3 text-sm font-semibold text-text transition-colors hover:border-accent hover:text-accent"
+          data-cv-lang="en"
+        >
+          {cvText.english}
+        </button>
+      </div>
+
+      <button
+        id="close-cv-modal"
+        type="button"
+        class="mt-5 text-sm text-muted transition-colors hover:text-accent"
+      >
+        {cvText.cancel}
+      </button>
     </div>
   </div>
 
@@ -121,6 +190,58 @@ const roles = lang === 'es' ? es.typewriter.roles : en.typewriter.roles;
         loop();
       }
     }
+
+    const cvModal = document.getElementById("cv-modal");
+    const openCvModalBtn = document.getElementById("open-cv-modal");
+    const closeCvModalBtn = document.getElementById("close-cv-modal");
+    const cvOverlay = document.getElementById("cv-modal-overlay");
+    const cvDownloadButtons = document.querySelectorAll(".cv-download-btn");
+    const resumeFiles = {
+      es: "",
+      en: "",
+    };
+    const missingFileMessage = {JSON.stringify(cvText.missingFile)};
+
+    const openCvModal = () => {
+      if (!cvModal) return;
+      cvModal.classList.remove("hidden");
+      cvModal.classList.add("flex");
+      cvModal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("overflow-hidden");
+    };
+
+    const closeCvModal = () => {
+      if (!cvModal) return;
+      cvModal.classList.add("hidden");
+      cvModal.classList.remove("flex");
+      cvModal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("overflow-hidden");
+    };
+
+    openCvModalBtn?.addEventListener("click", openCvModal);
+    closeCvModalBtn?.addEventListener("click", closeCvModal);
+    cvOverlay?.addEventListener("click", closeCvModal);
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && cvModal && !cvModal.classList.contains("hidden")) {
+        closeCvModal();
+      }
+    });
+
+    cvDownloadButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const selectedLang = button.getAttribute("data-cv-lang");
+        const fileUrl = selectedLang ? resumeFiles[selectedLang] : "";
+
+        if (!fileUrl) {
+          alert(missingFileMessage);
+          return;
+        }
+
+        window.open(fileUrl, "_blank", "noopener,noreferrer");
+        closeCvModal();
+      });
+    });
   </script>
 
   <style>
