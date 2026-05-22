@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./contact.css";
 
 @theme {
     /* Modo oscuro: gris uniforme + gradiente lineal como en Experience/Skills */

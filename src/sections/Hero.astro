@@ -93,7 +93,8 @@ const cvText = lang === 'es'
         </a>
         <span class="w-[1px] h-4 bg-muted/30" />
         <a
-          href="mailto:fcotebar93@gmail.com"
+          href={`mailto:fcotebar93@gmail.com?subject=${encodeURIComponent(t('contact.form.mailtoSubject'))}`}
+          data-portfolio-mailto
           class="hover:text-accent transition-colors font-medium"
           data-i18n="hero.contact"
         >

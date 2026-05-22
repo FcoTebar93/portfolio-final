@@ -1,0 +1,53 @@
+[data-theme="light"] #contact {
+  background: var(--color-secondary);
+}
+
+[data-theme="light"] .contact-form {
+  background: var(--color-surface);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border: 1.5px solid var(--color-border);
+}
+
+[data-theme="light"] .contact-form input,
+[data-theme="light"] .contact-form textarea {
+  background: var(--color-primary);
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+[data-theme="light"] .contact-form input:focus,
+[data-theme="light"] .contact-form textarea:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.1);
+  outline: none;
+}
+
+[data-theme="light"] .contact-form button {
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
+  font-weight: 600;
+}
+
+[data-theme="light"] .contact-form button:hover {
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.3);
+  transform: translateY(-1px);
+}
+
+[data-theme="light"] #contact .text-text {
+  color: #1a1a1a;
+}
+
+[data-theme="light"] #contact .text-muted {
+  color: #525252;
+}
+
+[data-theme="light"] footer {
+  border-color: var(--color-border);
+  background: var(--color-primary);
+}
+
+[data-theme="light"] footer .text-muted {
+  color: #525252;
+}

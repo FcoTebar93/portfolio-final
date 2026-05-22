@@ -217,15 +217,97 @@ function updatePageContent() {
   }
 
   refreshProjectModalIfOpen(lang);
+
+  const mailtoSubject = encodeURIComponent(t('contact.form.mailtoSubject'));
+  document.querySelectorAll<HTMLAnchorElement>('[data-portfolio-mailto]').forEach((el) => {
+    el.href = `mailto:fcotebar93@gmail.com?subject=${mailtoSubject}`;
+  });
+}
+
+function initPortfolioForm() {
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+  const submitBtn = form?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+  const subjectInput = document.getElementById('subject');
+  const formSubject = document.getElementById('form-subject') as HTMLInputElement | null;
+  const formFromName = document.getElementById('form-from-name') as HTMLInputElement | null;
+  const formSource = document.getElementById('form-source') as HTMLInputElement | null;
+
+  if (!form || !status || !submitBtn || !subjectInput || !formSubject || !formFromName || !formSource) {
+    return;
+  }
+
+  const showStatus = (text: string, type: 'success' | 'error' | 'info') => {
+    status.textContent = text;
+    status.classList.remove('hidden');
+    if (type === 'success') {
+      status.className = 'text-sm text-center text-accent';
+    } else if (type === 'error') {
+      status.className = 'text-sm text-center text-red-400';
+    } else {
+      status.className = 'text-sm text-center text-muted';
+    }
+    if (type === 'success') {
+      setTimeout(() => status.classList.add('hidden'), 5000);
+    }
+  };
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name = (document.getElementById('name') as HTMLInputElement).value.trim();
+    const email = (document.getElementById('email') as HTMLInputElement).value.trim();
+    const subject = (subjectInput as HTMLInputElement).value.trim();
+    const message = (document.getElementById('message') as HTMLTextAreaElement).value.trim();
+
+    if (!name || !email || !subject || !message) {
+      showStatus(t('contact.form.fillAll'), 'error');
+      return;
+    }
+
+    formSubject.value = `${t('contact.form.emailSubjectPrefix')} ${subject}`;
+    formFromName.value = name;
+    formSource.value = t('contact.form.source');
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = t('contact.form.sending');
+    showStatus(t('contact.form.sending'), 'info');
+
+    try {
+      const formData = new FormData(form);
+      formData.set('message', `${t('contact.form.source')}\n\n---\n\n${message}`);
+
+      const endpoint = ['https://api.', 'web3forms.com/submit'].join('');
+      const response = await fetch(endpoint, { method: 'POST', body: formData });
+      const data = await response.json();
+
+      if (data.success) {
+        showStatus(t('contact.form.success'), 'success');
+        form.reset();
+      } else {
+        throw new Error(data.message || 'Failed to send');
+      }
+    } catch (error) {
+      console.error('Form error:', error);
+      showStatus(t('contact.form.error'), 'error');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = t('contact.form.send');
+    }
+  });
 }
 
 if (typeof window !== 'undefined') {
   const lang = getLanguage();
   setLanguage(lang);
   (window as any).updatePageContent = updatePageContent;
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => updatePageContent());
-  } else {
+  const boot = () => {
     updatePageContent();
+    initPortfolioForm();
+  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
   }
 }
