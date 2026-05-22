@@ -27,7 +27,7 @@ const cvText = lang === 'es'
     };
 ---
 
-<section class="min-h-screen flex items-center justify-center px-4 pb-8 sm:pb-12 relative overflow-hidden bg-secondary/40">
+<section class="hero-home min-h-screen flex items-center justify-center px-4 pb-8 sm:pb-12 relative overflow-hidden bg-secondary/40">
   <div class="max-w-5xl w-full flex flex-col md:flex-row md:items-center md:justify-between gap-10 md:gap-12 relative z-10">
     <!-- Imagen de perfil: aparece primero -->
     <div class="order-first md:order-last flex justify-center md:justify-end shrink-0 hero-photo-wrap">
@@ -46,7 +46,7 @@ const cvText = lang === 'es'
         {t('hero.portfolio')}
       </p>
 
-      <h1 class="hero-anim hero-from-left text-5xl sm:text-6xl md:text-7xl font-bold leading-[1.1] tracking-tight" style="animation-delay: 0.5s">
+      <h1 class="hero-anim hero-from-left text-4xl sm:text-6xl md:text-7xl font-bold leading-[1.1] tracking-tight break-words" style="animation-delay: 0.5s">
         <span class="block text-text">Francisco Tebar Navarro</span>
       </h1>
       <div class="hero-anim hero-from-right text-accent font-mono text-xl sm:text-2xl md:text-3xl mt-1 sm:mt-2" style="animation-delay: 0.65s">
@@ -73,7 +73,7 @@ const cvText = lang === 'es'
         {t('hero.viewWork')}
       </a>
 
-      <div class="flex items-center gap-4 text-sm text-muted">
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted max-w-full">
         <a
           href="https://github.com/FcoTebar93"
           target="_blank"
@@ -247,6 +247,35 @@ const cvText = lang === 'es'
   </script>
 
   <style>
+    .hero-home::before,
+    .hero-home::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      z-index: 20;
+      background: var(--color-primary);
+      pointer-events: none;
+    }
+    .hero-home::before {
+      left: 0;
+    }
+    .hero-home::after {
+      right: 0;
+    }
+    .hero-home.hero-divide-ready::before,
+    .hero-home.hero-divide-ready::after {
+      width: 0;
+      transition: width 0.6s 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+
+    :global(body.preloader-active) .hero-anim,
+    :global(body.preloader-active) .hero-photo-wrap {
+      animation: none !important;
+      opacity: 0;
+    }
+
     .hero-photo-wrap {
       animation: hero-photo-in 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }

@@ -44,7 +44,7 @@ const projects = [
 ];
 ---
 
-<section id="projects" class="px-4 py-16 sm:py-24 bg-secondary/40">
+<section id="projects" class="px-4 py-16 sm:py-24 bg-secondary/40 overflow-x-clip">
     <div class="max-w-5xl mx-auto">
       <div class="flex items-baseline justify-between gap-4 mb-10 sm:mb-14">
         <div>
@@ -432,6 +432,21 @@ const projects = [
     @media (max-width: 768px) {
       .modal-content {
         max-height: 90vh;
+      }
+
+      #projects .project-card {
+        transform: translate(0, 24px) scale(0.98);
+      }
+
+      @keyframes project-card-enter {
+        from {
+          opacity: 0;
+          transform: translate(0, 24px) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: translate(0, 0) scale(1);
+        }
       }
     }
 

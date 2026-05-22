@@ -43,6 +43,19 @@
     color: var(--color-text);
 }
 
+html {
+    overflow-x: clip;
+}
+
+body {
+    overflow-x: clip;
+    max-width: 100%;
+}
+
+body.preloader-active {
+    overflow: hidden;
+}
+
 [data-theme="light"] {
     --color-primary: #FAFAFA;
     --color-secondary: #F5F5F5;
