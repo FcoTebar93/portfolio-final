@@ -1,0 +1,167 @@
+---
+/** Pantalla de carga al iniciar la web (spinner + overlay que se desliza hacia arriba). */
+---
+
+<div id="preloader-overlay" class="preloader-overlay" aria-hidden="false" aria-busy="true">
+  <div id="preloader" class="preloader" role="status" aria-label="Loading">
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<script>
+  const MIN_DISPLAY_MS = 800;
+  const SPINNER_EXIT_MS = 400;
+  const OVERLAY_EXIT_MS = 1000;
+
+  function finishPreloader() {
+    const overlay = document.getElementById("preloader-overlay");
+    const spinner = document.getElementById("preloader");
+    const hero = document.querySelector(".hero-home");
+
+    if (!overlay || overlay.dataset.done === "true") return;
+    overlay.dataset.done = "true";
+
+    document.body.classList.remove("preloader-active");
+    document.body.removeAttribute("aria-busy");
+
+    if (spinner) {
+      spinner.classList.add("preloader--exit");
+    }
+
+    window.setTimeout(() => {
+      overlay.classList.add("preloader-overlay--exit");
+
+      const onOverlayEnd = (event: TransitionEvent) => {
+        if (event.propertyName !== "transform") return;
+        overlay.removeEventListener("transitionend", onOverlayEnd);
+        overlay.remove();
+        hero?.classList.add("hero-divide-ready");
+      };
+
+      overlay.addEventListener("transitionend", onOverlayEnd);
+
+      window.setTimeout(() => {
+        if (document.getElementById("preloader-overlay")) {
+          overlay.remove();
+          hero?.classList.add("hero-divide-ready");
+        }
+      }, OVERLAY_EXIT_MS + 100);
+    }, SPINNER_EXIT_MS);
+  }
+
+  function startPreloader() {
+    const start = Date.now();
+
+    const run = () => {
+      const elapsed = Date.now() - start;
+      const wait = Math.max(0, MIN_DISPLAY_MS - elapsed);
+      window.setTimeout(finishPreloader, wait);
+    };
+
+    if (document.readyState === "complete") {
+      run();
+    } else {
+      window.addEventListener("load", run, { once: true });
+    }
+
+    window.setTimeout(finishPreloader, 6000);
+  }
+
+  startPreloader();
+</script>
+
+<style>
+  .preloader-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary);
+    transform: translateY(0);
+    transition: transform 1s cubic-bezier(0.7, 0, 0.3, 1);
+  }
+
+  .preloader-overlay--exit {
+    transform: translateY(-100%);
+  }
+
+  .preloader {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    transition:
+      opacity 0.4s ease,
+      transform 0.4s ease;
+  }
+
+  .preloader--exit {
+    opacity: 0.1;
+    transform: translateY(-80px);
+  }
+
+  .preloader span {
+    position: absolute;
+    border: 8px solid var(--color-accent);
+    border-top-color: transparent;
+    border-radius: 999px;
+  }
+
+  .preloader span:nth-child(1) {
+    width: 80px;
+    height: 80px;
+    animation: preloader-spin-1 2s infinite linear;
+  }
+
+  .preloader span:nth-child(2) {
+    top: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    animation: preloader-spin-2 1s infinite linear;
+  }
+
+  @keyframes preloader-spin-1 {
+    0% {
+      transform: rotate(360deg);
+      opacity: 1;
+    }
+    50% {
+      transform: rotate(180deg);
+      opacity: 0.5;
+    }
+    100% {
+      transform: rotate(0deg);
+      opacity: 1;
+    }
+  }
+
+  @keyframes preloader-spin-2 {
+    0% {
+      transform: rotate(0deg);
+      opacity: 0.5;
+    }
+    50% {
+      transform: rotate(180deg);
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(360deg);
+      opacity: 0.5;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .preloader-overlay {
+      transition-duration: 0.01ms;
+    }
+    .preloader span {
+      animation: none;
+    }
+    .preloader--exit {
+      transition-duration: 0.01ms;
+    }
+  }
+</style>
