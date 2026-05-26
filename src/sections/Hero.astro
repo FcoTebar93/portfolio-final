@@ -5,6 +5,7 @@ import en from '../i18n/en.json';
 import es from '../i18n/es.json';
 
 const lang = getLanguage();
+const resumePdfUrl = encodeURI('/32023 62023.pdf');
 const roles = lang === 'es' ? es.typewriter.roles : en.typewriter.roles;
 const cvText = lang === 'es'
   ? {
@@ -118,6 +119,8 @@ const cvText = lang === 'es'
     class="fixed inset-0 z-50 hidden items-center justify-center p-4"
     aria-hidden="true"
     data-missing-message={cvText.missingFile}
+    data-resume-es={resumePdfUrl}
+    data-resume-en={resumePdfUrl}
   >
     <button
       id="cv-modal-overlay"
@@ -199,8 +202,8 @@ const cvText = lang === 'es'
     const cvOverlay = document.getElementById("cv-modal-overlay");
     const cvDownloadButtons = document.querySelectorAll(".cv-download-btn");
     const resumeFiles = {
-      es: "",
-      en: "",
+      es: cvModal?.dataset.resumeEs || "",
+      en: cvModal?.dataset.resumeEn || "",
     };
     const missingFileMessage = cvModal?.getAttribute("data-missing-message")
       || "Resume not available yet.";
@@ -241,7 +244,13 @@ const cvText = lang === 'es'
           return;
         }
 
-        window.open(fileUrl, "_blank", "noopener,noreferrer");
+        const link = document.createElement("a");
+        link.href = fileUrl;
+        link.download = "Francisco-Tebar-CV.pdf";
+        link.rel = "noopener";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
         closeCvModal();
       });
     });
