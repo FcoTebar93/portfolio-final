@@ -5,7 +5,9 @@ import en from '../i18n/en.json';
 import es from '../i18n/es.json';
 
 const lang = getLanguage();
-const resumePdfUrl = encodeURI('/32023 62023.pdf');
+
+const resumePdfEs = '/CV_Francisco_Tébar_Navarro_ES.pdf';
+const resumePdfEn = '/CV_Francisco_Tébar_Navarro_EN.pdf';
 const roles = lang === 'es' ? es.typewriter.roles : en.typewriter.roles;
 const cvText = lang === 'es'
   ? {
@@ -119,8 +121,8 @@ const cvText = lang === 'es'
     class="fixed inset-0 z-50 hidden items-center justify-center p-4"
     aria-hidden="true"
     data-missing-message={cvText.missingFile}
-    data-resume-es={resumePdfUrl}
-    data-resume-en={resumePdfUrl}
+    data-resume-es={resumePdfEs}
+    data-resume-en={resumePdfEn}
   >
     <button
       id="cv-modal-overlay"
@@ -234,24 +236,46 @@ const cvText = lang === 'es'
       }
     });
 
-    cvDownloadButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const selectedLang = button.getAttribute("data-cv-lang");
-        const fileUrl = selectedLang ? resumeFiles[selectedLang] : "";
+    const resumeDownloadNames = {
+      es: "CV_Francisco_Tebar_Navarro_ES.pdf",
+      en: "CV_Francisco_Tebar_Navarro_EN.pdf",
+    };
 
-        if (!fileUrl) {
-          alert(missingFileMessage);
-          return;
+    const downloadResume = async (selectedLang) => {
+      const fileUrl = selectedLang ? resumeFiles[selectedLang] : "";
+      const fileName = selectedLang ? resumeDownloadNames[selectedLang] : "";
+
+      if (!fileUrl || !fileName) {
+        alert(missingFileMessage);
+        return;
+      }
+
+      try {
+        const response = await fetch(fileUrl);
+        if (!response.ok) {
+          throw new Error("Resume file not found");
         }
 
+        const blob = await response.blob();
+        const blobUrl = URL.createObjectURL(blob);
         const link = document.createElement("a");
-        link.href = fileUrl;
-        link.download = "Francisco-Tebar-CV.pdf";
+        link.href = blobUrl;
+        link.download = fileName;
         link.rel = "noopener";
         document.body.appendChild(link);
         link.click();
         link.remove();
+        URL.revokeObjectURL(blobUrl);
         closeCvModal();
+      } catch {
+        alert(missingFileMessage);
+      }
+    };
+
+    cvDownloadButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const selectedLang = button.getAttribute("data-cv-lang");
+        void downloadResume(selectedLang);
       });
     });
   </script>
