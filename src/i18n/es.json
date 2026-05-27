@@ -103,11 +103,11 @@
       "title": "Proyectos",
       "subtitle": "Algunos proyectos recientes en los que he trabajado.",
       "items": {
-        "eventix": {
-          "name": "Eventix",
-          "role": "Plataforma de compraventa de tickets",
-          "short": "Plataforma moderna para compraventa de entradas con foco en UX, pagos seguros y gestión de eventos en tiempo real.",
-          "long": "Eventix es una plataforma pensada para organizadores y asistentes. Permite crear eventos, gestionar aforos, controlar accesos mediante códigos QR y procesar pagos de forma segura. El foco está en ofrecer una experiencia muy fluida, con analítica básica para organizadores y un flujo de compra sin fricción para usuarios finales."
+        "mentorix": {
+          "name": "Mentorix",
+          "role": "Plataforma de entrevistas técnicas con IA",
+          "short": "Toolkit todo-en-uno para diseñar, lanzar y evaluar entrevistas técnicas con multi-LLM, voz en tiempo real, rúbricas explicables y links de acceso para candidatos.",
+          "long": "Mentorix permite a reclutadores definir plantillas de entrevista (rol, nivel, rúbrica), generar un link de acceso único y que el candidato complete la sesión guiada por texto o voz. Un LLM conduce la entrevista, puntúa las respuestas según dimensiones ponderadas de la rúbrica y genera informes estructurados con fortalezas, mejoras y recomendación final. Stack: backend Fastify + Drizzle + Postgres, frontend React, proveedores LLM intercambiables (OpenAI, Anthropic, Gemini, Groq, Ollama) y STT/TTS propios (Whisper + Piper) sobre WebRTC para voz en tiempo real."
         },
         "agentic-code-reviewer": {
           "name": "Agentic Code Reviewer",
