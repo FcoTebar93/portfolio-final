@@ -95,6 +95,12 @@ function updatePageContent() {
     'hero.description': t('hero.description'),
     'hero.viewWork': t('hero.viewWork'),
     'hero.contact': t('hero.contact'),
+    'hero.cv.openButton': t('hero.cv.openButton'),
+    'hero.cv.modalTitle': t('hero.cv.modalTitle'),
+    'hero.cv.modalDescription': t('hero.cv.modalDescription'),
+    'hero.cv.spanish': t('hero.cv.spanish'),
+    'hero.cv.english': t('hero.cv.english'),
+    'hero.cv.cancel': t('hero.cv.cancel'),
     'about.title': t('about.title'),
     'about.heading': t('about.heading'),
     'about.paragraph1': t('about.paragraph1'),
@@ -222,6 +228,11 @@ function updatePageContent() {
   document.querySelectorAll<HTMLAnchorElement>('[data-portfolio-mailto]').forEach((el) => {
     el.href = `mailto:fcotebar93@gmail.com?subject=${mailtoSubject}`;
   });
+
+  const cvModal = document.getElementById('cv-modal');
+  if (cvModal) {
+    cvModal.setAttribute('data-missing-message', t('hero.cv.missingFile'));
+  }
 }
 
 function initPortfolioForm() {

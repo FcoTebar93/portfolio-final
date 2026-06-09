@@ -8,7 +8,16 @@
       "subtitle": "Software Developer ·",
       "description": "Fullstack developer focused on building scalable applications, automation pipelines, and AI-powered solutions using modern Cloud and DevOps practices.",
       "viewWork": "View my work",
-      "contact": "Contact"
+      "contact": "Contact",
+      "cv": {
+        "openButton": "Resume",
+        "modalTitle": "Download resume",
+        "modalDescription": "Choose your download language.",
+        "spanish": "Spanish",
+        "english": "English",
+        "cancel": "Cancel",
+        "missingFile": "This resume is not uploaded yet. It will be available soon."
+      }
     },
     "about": {
       "title": "About",

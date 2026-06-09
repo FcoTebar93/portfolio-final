@@ -9,25 +9,6 @@ const lang = getLanguage();
 const resumePdfEs = '/CV_Francisco_Tébar_Navarro_ES.pdf';
 const resumePdfEn = '/CV_Francisco_Tébar_Navarro_EN.pdf';
 const roles = lang === 'es' ? es.typewriter.roles : en.typewriter.roles;
-const cvText = lang === 'es'
-  ? {
-      openButton: 'Curriculum',
-      modalTitle: 'Descargar currículum',
-      modalDescription: 'Elige el idioma de descarga',
-      spanish: 'Español',
-      english: 'Inglés',
-      cancel: 'Cancelar',
-      missingFile: 'Aún no he subido este currículum. Estará disponible pronto.',
-    }
-  : {
-      openButton: 'Resume',
-      modalTitle: 'Download resume',
-      modalDescription: 'Choose your download language.',
-      spanish: 'Spanish',
-      english: 'English',
-      cancel: 'Cancel',
-      missingFile: 'This resume is not uploaded yet. It will be available soon.',
-    };
 ---
 
 <section class="hero-home min-h-screen flex items-center justify-center px-4 pb-8 sm:pb-12 relative overflow-hidden bg-secondary/40">
@@ -108,8 +89,9 @@ const cvText = lang === 'es'
           id="open-cv-modal"
           type="button"
           class="hover:text-accent transition-colors font-medium"
+          data-i18n="hero.cv.openButton"
         >
-          {cvText.openButton}
+          {t('hero.cv.openButton')}
         </button>
       </div>
     </div>
@@ -120,7 +102,7 @@ const cvText = lang === 'es'
     id="cv-modal"
     class="fixed inset-0 z-50 hidden items-center justify-center p-4"
     aria-hidden="true"
-    data-missing-message={cvText.missingFile}
+    data-missing-message={t('hero.cv.missingFile')}
     data-resume-es={resumePdfEs}
     data-resume-en={resumePdfEn}
   >
@@ -131,23 +113,25 @@ const cvText = lang === 'es'
       aria-label="Close modal"
     />
     <div class="cv-modal-card relative w-full max-w-md">
-      <h2 class="cv-modal-title">{cvText.modalTitle}</h2>
-      <p class="cv-modal-description">{cvText.modalDescription}</p>
+      <h2 class="cv-modal-title" data-i18n="hero.cv.modalTitle">{t('hero.cv.modalTitle')}</h2>
+      <p class="cv-modal-description" data-i18n="hero.cv.modalDescription">{t('hero.cv.modalDescription')}</p>
 
       <div class="cv-modal-actions">
         <button
           type="button"
           class="cv-download-btn cv-modal-button"
           data-cv-lang="es"
+          data-i18n="hero.cv.spanish"
         >
-          {cvText.spanish}
+          {t('hero.cv.spanish')}
         </button>
         <button
           type="button"
           class="cv-download-btn cv-modal-button"
           data-cv-lang="en"
+          data-i18n="hero.cv.english"
         >
-          {cvText.english}
+          {t('hero.cv.english')}
         </button>
       </div>
 
@@ -155,8 +139,9 @@ const cvText = lang === 'es'
         id="close-cv-modal"
         type="button"
         class="cv-modal-cancel"
+        data-i18n="hero.cv.cancel"
       >
-        {cvText.cancel}
+        {t('hero.cv.cancel')}
       </button>
     </div>
   </div>

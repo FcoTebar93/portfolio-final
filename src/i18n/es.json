@@ -8,7 +8,16 @@
       "subtitle": "Desarrollador de Software ·",
       "description": "Desarrollador fullstack enfocado en construir aplicaciones escalables, pipelines de automatización y soluciones impulsadas por IA usando prácticas modernas de Cloud y DevOps.",
       "viewWork": "Ver mi trabajo",
-      "contact": "Contacto"
+      "contact": "Contacto",
+      "cv": {
+        "openButton": "Currículum",
+        "modalTitle": "Descargar currículum",
+        "modalDescription": "Elige el idioma de descarga",
+        "spanish": "Español",
+        "english": "Inglés",
+        "cancel": "Cancelar",
+        "missingFile": "Aún no he subido este currículum. Estará disponible pronto."
+      }
     },
     "about": {
       "title": "Sobre mí",
