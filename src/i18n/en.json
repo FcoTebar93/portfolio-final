@@ -116,7 +116,7 @@
           "name": "Mentorix",
           "role": "AI-powered technical interview platform",
           "short": "All-in-one toolkit to design, run and evaluate technical interviews with multi-LLM support, real-time voice, explainable rubrics and shareable candidate links.",
-          "long": "Mentorix lets recruiters define interview templates (role, seniority, rubric), generate a unique access link and have candidates complete guided interviews by text or voice. An LLM conducts the session, scores answers against weighted rubric dimensions and produces structured reports with strengths, gaps and a hiring recommendation. Built with Fastify, Drizzle and Postgres on the backend, React on the frontend, pluggable LLM providers (OpenAI, Anthropic, Gemini, Groq, Ollama) and self-hosted STT/TTS (Whisper + Piper) over WebRTC for real-time voice."
+          "long": "Mentorix lets recruiters define interview templates (role, seniority, rubric), generate a unique access link and have candidates complete guided interviews by text or voice. An LLM conducts the session, scores answers against weighted rubric dimensions and produces structured reports with strengths, gaps and a hiring recommendation."
         },
         "agentic-code-reviewer": {
           "name": "Agentic Code Reviewer",
