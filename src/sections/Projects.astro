@@ -130,79 +130,89 @@ const projects = [
 
   <div
     id="project-modal"
-    class="fixed inset-0 z-40 hidden flex items-center justify-center px-4 py-8 bg-black/60 backdrop-blur-sm project-modal"
+    class="fixed inset-0 z-40 hidden project-modal"
     role="dialog"
     aria-modal="true"
     aria-label={t('projects.ui.cardModalLabel')}
     aria-hidden="true"
   >
-    <div class="relative max-w-3xl w-full bg-secondary rounded-2xl border border-accent/25 shadow-2xl overflow-hidden modal-content">
-      <div class="grid md:grid-cols-[1.1fr,0.9fr]">
-        <div class="relative bg-gradient-to-br from-accent/20 via-primary to-accent/10 p-8 flex flex-col justify-end">
-          <div class="absolute inset-0 opacity-50 pointer-events-none project-card-glow" />
-          <div class="relative z-10">
-            <p class="text-[0.7rem] uppercase tracking-[0.18em] text-accent font-mono mb-2" id="project-modal-role">
-            </p>
-            <h3 class="text-2xl font-semibold mb-2" id="project-modal-title">
-            </h3>
-            <p class="text-sm text-muted max-w-md" id="project-modal-short">
-            </p>
+    <button
+      type="button"
+      id="project-modal-backdrop"
+      class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+      aria-label={t('projects.ui.modalBack')}
+    />
+    <div class="relative z-10 flex min-h-full items-center justify-center px-4 py-6 sm:py-8 pointer-events-none">
+      <div class="modal-content pointer-events-auto relative max-w-3xl w-full bg-secondary rounded-2xl border border-accent/25 shadow-2xl flex flex-col">
+        <div class="modal-scroll flex-1 min-h-0 overflow-y-auto overscroll-y-contain">
+          <div class="grid md:grid-cols-[1.1fr,0.9fr]">
+            <div class="relative bg-gradient-to-br from-accent/20 via-primary to-accent/10 p-6 sm:p-8 flex flex-col justify-end">
+              <div class="absolute inset-0 opacity-50 pointer-events-none project-card-glow" />
+              <div class="relative z-10">
+                <p class="text-[0.7rem] uppercase tracking-[0.18em] text-accent font-mono mb-2" id="project-modal-role">
+                </p>
+                <h3 class="text-2xl font-semibold mb-2" id="project-modal-title">
+                </h3>
+                <p class="text-sm text-muted max-w-md" id="project-modal-short">
+                </p>
+              </div>
+            </div>
+
+            <div class="p-6 sm:p-7 flex flex-col gap-4">
+              <div class="space-y-2">
+                <h4
+                  class="text-sm font-semibold text-accent tracking-[0.18em] uppercase"
+                  data-i18n="projects.ui.modalDetails"
+                >
+                  {t('projects.ui.modalDetails')}
+                </h4>
+                <p class="text-sm text-muted leading-relaxed" id="project-modal-long">
+                </p>
+              </div>
+
+              <div>
+                <h4
+                  class="text-xs font-semibold text-muted/80 tracking-[0.22em] uppercase mb-2"
+                  data-i18n="projects.ui.modalTechnologies"
+                >
+                  {t('projects.ui.modalTechnologies')}
+                </h4>
+                <div class="flex flex-wrap gap-1.5" id="project-modal-tags">
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="p-6 sm:p-7 flex flex-col gap-4">
-          <div class="space-y-2">
-            <h4
-              class="text-sm font-semibold text-accent tracking-[0.18em] uppercase"
-              data-i18n="projects.ui.modalDetails"
-            >
-              {t('projects.ui.modalDetails')}
-            </h4>
-            <p class="text-sm text-muted leading-relaxed" id="project-modal-long">
-            </p>
-          </div>
-
-          <div>
-            <h4
-              class="text-xs font-semibold text-muted/80 tracking-[0.22em] uppercase mb-2"
-              data-i18n="projects.ui.modalTechnologies"
-            >
-              {t('projects.ui.modalTechnologies')}
-            </h4>
-            <div class="flex flex-wrap gap-1.5" id="project-modal-tags">
-            </div>
-          </div>
-
-          <div class="mt-4 flex flex-wrap justify-end gap-3">
-            <a
-              href="#"
-              target="_blank"
-              rel="noreferrer"
-              class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-accent text-primary text-xs sm:text-sm font-semibold hover:opacity-90 transition-all hover:shadow-md hover:scale-[1.02] active:scale-[0.98]"
-              id="project-modal-github"
-              data-i18n="projects.ui.modalGithub"
-            >
-              {t('projects.ui.modalGithub')}
-            </a>
-            <button
-              type="button"
-              disabled
-              aria-disabled="true"
-              class="project-modal-live-btn inline-flex items-center justify-center px-4 py-2 rounded-full bg-primary text-muted text-xs sm:text-sm font-semibold border border-accent/25 cursor-not-allowed opacity-50"
-              id="project-modal-live"
-              data-i18n="projects.ui.modalLive"
-            >
-              {t('projects.ui.modalLive')}
-            </button>
-            <button
-              type="button"
-              id="project-modal-close"
-              class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-secondary text-muted text-xs sm:text-sm font-semibold border border-accent/40 hover:border-accent hover:text-accent hover:bg-primary/60 cursor-pointer transition-all hover:shadow-md hover:scale-[1.02] active:scale-[0.98]"
-              data-i18n="projects.ui.modalBack"
-            >
-              {t('projects.ui.modalBack')}
-            </button>
-          </div>
+        <div class="modal-actions shrink-0 flex flex-wrap justify-end gap-3 p-4 sm:p-5 border-t border-accent/15 bg-secondary rounded-b-2xl">
+          <a
+            href="#"
+            target="_blank"
+            rel="noreferrer"
+            class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-accent text-primary text-xs sm:text-sm font-semibold hover:opacity-90 transition-all hover:shadow-md hover:scale-[1.02] active:scale-[0.98]"
+            id="project-modal-github"
+            data-i18n="projects.ui.modalGithub"
+          >
+            {t('projects.ui.modalGithub')}
+          </a>
+          <button
+            type="button"
+            disabled
+            aria-disabled="true"
+            class="project-modal-live-btn inline-flex items-center justify-center px-4 py-2 rounded-full bg-primary text-muted text-xs sm:text-sm font-semibold border border-accent/25 cursor-not-allowed opacity-50"
+            id="project-modal-live"
+            data-i18n="projects.ui.modalLive"
+          >
+            {t('projects.ui.modalLive')}
+          </button>
+          <button
+            type="button"
+            id="project-modal-close"
+            class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-secondary text-muted text-xs sm:text-sm font-semibold border border-accent/40 hover:border-accent hover:text-accent hover:bg-primary/60 cursor-pointer transition-all hover:shadow-md hover:scale-[1.02] active:scale-[0.98]"
+            data-i18n="projects.ui.modalBack"
+          >
+            {t('projects.ui.modalBack')}
+          </button>
         </div>
       </div>
     </div>
@@ -220,6 +230,29 @@ const projects = [
       var longEl = document.getElementById("project-modal-long");
       var tagsEl = document.getElementById("project-modal-tags");
       var githubEl = document.getElementById("project-modal-github");
+      var scrollLockY = 0;
+
+      function lockBodyScroll() {
+        scrollLockY = window.scrollY || window.pageYOffset || 0;
+        document.documentElement.classList.add("overflow-hidden");
+        document.body.classList.add("overflow-hidden");
+        document.body.style.position = "fixed";
+        document.body.style.top = "-" + scrollLockY + "px";
+        document.body.style.left = "0";
+        document.body.style.right = "0";
+        document.body.style.width = "100%";
+      }
+
+      function unlockBodyScroll() {
+        document.documentElement.classList.remove("overflow-hidden");
+        document.body.classList.remove("overflow-hidden");
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.left = "";
+        document.body.style.right = "";
+        document.body.style.width = "";
+        window.scrollTo(0, scrollLockY);
+      }
 
       function openModal(cardEl) {
         if (!cardEl) return;
@@ -270,7 +303,7 @@ const projects = [
         void modal.offsetWidth;
         modal.classList.add("is-open");
         modal.setAttribute("aria-hidden", "false");
-        document.body.style.overflow = "hidden";
+        lockBodyScroll();
       }
 
       function closeModal() {
@@ -279,7 +312,7 @@ const projects = [
         modal.classList.add("hidden");
         modal.classList.remove("is-open");
         modal.setAttribute("aria-hidden", "true");
-        document.body.style.overflow = "";
+        unlockBodyScroll();
       }
 
       document.querySelectorAll("[data-project-id]").forEach(function (card) {
@@ -289,6 +322,7 @@ const projects = [
       });
 
       document.getElementById("project-modal-close")?.addEventListener("click", closeModal);
+      document.getElementById("project-modal-backdrop")?.addEventListener("click", closeModal);
 
       document.addEventListener("keydown", function (event) {
         if (event.key === "Escape" && !modal.classList.contains("hidden")) {
@@ -371,7 +405,7 @@ const projects = [
     }
 
     .modal-content {
-      max-height: min(90vh, 640px);
+      max-height: min(90dvh, 640px);
     }
 
     .project-modal {
@@ -379,6 +413,9 @@ const projects = [
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.34s ease-out;
+      overflow: hidden;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
     }
 
     .project-modal.is-open {
@@ -435,7 +472,20 @@ const projects = [
 
     @media (max-width: 768px) {
       .modal-content {
-        max-height: 90vh;
+        max-height: min(92dvh, 640px);
+      }
+
+      .modal-actions {
+        justify-content: stretch;
+      }
+
+      .modal-actions > * {
+        flex: 1 1 calc(50% - 0.375rem);
+        min-width: 0;
+      }
+
+      #project-modal-close {
+        flex: 1 1 100%;
       }
 
       #projects .project-card {
@@ -471,6 +521,11 @@ const projects = [
     [data-theme="light"] #project-modal .modal-content {
       background: var(--color-surface);
       border-color: var(--color-border-strong, var(--color-accent));
+    }
+
+    [data-theme="light"] #project-modal .modal-actions {
+      background: var(--color-surface);
+      border-color: var(--color-border);
     }
 
     .project-modal-live-btn:disabled {
