@@ -30,11 +30,13 @@
       "roles": {
         "softwareDeveloper": "Desarrollador de software",
         "chatbotDeveloper": "Desarrollador de Chatbots",
-        "backendDeveloper": "Desarrollador Backend"
+        "backendDeveloper": "Desarrollador Backend",
+        "freelance": "Desarrollador Freelance"
       },
       "locations": {
         "aunoa": "Aunoa · Valencia",
-        "mimacom": "Mimacom · Valencia"
+        "mimacom": "Mimacom · Valencia",
+        "freelance": "Por cuenta propia"
       },
       "descriptions": {
         "softwareDev1": "Mantuve y extendí una plataforma de comunicación a gran escala en todo el stack, implementando y depurando APIs REST, características frontend e integraciones de almacenes de datos.",
@@ -43,7 +45,8 @@
         "chatbotDev1": "Diseñé, construí y mantuve chatbots conversacionales usando automatización basada en flujos de trabajo con funciones JavaScript integradas, integrando APIs SOAP y REST, modelos NLP y bases de datos SQLite para entregar soluciones de extremo a extremo.",
         "chatbotDev2": "Lideré la ingeniería de prompts y el ajuste de IA conversacional, creé análisis e informes para el rendimiento del chatbot y proporcioné soporte al cliente para mejorar continuamente los flujos de trabajo y la experiencia del usuario.",
         "backendDev1": "Diseñé e implementé la lógica de negocio de extremo a extremo para una plataforma de cadena de suministro de reciclaje, cubriendo el flujo completo desde la recolección de materiales hasta la transformación en productos reutilizables.",
-        "backendDev2": "Alineé proactivamente equipos de frontend, backend, negocio y soporte, estableciendo puentes de comunicación y flujos de trabajo que permitieron que el producto se entregara a tiempo."
+        "backendDev2": "Alineé proactivamente equipos de frontend, backend, negocio y soporte, estableciendo puentes de comunicación y flujos de trabajo que permitieron que el producto se entregara a tiempo.",
+        "freelance": "Desarrollé soluciones de software, incluyendo aplicaciones web, automatización de procesos mediante inteligencia artificial, integración de servicios externos y diseño de productos digitales orientados a negocio.",
       },
       "achievements": {
         "softwareDev1": "Mantuve la plataforma de extremo a extremo, implementé, actualicé y depuré APIs REST, funcionalidades frontend, integraciones cloud y más.",
@@ -52,7 +55,10 @@
         "chatbotDev1": "Creé bots mediante flujos con una gran variedad de integraciones, diseñé campañas de WhatsApp, personalicé la atención al cliente, utilicé modelos de NLP y LLM, entre otras tareas.",
         "chatbotDev2": "Lideré la ingeniería de prompts y el ajuste de IA conversacional, creando análisis e informes para el rendimiento del chatbot.",
         "backendDev1": "Implementé lógica de negocio usando Java, Spring Boot y Flowable.",
-        "backendDev2": "Alineé proactivamente equipos de frontend, backend, negocio y soporte, estableciendo puentes de comunicación que permitieron entregar el producto a tiempo."
+        "backendDev2": "Alineé proactivamente equipos de frontend, backend, negocio y soporte, estableciendo puentes de comunicación que permitieron entregar el producto a tiempo.",
+        "freelance1": "Desarrollé una plataforma de gestión para una cooperativa de profesionales del ámbito animal, llevando todo el proceso de desarrollo y mantenimiento.",
+        "freelance2": "Diseñé automatizaciones basadas en IA y agentes para optimizar procesos empresariales.",
+        "freelance3": "Desarrollé un sistema de recomendación de productos basado en inteligencia artificial para la creación de sugerencias personalizadas."
       }
     },
     "skills": {

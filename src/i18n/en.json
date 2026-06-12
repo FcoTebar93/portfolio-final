@@ -30,11 +30,13 @@
       "roles": {
         "softwareDeveloper": "Software developer",
         "chatbotDeveloper": "Chatbot Developer",
-        "backendDeveloper": "Backend Developer"
+        "backendDeveloper": "Backend Developer",
+        "freelance": "Freelance Developer"
       },
       "locations": {
         "aunoa": "Aunoa · Valencia",
-        "mimacom": "Mimacom · Valencia"
+        "mimacom": "Mimacom · Valencia",
+        "freelance": "Freelance"
       },
       "descriptions": {
         "softwareDev1": "Maintained and extended a large‑scale communication platform across the full stack, implementing and debugging REST APIs, frontend features and data‑warehouse integrations.",
@@ -43,7 +45,8 @@
         "chatbotDev1": "Designed, built and maintained conversational chatbots using workflow‑based automation with embedded JavaScript functions, integrating SOAP and REST APIs, NLP models and SQLite databases to deliver end‑to‑end solutions.",
         "chatbotDev2": "Led prompt engineering and conversational AI tuning, created analytics and reporting for chatbot performance, and provided customer support to continuously improve workflows and user experience.",
         "backendDev1": "Designed and implemented the end‑to‑end business logic for a recycling supply‑chain platform, covering the full flow from material collection to transformation into reusable products.",
-        "backendDev2": "Proactively aligned frontend, backend, business and support teams, establishing communication bridges and workflows that enabled the product to be delivered on time."
+        "backendDev2": "Proactively aligned frontend, backend, business and support teams, establishing communication bridges and workflows that enabled the product to be delivered on time.",
+        "freelance": "Designed, developed, and maintained software applications, process automations, AI integrations, and digital product development for clients across different industries."
       },
       "achievements": {
         "softwareDev1": "Maintained the platform end-to-end, implemented, updated and debugged REST APIs, frontend features, cloud integrations and more.",
@@ -52,7 +55,10 @@
         "chatbotDev1": "Created bots via workflows using a wide variety of integrations, created Whatsapp Campaigns, personalized customer service, used NLP and LLM models and more.",
         "chatbotDev2": "Led prompt engineering and conversational AI tuning, creating analytics and reporting for chatbot performance.",
         "backendDev1": "Implemented business logic using Java, Spring Boot and Flowable.",
-        "backendDev2": "Proactively aligned frontend, backend, business and support teams, establishing communication bridges that enabled on‑time delivery."
+        "backendDev2": "Proactively aligned frontend, backend, business and support teams, establishing communication bridges that enabled on‑time delivery.",
+        "freelance1": "Built and maintained a management platform for an animal-services cooperative, implementing secure backend services, database design, and user-facing features.",
+        "freelance2": "Designed AI-powered automation workflows and intelligent agents to streamline customer communication and operational processes.",
+        "freelance3": "Developed recommendation systems leveraging LLMs and external data sources to generate contextual product suggestions and personalized user experiences."
       }
     },
     "skills": {

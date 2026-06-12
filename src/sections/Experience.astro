@@ -9,7 +9,54 @@ import { t } from '../utils/i18n.ts';
     <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-muted/40 -translate-x-1/2 experience-line"></div>
 
     <div class="space-y-12 md:space-y-16">
-      <!-- Item 1: card a la derecha, entra desde la izquierda -->
+      <article class="experience-item experience-item-from-right relative grid md:grid-cols-2 gap-y-4 opacity-0 transition-all duration-700 delay-150">
+        <div class="timeline-marker-center"></div>
+        <div class="md:pr-10 md:text-right">
+          <div class="timeline-content">
+            <div class="timeline-header md:flex-row-reverse">
+              <div class="timeline-year">Feb 2026 - Present</div>
+            </div>
+            <h3 class="timeline-title" data-i18n="experience.roles.freelance">{t('experience.roles.freelance')}</h3>
+            <div class="timeline-company md:justify-end">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+              </svg>
+              <span data-i18n="experience.locations.freelance">{t('experience.locations.freelance')}</span>
+            </div>
+            <p class="timeline-description" data-i18n="experience.descriptions.freelance">{t('experience.descriptions.freelance')}</p>
+            <div class="timeline-achievements achievements-reverse">
+              <div class="achievement-item">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span data-i18n="experience.achievements.freelance1">{t('experience.achievements.freelance1')}</span>
+              </div>
+              <div class="achievement-item">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span data-i18n="experience.achievements.freelance2">{t('experience.achievements.freelance2')}</span>
+              </div>
+              <div class="achievement-item">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span data-i18n="experience.achievements.freelance2">{t('experience.achievements.freelance3')}</span>
+              </div>
+            </div>
+            <div class="timeline-tags md:justify-end">
+              <span class="tag">Typescrypt</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">n8n</span>
+              <span class="tag">Agentic LLMs</span>
+              <span class="tag">React</span>
+              <span class="tag">NextJS</span>
+            </div>
+          </div>
+        </div>
+        <div class="hidden md:block"></div>
+      </article>
+
       <article class="experience-item experience-item-from-left relative grid md:grid-cols-2 gap-y-4 opacity-0 transition-all duration-700">
         <div class="timeline-marker-center"></div>
         <div class="hidden md:block"></div>
@@ -65,7 +112,6 @@ import { t } from '../utils/i18n.ts';
         </div>
       </article>
 
-      <!-- Item 2: card a la izquierda, entra desde la derecha -->
       <article class="experience-item experience-item-from-right relative grid md:grid-cols-2 gap-y-4 opacity-0 transition-all duration-700 delay-150">
         <div class="timeline-marker-center"></div>
         <div class="md:pr-10 md:text-right">
@@ -108,7 +154,6 @@ import { t } from '../utils/i18n.ts';
         <div class="hidden md:block"></div>
       </article>
 
-      <!-- Item 3: card a la derecha, entra desde la izquierda -->
       <article class="experience-item experience-item-from-left relative grid md:grid-cols-2 gap-y-4 opacity-0 transition-all duration-700 delay-300">
         <div class="timeline-marker-center"></div>
         <div class="hidden md:block"></div>
