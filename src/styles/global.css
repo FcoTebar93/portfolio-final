@@ -57,7 +57,7 @@ body.preloader-active {
     overflow: hidden;
 }
 
-body.intro-sequence-active #app-container {
+body.preloader-active #app-container {
     visibility: hidden;
 }
 

@@ -31,8 +31,9 @@
     }
   }
 
-  function finishIntroSequence() {
-    document.body.classList.remove("intro-sequence-active");
+  function revealAppBeforeCurtain() {
+    syncScrollBeforeReveal();
+    document.body.classList.remove("preloader-active");
   }
 
   function openPageCurtain() {
@@ -41,39 +42,43 @@
 
     const curtain = document.getElementById("page-curtain");
     if (!curtain) {
-      finishIntroSequence();
+      revealAppBeforeCurtain();
       return;
     }
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    revealAppBeforeCurtain();
+
     if (reducedMotion) {
-      syncScrollBeforeReveal();
       curtain.remove();
-      finishIntroSequence();
       return;
     }
-
-    syncScrollBeforeReveal();
-    curtain.classList.add("page-curtain--open");
 
     let cleanedUp = false;
     const cleanup = () => {
       if (cleanedUp) return;
       cleanedUp = true;
       curtain.remove();
-      finishIntroSequence();
     };
 
-    const onCurtainEnd = (event: TransitionEvent) => {
-      if (event.target !== curtain.querySelector(".page-curtain__panel--right")) return;
-      if (event.propertyName !== "width") return;
-      curtain.removeEventListener("transitionend", onCurtainEnd);
-      cleanup();
+    const startCurtainAnimation = () => {
+      curtain.classList.add("page-curtain--open");
+
+      const onCurtainEnd = (event: TransitionEvent) => {
+        if (event.target !== curtain.querySelector(".page-curtain__panel--right")) return;
+        if (event.propertyName !== "width") return;
+        curtain.removeEventListener("transitionend", onCurtainEnd);
+        cleanup();
+      };
+
+      curtain.addEventListener("transitionend", onCurtainEnd);
+      window.setTimeout(cleanup, CURTAIN_EXIT_MS + 100);
     };
 
-    curtain.addEventListener("transitionend", onCurtainEnd);
-    window.setTimeout(cleanup, CURTAIN_EXIT_MS + 100);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(startCurtainAnimation);
+    });
   }
 
   function finishPreloader() {
@@ -83,7 +88,6 @@
     if (!overlay || overlay.dataset.done === "true") return;
     overlay.dataset.done = "true";
 
-    document.body.classList.remove("preloader-active");
     document.body.removeAttribute("aria-busy");
 
     if (spinner) {
@@ -143,7 +147,7 @@
   .page-curtain__panel {
     position: absolute;
     top: 0;
-    height: 100%;
+    height: 100dvh;
     width: 50%;
     background: var(--color-primary);
   }
