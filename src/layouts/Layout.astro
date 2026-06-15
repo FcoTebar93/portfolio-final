@@ -25,16 +25,54 @@ const { title } = Astro.props;
             rel="stylesheet"
             />
             <title>{title}</title>
+        </head>
+        <body class="bg-primary text-text font-sans min-h-screen preloader-active intro-sequence-active" aria-busy="true">
             <script is:inline>
                 (function () {
-                    if ("scrollRestoration" in history) {
-                        history.scrollRestoration = "manual";
+                    var hash = window.location.hash;
+
+                    function syncScrollPosition() {
+                        if (!hash) return false;
+                        var id = hash.slice(1);
+                        var el = id && document.getElementById(id);
+                        if (!el) return false;
+                        el.scrollIntoView({ block: "start" });
+                        return true;
                     }
-                    window.scrollTo(0, 0);
+
+                    function initScrollPosition() {
+                        if (hash) {
+                            if (!syncScrollPosition()) {
+                                var tries = 0;
+                                (function retry() {
+                                    if (!syncScrollPosition() && tries < 16) {
+                                        tries += 1;
+                                        requestAnimationFrame(retry);
+                                    }
+                                })();
+                            }
+                            return;
+                        }
+
+                        var saved = sessionStorage.getItem("portfolio-scroll-y");
+                        if (saved === null) return;
+                        window.scrollTo(0, parseInt(saved, 10) || 0);
+                        sessionStorage.removeItem("portfolio-scroll-y");
+                    }
+
+                    window.addEventListener("beforeunload", function () {
+                        if (!window.location.hash) {
+                            sessionStorage.setItem("portfolio-scroll-y", String(window.scrollY));
+                        }
+                    });
+
+                    if (document.readyState === "loading") {
+                        document.addEventListener("DOMContentLoaded", initScrollPosition, { once: true });
+                    } else {
+                        initScrollPosition();
+                    }
                 })();
             </script>
-        </head>
-        <body class="bg-primary text-text font-sans min-h-screen preloader-active" aria-busy="true">
             <Preloader />
             <div id="app-container" class="app-container">
                 <nav class="fixed top-0 right-0 z-50 flex gap-2 nav-container safe-nav">

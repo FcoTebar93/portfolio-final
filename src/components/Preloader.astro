@@ -19,8 +19,21 @@
   const SPINNER_EXIT_MS = 400;
   const OVERLAY_EXIT_MS = 1000;
   const CURTAIN_EXIT_MS = 750;
-  const pendingHash = window.location.hash;
   let curtainOpened = false;
+
+  function syncScrollBeforeReveal() {
+    const hash = window.location.hash;
+    if (!hash) return;
+
+    const target = document.querySelector(hash);
+    if (target instanceof HTMLElement) {
+      target.scrollIntoView({ block: "start" });
+    }
+  }
+
+  function finishIntroSequence() {
+    document.body.classList.remove("intro-sequence-active");
+  }
 
   function openPageCurtain() {
     if (curtainOpened) return;
@@ -28,18 +41,20 @@
 
     const curtain = document.getElementById("page-curtain");
     if (!curtain) {
-      restorePendingHash();
+      finishIntroSequence();
       return;
     }
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (reducedMotion) {
+      syncScrollBeforeReveal();
       curtain.remove();
-      restorePendingHash();
+      finishIntroSequence();
       return;
     }
 
+    syncScrollBeforeReveal();
     curtain.classList.add("page-curtain--open");
 
     let cleanedUp = false;
@@ -47,7 +62,7 @@
       if (cleanedUp) return;
       cleanedUp = true;
       curtain.remove();
-      restorePendingHash();
+      finishIntroSequence();
     };
 
     const onCurtainEnd = (event: TransitionEvent) => {
@@ -59,18 +74,6 @@
 
     curtain.addEventListener("transitionend", onCurtainEnd);
     window.setTimeout(cleanup, CURTAIN_EXIT_MS + 100);
-  }
-
-  function restorePendingHash() {
-    if (!pendingHash) return;
-
-    const target = document.querySelector(pendingHash);
-    if (target instanceof HTMLElement) {
-      target.scrollIntoView();
-      return;
-    }
-
-    window.location.hash = pendingHash;
   }
 
   function finishPreloader() {
