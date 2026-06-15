@@ -265,29 +265,6 @@ const roles = lang === 'es' ? es.typewriter.roles : en.typewriter.roles;
   </script>
 
   <style>
-    .hero-home::before,
-    .hero-home::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      width: 50%;
-      height: 100%;
-      z-index: 20;
-      background: var(--color-primary);
-      pointer-events: none;
-    }
-    .hero-home::before {
-      left: 0;
-    }
-    .hero-home::after {
-      right: 0;
-    }
-    .hero-home.hero-divide-ready::before,
-    .hero-home.hero-divide-ready::after {
-      width: 0;
-      transition: width 0.6s 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
-    }
-
     :global(body.preloader-active) .hero-anim,
     :global(body.preloader-active) .hero-photo-wrap {
       animation: none !important;

@@ -2,6 +2,11 @@
 /** Pantalla de carga al iniciar la web (spinner + overlay que se desliza hacia arriba). */
 ---
 
+<div id="page-curtain" class="page-curtain" aria-hidden="true">
+  <span class="page-curtain__panel page-curtain__panel--left"></span>
+  <span class="page-curtain__panel page-curtain__panel--right"></span>
+</div>
+
 <div id="preloader-overlay" class="preloader-overlay" aria-hidden="false" aria-busy="true">
   <div id="preloader" class="preloader" role="status" aria-label="Loading">
     <span></span>
@@ -13,11 +18,64 @@
   const MIN_DISPLAY_MS = 800;
   const SPINNER_EXIT_MS = 400;
   const OVERLAY_EXIT_MS = 1000;
+  const CURTAIN_EXIT_MS = 750;
+  const pendingHash = window.location.hash;
+  let curtainOpened = false;
+
+  function openPageCurtain() {
+    if (curtainOpened) return;
+    curtainOpened = true;
+
+    const curtain = document.getElementById("page-curtain");
+    if (!curtain) {
+      restorePendingHash();
+      return;
+    }
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reducedMotion) {
+      curtain.remove();
+      restorePendingHash();
+      return;
+    }
+
+    curtain.classList.add("page-curtain--open");
+
+    let cleanedUp = false;
+    const cleanup = () => {
+      if (cleanedUp) return;
+      cleanedUp = true;
+      curtain.remove();
+      restorePendingHash();
+    };
+
+    const onCurtainEnd = (event: TransitionEvent) => {
+      if (event.target !== curtain.querySelector(".page-curtain__panel--right")) return;
+      if (event.propertyName !== "width") return;
+      curtain.removeEventListener("transitionend", onCurtainEnd);
+      cleanup();
+    };
+
+    curtain.addEventListener("transitionend", onCurtainEnd);
+    window.setTimeout(cleanup, CURTAIN_EXIT_MS + 100);
+  }
+
+  function restorePendingHash() {
+    if (!pendingHash) return;
+
+    const target = document.querySelector(pendingHash);
+    if (target instanceof HTMLElement) {
+      target.scrollIntoView();
+      return;
+    }
+
+    window.location.hash = pendingHash;
+  }
 
   function finishPreloader() {
     const overlay = document.getElementById("preloader-overlay");
     const spinner = document.getElementById("preloader");
-    const hero = document.querySelector(".hero-home");
 
     if (!overlay || overlay.dataset.done === "true") return;
     overlay.dataset.done = "true";
@@ -36,7 +94,7 @@
         if (event.propertyName !== "transform") return;
         overlay.removeEventListener("transitionend", onOverlayEnd);
         overlay.remove();
-        hero?.classList.add("hero-divide-ready");
+        openPageCurtain();
       };
 
       overlay.addEventListener("transitionend", onOverlayEnd);
@@ -44,7 +102,7 @@
       window.setTimeout(() => {
         if (document.getElementById("preloader-overlay")) {
           overlay.remove();
-          hero?.classList.add("hero-divide-ready");
+          openPageCurtain();
         }
       }, OVERLAY_EXIT_MS + 100);
     }, SPINNER_EXIT_MS);
@@ -72,6 +130,34 @@
 </script>
 
 <style>
+  .page-curtain {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    pointer-events: none;
+  }
+
+  .page-curtain__panel {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    background: var(--color-primary);
+  }
+
+  .page-curtain__panel--left {
+    left: 0;
+  }
+
+  .page-curtain__panel--right {
+    right: 0;
+  }
+
+  .page-curtain--open .page-curtain__panel {
+    width: 0;
+    transition: width 0.6s 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
   .preloader-overlay {
     position: fixed;
     inset: 0;
@@ -154,6 +240,10 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .page-curtain--open .page-curtain__panel {
+      transition-duration: 0.01ms;
+    }
+
     .preloader-overlay {
       transition-duration: 0.01ms;
     }
