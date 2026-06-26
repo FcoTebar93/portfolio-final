@@ -6,7 +6,7 @@
     "hero": {
       "portfolio": "Portfolio",
       "subtitle": "Software Developer ·",
-      "description": "Fullstack developer focused on building scalable applications, automation pipelines, and AI-powered solutions using modern Cloud and DevOps practices.",
+      "description": "Focused on building scalable applications, automation pipelines, and AI-powered solutions using Cloud and DevOps practices.",
       "viewWork": "View my work",
       "contact": "Contact",
       "cv": {
@@ -22,8 +22,8 @@
     "about": {
       "title": "About",
       "heading": "I build reliable, automated systems from backend to cloud.",
-      "paragraph1": "I'm a fullstack developer with experience across the entire software development lifecycle, from requirements definition to final delivery and ongoing maintenance. I have experience in a wide variety of architectures and technologies, which allows me to adapt to different needs and contexts.",
-      "paragraph2": "My focus is on creating maintainable architectures, automating repetitive processes, and collaborating closely with teams to ship high quality software faster and more safely."
+      "paragraph1": "I'm a fullstack developer with experience across the entire software development lifecycle, from requirements definition to final delivery and ongoing maintenance.",
+      "paragraph2": "My focus is on creating maintainable architectures, automating repetitive processes, and shipping high quality software faster and more safely."
     },
     "experience": {
       "title": "Experience",
@@ -57,7 +57,7 @@
         "backendDev1": "Implemented business logic using Java, Spring Boot and Flowable.",
         "backendDev2": "Proactively aligned frontend, backend, business and support teams, establishing communication bridges that enabled on‑time delivery.",
         "freelance1": "Built and maintained a management platform for an animal-services cooperative, implementing secure backend services, database design, and user-facing features.",
-        "freelance2": "Designed AI-powered automation workflows and intelligent agents to streamline customer communication and operational processes.",
+        "_freelance2": "Designed AI-powered automation workflows and intelligent agents to streamline customer communication and operational processes.",
         "freelance3": "Developed recommendation systems leveraging LLMs and external data sources to generate contextual product suggestions and personalized user experiences."
       }
     },

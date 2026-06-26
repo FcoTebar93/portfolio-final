@@ -122,7 +122,7 @@ function updatePageContent() {
     'experience.descriptions.backendDev1': t('experience.descriptions.backendDev1'),
     'experience.descriptions.backendDev2': t('experience.descriptions.backendDev2'),
     'experience.achievements.freelance1': t('experience.achievements.freelance1'),
-    'experience.achievements.freelance2': t('experience.achievements.freelance2'),
+    // 'experience.achievements.freelance2': t('experience.achievements.freelance2'),
     'experience.achievements.freelance3': t('experience.achievements.freelance3'),
     'experience.achievements.softwareDev1': t('experience.achievements.softwareDev1'),
     'experience.achievements.softwareDev2': t('experience.achievements.softwareDev2'),

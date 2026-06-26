@@ -6,7 +6,7 @@
     "hero": {
       "portfolio": "Portafolio",
       "subtitle": "Desarrollador de Software ·",
-      "description": "Desarrollador fullstack enfocado en construir aplicaciones escalables, pipelines de automatización y soluciones impulsadas por IA usando prácticas modernas de Cloud y DevOps.",
+      "description": "Enfocado en construir aplicaciones escalables, pipelines de automatización y soluciones impulsadas por IA usando prácticas de Cloud y DevOps.",
       "viewWork": "Ver mi trabajo",
       "contact": "Contacto",
       "cv": {
@@ -22,8 +22,8 @@
     "about": {
       "title": "Sobre mí",
       "heading": "Construyo sistemas confiables y automatizados desde el backend hasta la nube.",
-      "paragraph1": "Soy un desarrollador fullstack con experiencia en todo el proceso de creación de software, desde la definición de requerimientos hasta la entrega de la solución final y el mantenimiento de la misma. Tengo experiencia en una gran variedad de arquitecturas y tecnologías, lo que me permite adaptarme a diferentes necesidades y contextos.",
-      "paragraph2": "Mi enfoque está en crear arquitecturas mantenibles, automatizar procesos repetitivos y colaborar estrechamente con equipos para entregar software de alta calidad más rápido y de forma más segura."
+      "paragraph1": "Soy un desarrollador fullstack con experiencia en todo el proceso de creación de software, desde la definición de requerimientos hasta la entrega de la solución final y el mantenimiento de la misma.",
+      "paragraph2": "Mi enfoque está en crear arquitecturas mantenibles, automatizar procesos repetitivos y entregar software de alta calidad."
     },
     "experience": {
       "title": "Experiencia",
@@ -57,7 +57,7 @@
         "backendDev1": "Implementé lógica de negocio usando Java, Spring Boot y Flowable.",
         "backendDev2": "Alineé proactivamente equipos de frontend, backend, negocio y soporte, estableciendo puentes de comunicación que permitieron entregar el producto a tiempo.",
         "freelance1": "Desarrollé una plataforma de gestión para una cooperativa de profesionales del ámbito animal, llevando todo el proceso de desarrollo y mantenimiento.",
-        "freelance2": "Diseñé automatizaciones basadas en IA y agentes para optimizar procesos empresariales.",
+        "_freelance2": "Diseñé automatizaciones basadas en IA y agentes para optimizar procesos empresariales.",
         "freelance3": "Desarrollé un sistema de recomendación de productos basado en inteligencia artificial para la creación de sugerencias personalizadas."
       }
     },
