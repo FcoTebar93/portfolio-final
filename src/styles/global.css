@@ -61,6 +61,22 @@ body.preloader-active #app-container {
     visibility: hidden;
 }
 
+@media (max-width: 1023px) {
+    #app-container main > section,
+    #app-container footer {
+        padding-left: max(1.5rem, env(safe-area-inset-left, 0px));
+        padding-right: max(1.5rem, env(safe-area-inset-right, 0px));
+    }
+}
+
+@media (max-width: 639px) {
+    #app-container main > section,
+    #app-container footer {
+        padding-left: max(1.75rem, env(safe-area-inset-left, 0px));
+        padding-right: max(1.75rem, env(safe-area-inset-right, 0px));
+    }
+}
+
 [data-theme="light"] {
     --color-primary: #FAFAFA;
     --color-secondary: #F5F5F5;
