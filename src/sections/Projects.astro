@@ -143,10 +143,10 @@ const projects = [
       aria-label={t('projects.ui.modalBack')}
     />
     <div class="relative z-10 flex min-h-full items-center justify-center px-4 py-6 sm:py-8 pointer-events-none">
-      <div class="modal-content pointer-events-auto relative max-w-3xl w-full bg-secondary rounded-2xl border border-accent/25 shadow-2xl flex flex-col">
+      <div class="modal-content pointer-events-auto relative max-w-3xl w-full bg-secondary rounded-2xl border border-accent/25 shadow-2xl flex flex-col overflow-hidden">
         <div class="modal-scroll flex-1 min-h-0 overflow-y-auto overscroll-y-contain">
           <div class="grid md:grid-cols-[1.1fr,0.9fr]">
-            <div class="relative bg-gradient-to-br from-accent/20 via-primary to-accent/10 p-6 sm:p-8 flex flex-col justify-end">
+            <div class="modal-header relative bg-gradient-to-br from-accent/20 via-primary to-accent/10 p-6 sm:p-8 flex flex-col justify-end overflow-hidden rounded-t-2xl md:rounded-t-none md:rounded-l-2xl">
               <div class="absolute inset-0 opacity-50 pointer-events-none project-card-glow" />
               <div class="relative z-10">
                 <p class="text-[0.7rem] uppercase tracking-[0.18em] text-accent font-mono mb-2" id="project-modal-role">
@@ -341,20 +341,67 @@ const projects = [
       }
 
       var hasAnimatedProjects = false;
-      var projectsObserver = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting && !hasAnimatedProjects) {
-              hasAnimatedProjects = true;
-              projectsSection.classList.add("projects-visible");
-              projectsObserver.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.28 }
-      );
+      var projectsObserver = null;
+      var cardsGrid = projectsSection.querySelector(".grid");
 
-      projectsObserver.observe(projectsSection);
+      function showProjects() {
+        if (hasAnimatedProjects) return;
+        hasAnimatedProjects = true;
+        projectsSection.classList.add("projects-visible");
+        if (projectsObserver && cardsGrid) {
+          projectsObserver.unobserve(cardsGrid);
+        }
+      }
+
+      function isGridInView() {
+        if (!cardsGrid) return false;
+        var rect = cardsGrid.getBoundingClientRect();
+        return rect.top < window.innerHeight * 0.9 && rect.bottom > window.innerHeight * 0.1;
+      }
+
+      function initProjectsReveal() {
+        if (!cardsGrid) return;
+
+        projectsObserver = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                showProjects();
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px 80px 0px" }
+        );
+
+        projectsObserver.observe(cardsGrid);
+
+        if (isGridInView()) {
+          showProjects();
+        }
+      }
+
+      function isIntroComplete() {
+        return !document.body.classList.contains("preloader-active")
+          && !document.getElementById("page-curtain");
+      }
+
+      function whenIntroComplete(callback) {
+        if (isIntroComplete()) {
+          callback();
+          return;
+        }
+
+        var attempts = 0;
+        var timer = window.setInterval(function () {
+          attempts += 1;
+          if (isIntroComplete() || attempts > 160) {
+            window.clearInterval(timer);
+            callback();
+          }
+        }, 50);
+      }
+
+      whenIntroComplete(initProjectsReveal);
     })();
   </script>
 
@@ -406,6 +453,25 @@ const projects = [
 
     .modal-content {
       max-height: min(90dvh, 640px);
+      isolation: isolate;
+    }
+
+    .modal-header .project-card-glow {
+      border-radius: inherit;
+    }
+
+    @media (max-width: 767px) {
+      .modal-header {
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .modal-header {
+        border-top-left-radius: 1rem;
+        border-bottom-left-radius: 1rem;
+      }
     }
 
     .project-modal {
