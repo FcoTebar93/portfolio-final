@@ -3,6 +3,8 @@ import { t } from '../utils/i18n.ts';
 
 const terranima = {
   id: 'terranima',
+  siteUrl: 'https://terranima.es/',
+  portalUrl: 'https://www.terranima.es/profile',
   // Stack oculto de momento; descomentar para mostrarlo otra vez.
   // tech: [
   //   'React 18',
@@ -50,6 +52,12 @@ const terranima = {
         >
           {t('freelance.subtitle')}
         </h2>
+        <p
+          class="mt-4 max-w-3xl text-sm text-muted leading-relaxed"
+          data-i18n="freelance.disclaimer"
+        >
+          {t('freelance.disclaimer')}
+        </p>
       </div>
     </div>
 
@@ -103,21 +111,33 @@ const terranima = {
           >
             {t(`freelance.items.${terranima.id}.description`)}
           </p>
-          <p
-            class="mt-4 text-sm font-medium text-accent"
-            data-i18n="freelance.ui.modalOpen"
-          >
-            {t('freelance.ui.modalOpen')}
-          </p>
+          <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+            <p class="text-sm font-medium text-accent" data-i18n="freelance.ui.modalOpen">
+              {t('freelance.ui.modalOpen')}
+            </p>
+            <a
+              href={terranima.siteUrl}
+              target="_blank"
+              rel="noreferrer"
+              class="text-sm text-muted hover:text-accent transition-colors underline-offset-2 hover:underline"
+              data-i18n="freelance.ui.visitSite"
+              data-freelance-external-link
+            >
+              {t('freelance.ui.visitSite')}
+            </a>
+            <a
+              href={terranima.portalUrl}
+              target="_blank"
+              rel="noreferrer"
+              class="text-sm text-muted hover:text-accent transition-colors underline-offset-2 hover:underline"
+              data-i18n="freelance.ui.visitPortal"
+              data-freelance-external-link
+            >
+              {t('freelance.ui.visitPortal')}
+            </a>
+          </div>
         </div>
 
-        {/* Stack comentado de momento
-        <div class="flex flex-wrap gap-1.5 md:max-w-xs md:justify-end shrink-0">
-          {terranima.tech.map((tag) => (
-            <span class="tag">{tag}</span>
-          ))}
-        </div>
-        */}
       </div>
     </article>
   </div>
@@ -246,25 +266,28 @@ const terranima = {
               </ul>
             </section>
 
-            {/* Stack comentado de momento
-            <section>
-              <h4
-                class="text-xs font-semibold text-muted/80 tracking-[0.22em] uppercase mb-2"
-                data-i18n="freelance.ui.modalTechnologies"
-              >
-                {t('freelance.ui.modalTechnologies')}
-              </h4>
-              <div class="flex flex-wrap gap-1.5">
-                {terranima.tech.map((tag) => (
-                  <span class="tag">{tag}</span>
-                ))}
-              </div>
-            </section>
-            */}
           </div>
         </div>
 
         <div class="freelance-modal-actions shrink-0 flex flex-wrap justify-end gap-3 p-4 sm:p-5 border-t border-accent/15 bg-secondary rounded-b-2xl">
+          <a
+            href={terranima.siteUrl}
+            target="_blank"
+            rel="noreferrer"
+            class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-accent text-primary text-xs sm:text-sm font-semibold hover:opacity-90 transition-all hover:shadow-md hover:scale-[1.02] active:scale-[0.98]"
+            data-i18n="freelance.ui.visitSite"
+          >
+            {t('freelance.ui.visitSite')}
+          </a>
+          <a
+            href={terranima.portalUrl}
+            target="_blank"
+            rel="noreferrer"
+            class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-primary text-muted text-xs sm:text-sm font-semibold border border-accent/25 hover:border-accent hover:text-accent transition-all hover:shadow-md hover:scale-[1.02] active:scale-[0.98]"
+            data-i18n="freelance.ui.visitPortal"
+          >
+            {t('freelance.ui.visitPortal')}
+          </a>
           <button
             type="button"
             id="freelance-modal-close"
@@ -361,14 +384,27 @@ const terranima = {
       }
 
       if (card) {
-        card.addEventListener('click', function () {
+        card.addEventListener('click', function (event) {
+          var target = event.target;
+          if (target && target.closest && target.closest('[data-freelance-external-link]')) {
+            return;
+          }
           openModal();
         });
         card.addEventListener('keydown', function (event) {
           if (event.key === 'Enter' || event.key === ' ') {
+            var target = event.target;
+            if (target && target.closest && target.closest('[data-freelance-external-link]')) {
+              return;
+            }
             event.preventDefault();
             openModal();
           }
+        });
+        card.querySelectorAll('[data-freelance-external-link]').forEach(function (link) {
+          link.addEventListener('click', function (event) {
+            event.stopPropagation();
+          });
         });
       }
 

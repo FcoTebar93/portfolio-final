@@ -117,6 +117,7 @@
     "freelance": {
       "title": "Freelance",
       "subtitle": "Trabajo con clientes donde he llevado producto y desarrollo de extremo a extremo.",
+      "disclaimer": "Aquí solo aparecen proyectos que se pueden presentar públicamente (sin NDA ni restricciones de confidencialidad). Hay otros trabajos realizados que no se pueden mostrar por distintas razones.",
       "items": {
         "terranima": {
           "name": "Terrànima",
@@ -160,6 +161,8 @@
         "modalFeatures": "Features destacables",
         "modalTechnologies": "Stack",
         "modalOpen": "Ver detalles",
+        "visitSite": "Visitar web",
+        "visitPortal": "Ver portal",
         "modalBack": "Volver"
       }
     },

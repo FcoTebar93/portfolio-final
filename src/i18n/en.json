@@ -117,6 +117,7 @@
     "freelance": {
       "title": "Freelance",
       "subtitle": "Client work where I owned product and end-to-end development.",
+      "disclaimer": "Only projects that can be shown publicly are listed here (no NDA or confidentiality restrictions). Other work has been done that cannot be shared for various reasons.",
       "items": {
         "terranima": {
           "name": "Terrànima",
@@ -160,6 +161,8 @@
         "modalFeatures": "Highlights",
         "modalTechnologies": "Stack",
         "modalOpen": "View details",
+        "visitSite": "Visit website",
+        "visitPortal": "View portal",
         "modalBack": "Back"
       }
     },
