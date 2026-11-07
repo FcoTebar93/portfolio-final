@@ -4,7 +4,7 @@ import { t } from '../utils/i18n.ts';
 const terranima = {
   id: 'terranima',
   siteUrl: 'https://terranima.es/',
-  portalUrl: 'https://www.terranima.es/profile',
+  portalUrl: 'https://terranima.es/profile',
   // Stack oculto de momento; descomentar para mostrarlo otra vez.
   // tech: [
   //   'React 18',
@@ -136,26 +136,6 @@ const terranima = {
           ))}
         </div>
 
-        <button
-          type="button"
-          class="freelance-media-nav freelance-media-prev"
-          data-freelance-prev
-          data-freelance-carousel-control
-          aria-label={t('freelance.ui.prev')}
-          data-i18n-aria="freelance.ui.prev"
-        >
-          <span aria-hidden="true">‹</span>
-        </button>
-        <button
-          type="button"
-          class="freelance-media-nav freelance-media-next"
-          data-freelance-next
-          data-freelance-carousel-control
-          aria-label={t('freelance.ui.next')}
-          data-i18n-aria="freelance.ui.next"
-        >
-          <span aria-hidden="true">›</span>
-        </button>
       </div>
 
       <div class="flex flex-col gap-5 p-5 sm:p-7 md:p-8 md:flex-row md:items-start md:justify-between md:gap-10">
@@ -512,12 +492,6 @@ const terranima = {
         });
       }
 
-      section.querySelector('[data-freelance-prev]')?.addEventListener('click', function () {
-        setActiveSlide(activeIndex - 1);
-      });
-      section.querySelector('[data-freelance-next]')?.addEventListener('click', function () {
-        setActiveSlide(activeIndex + 1);
-      });
       tabs.forEach(function (tab) {
         tab.addEventListener('click', function () {
           var target = Number(tab.getAttribute('data-slide-index') || 0);
@@ -714,43 +688,6 @@ const terranima = {
       background: color-mix(in srgb, var(--color-accent) 92%, white);
     }
 
-    .freelance-media-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 3;
-      width: 2.15rem;
-      height: 2.15rem;
-      border-radius: 999px;
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      background: rgba(26, 26, 26, 0.72);
-      color: var(--color-text);
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      backdrop-filter: blur(8px);
-      transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
-    }
-
-    .freelance-media-nav:hover {
-      border-color: var(--color-accent);
-      color: var(--color-accent);
-    }
-
-    .freelance-media-prev {
-      left: 0.75rem;
-    }
-
-    .freelance-media-next {
-      right: 0.75rem;
-    }
-
-    .freelance-media-nav span {
-      font-size: 1.3rem;
-      line-height: 1;
-      margin-top: -0.1rem;
-    }
-
     .freelance-media-fallback-mark {
       width: 4.25rem;
       height: 4.25rem;
@@ -888,11 +825,6 @@ const terranima = {
 
     [data-theme="light"] .freelance-media-tab {
       color: rgba(15, 23, 42, 0.65);
-    }
-
-    [data-theme="light"] .freelance-media-nav {
-      background: rgba(255, 255, 255, 0.84);
-      color: var(--color-text);
     }
 
     [data-theme="light"] .freelance-modal-content,

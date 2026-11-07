@@ -193,8 +193,6 @@ function updatePageContent() {
     'freelance.ui.modalBack': t('freelance.ui.modalBack'),
     'freelance.ui.viewDesktop': t('freelance.ui.viewDesktop'),
     'freelance.ui.viewMobile': t('freelance.ui.viewMobile'),
-    'freelance.ui.prev': t('freelance.ui.prev'),
-    'freelance.ui.next': t('freelance.ui.next'),
     'freelance.ui.gallery': t('freelance.ui.gallery'),
     'projects.title': t('projects.title'),
     'projects.subtitle': t('projects.subtitle'),
