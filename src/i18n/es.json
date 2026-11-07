@@ -150,7 +150,8 @@
             "emergencies": "Urgencias — aviso urgente desde la familia por email o WhatsApp"
           },
           "media": {
-            "portal": "Vista general del portal Terrànima"
+            "desktop": "Vista de escritorio del portal Terrànima",
+            "mobile": "Vista móvil del portal Terrànima"
           }
         }
       },
@@ -163,7 +164,12 @@
         "modalOpen": "Ver detalles",
         "visitSite": "Visitar web",
         "visitPortal": "Ver portal",
-        "modalBack": "Volver"
+        "modalBack": "Volver",
+        "viewDesktop": "Escritorio",
+        "viewMobile": "Móvil",
+        "prev": "Anterior",
+        "next": "Siguiente",
+        "gallery": "Vistas del portal"
       }
     },
     "projects": {

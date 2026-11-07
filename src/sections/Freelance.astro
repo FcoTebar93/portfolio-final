@@ -16,11 +16,24 @@ const terranima = {
   //   'MySQL',
   //   'WP REST',
   // ],
-  video: {
-    src: '/freelance/terranima/portal-overview.mp4',
-    poster: '/freelance/terranima/portal-overview-poster.jpg',
-    altKey: 'freelance.items.terranima.media.portal',
-  },
+  slides: [
+    {
+      id: 'desktop',
+      src: '/freelance/terranima/portal-overview.mp4',
+      poster: '/freelance/terranima/portal-overview-poster.jpg',
+      altKey: 'freelance.items.terranima.media.desktop',
+      labelKey: 'freelance.ui.viewDesktop',
+      layout: 'landscape',
+    },
+    {
+      id: 'mobile',
+      src: '/freelance/terranima/portal-mobile.mp4',
+      poster: '/freelance/terranima/portal-mobile-poster.jpg',
+      altKey: 'freelance.items.terranima.media.mobile',
+      labelKey: 'freelance.ui.viewMobile',
+      layout: 'portrait',
+    },
+  ],
   featureKeys: [
     'roles',
     'assignment',
@@ -70,25 +83,79 @@ const terranima = {
       aria-haspopup="dialog"
     >
       <div class="freelance-media relative bg-primary/80" data-freelance-media>
-        <video
-          class="freelance-media-asset"
-          muted
-          playsinline
-          loop
-          preload="none"
-          poster={terranima.video.poster}
-          data-video-src={terranima.video.src}
-          aria-label={t(terranima.video.altKey)}
-          data-i18n-aria={terranima.video.altKey}
-          data-freelance-video
-        />
-        <div class="freelance-media-fallback" aria-hidden="true">
-          <span class="freelance-media-fallback-mark">TA</span>
-          <span class="freelance-media-fallback-label" data-i18n={terranima.video.altKey}>
-            {t(terranima.video.altKey)}
-          </span>
+        <div class="freelance-media-track" data-freelance-track>
+          {terranima.slides.map((slide, index) => (
+            <figure
+              class:list={[
+                'freelance-media-slide',
+                slide.layout === 'portrait' && 'is-portrait',
+                index === 0 && 'is-active',
+              ]}
+              data-freelance-slide
+              data-slide-index={index}
+              data-slide-layout={slide.layout}
+            >
+              <video
+                class="freelance-media-asset"
+                muted
+                playsinline
+                loop
+                preload="none"
+                poster={slide.poster}
+                data-video-src={slide.src}
+                aria-label={t(slide.altKey)}
+                data-i18n-aria={slide.altKey}
+                data-freelance-video
+              />
+              <div class="freelance-media-fallback" aria-hidden="true">
+                <span class="freelance-media-fallback-mark">TA</span>
+                <span class="freelance-media-fallback-label" data-i18n={slide.altKey}>
+                  {t(slide.altKey)}
+                </span>
+              </div>
+            </figure>
+          ))}
         </div>
+
         <div class="absolute inset-0 opacity-30 mix-blend-screen pointer-events-none freelance-card-glow" />
+
+        <div class="freelance-media-tabs" role="tablist" aria-label={t('freelance.ui.gallery')} data-i18n-aria="freelance.ui.gallery">
+          {terranima.slides.map((slide, index) => (
+            <button
+              type="button"
+              class:list={['freelance-media-tab', index === 0 && 'is-active']}
+              role="tab"
+              aria-selected={index === 0 ? 'true' : 'false'}
+              data-freelance-tab
+              data-slide-index={index}
+              data-freelance-carousel-control
+              data-i18n={slide.labelKey}
+            >
+              {t(slide.labelKey)}
+            </button>
+          ))}
+        </div>
+
+        <button
+          type="button"
+          class="freelance-media-nav freelance-media-prev"
+          data-freelance-prev
+          data-freelance-carousel-control
+          aria-label={t('freelance.ui.prev')}
+          data-i18n-aria="freelance.ui.prev"
+        >
+          <span aria-hidden="true">‹</span>
+        </button>
+        <button
+          type="button"
+          class="freelance-media-nav freelance-media-next"
+          data-freelance-next
+          data-freelance-carousel-control
+          aria-label={t('freelance.ui.next')}
+          data-i18n-aria="freelance.ui.next"
+        >
+          <span aria-hidden="true">›</span>
+        </button>
       </div>
 
       <div class="flex flex-col gap-5 p-5 sm:p-7 md:p-8 md:flex-row md:items-start md:justify-between md:gap-10">
@@ -308,37 +375,64 @@ const terranima = {
       if (!section) return;
 
       var media = section.querySelector('[data-freelance-media]');
-      var video = section.querySelector('[data-freelance-video]');
+      var slides = Array.prototype.slice.call(section.querySelectorAll('[data-freelance-slide]'));
+      var tabs = Array.prototype.slice.call(section.querySelectorAll('[data-freelance-tab]'));
       var card = section.querySelector('[data-freelance-open]');
-      var videoLoaded = false;
+      var activeIndex = 0;
+      var mediaInView = false;
       var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var scrollLockY = 0;
 
-      if (video) {
-        video.addEventListener('error', function () {
-          if (media && !video.getAttribute('poster')) media.classList.add('is-broken');
+      slides.forEach(function (slide) {
+        var videoEl = slide.querySelector('[data-freelance-video]');
+        if (!videoEl) return;
+        videoEl.addEventListener('error', function () {
+          if (!videoEl.getAttribute('poster')) slide.classList.add('is-broken');
         });
-        video.addEventListener('loadeddata', function () {
-          if (media) media.classList.remove('is-broken');
+        videoEl.addEventListener('loadeddata', function () {
+          slide.classList.remove('is-broken');
+        });
+      });
+
+      function pauseAllVideos() {
+        slides.forEach(function (slide) {
+          var videoEl = slide.querySelector('[data-freelance-video]');
+          if (!videoEl) return;
+          try { videoEl.pause(); } catch (e) {}
         });
       }
 
-      function loadAndPlayVideo() {
-        if (!video || reduceMotion || videoLoaded) return;
-        var src = video.getAttribute('data-video-src');
+      function loadAndPlayActiveVideo() {
+        if (reduceMotion || !mediaInView) return;
+        var slide = slides[activeIndex];
+        if (!slide) return;
+        var videoEl = slide.querySelector('[data-freelance-video]');
+        if (!videoEl) return;
+        var src = videoEl.getAttribute('data-video-src');
         if (!src) return;
-        videoLoaded = true;
-        video.src = src;
-        video.load();
-        var playPromise = video.play();
+        if (videoEl.getAttribute('src') !== src) {
+          videoEl.src = src;
+          videoEl.load();
+        }
+        var playPromise = videoEl.play();
         if (playPromise && typeof playPromise.catch === 'function') {
           playPromise.catch(function () {});
         }
       }
 
-      function pauseVideo() {
-        if (!video) return;
-        try { video.pause(); } catch (e) {}
+      function setActiveSlide(nextIndex) {
+        if (!slides.length) return;
+        activeIndex = (nextIndex + slides.length) % slides.length;
+        slides.forEach(function (slide, i) {
+          slide.classList.toggle('is-active', i === activeIndex);
+        });
+        tabs.forEach(function (tab, i) {
+          var isActive = i === activeIndex;
+          tab.classList.toggle('is-active', isActive);
+          tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+        pauseAllVideos();
+        loadAndPlayActiveVideo();
       }
 
       function lockBodyScroll() {
@@ -365,7 +459,7 @@ const terranima = {
 
       function openModal() {
         if (!modal) return;
-        pauseVideo();
+        pauseAllVideos();
         modal.classList.remove('hidden');
         modal.classList.remove('is-open');
         void modal.offsetWidth;
@@ -380,13 +474,18 @@ const terranima = {
         modal.classList.remove('is-open');
         modal.setAttribute('aria-hidden', 'true');
         unlockBodyScroll();
-        loadAndPlayVideo();
+        loadAndPlayActiveVideo();
       }
 
       if (card) {
         card.addEventListener('click', function (event) {
           var target = event.target;
-          if (target && target.closest && target.closest('[data-freelance-external-link]')) {
+          if (
+            target &&
+            target.closest &&
+            (target.closest('[data-freelance-external-link]') ||
+              target.closest('[data-freelance-carousel-control]'))
+          ) {
             return;
           }
           openModal();
@@ -394,19 +493,37 @@ const terranima = {
         card.addEventListener('keydown', function (event) {
           if (event.key === 'Enter' || event.key === ' ') {
             var target = event.target;
-            if (target && target.closest && target.closest('[data-freelance-external-link]')) {
+            if (
+              target &&
+              target.closest &&
+              (target.closest('[data-freelance-external-link]') ||
+                target.closest('[data-freelance-carousel-control]'))
+            ) {
               return;
             }
             event.preventDefault();
             openModal();
           }
         });
-        card.querySelectorAll('[data-freelance-external-link]').forEach(function (link) {
-          link.addEventListener('click', function (event) {
+        card.querySelectorAll('[data-freelance-external-link], [data-freelance-carousel-control]').forEach(function (el) {
+          el.addEventListener('click', function (event) {
             event.stopPropagation();
           });
         });
       }
+
+      section.querySelector('[data-freelance-prev]')?.addEventListener('click', function () {
+        setActiveSlide(activeIndex - 1);
+      });
+      section.querySelector('[data-freelance-next]')?.addEventListener('click', function () {
+        setActiveSlide(activeIndex + 1);
+      });
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          var target = Number(tab.getAttribute('data-slide-index') || 0);
+          setActiveSlide(target);
+        });
+      });
 
       document.getElementById('freelance-modal-close')?.addEventListener('click', closeModal);
       document.getElementById('freelance-modal-backdrop')?.addEventListener('click', closeModal);
@@ -456,7 +573,8 @@ const terranima = {
 
         if (reduceMotion || !('IntersectionObserver' in window)) {
           showFreelance();
-          loadAndPlayVideo();
+          mediaInView = true;
+          setActiveSlide(0);
           return;
         }
 
@@ -478,9 +596,11 @@ const terranima = {
           function (entries) {
             entries.forEach(function (entry) {
               if (entry.isIntersecting && modal && modal.classList.contains('hidden')) {
-                loadAndPlayVideo();
+                mediaInView = true;
+                loadAndPlayActiveVideo();
               } else if (!entry.isIntersecting) {
-                pauseVideo();
+                mediaInView = false;
+                pauseAllVideos();
               }
             });
           },
@@ -510,11 +630,34 @@ const terranima = {
         #161616;
     }
 
+    .freelance-media-track {
+      position: absolute;
+      inset: 0;
+    }
+
+    .freelance-media-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    .freelance-media-slide.is-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
     .freelance-media-asset {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+
+    .freelance-media-slide.is-portrait .freelance-media-asset {
+      object-fit: contain;
+      background: #0f0f0f;
     }
 
     .freelance-media-fallback {
@@ -529,12 +672,83 @@ const terranima = {
       text-align: center;
     }
 
-    .freelance-media.is-broken .freelance-media-asset {
+    .freelance-media-slide.is-broken .freelance-media-asset {
       display: none;
     }
 
-    .freelance-media.is-broken .freelance-media-fallback {
+    .freelance-media-slide.is-broken .freelance-media-fallback {
       display: flex;
+    }
+
+    .freelance-media-tabs {
+      position: absolute;
+      left: 50%;
+      bottom: 0.85rem;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      gap: 0.35rem;
+      padding: 0.3rem;
+      border-radius: 999px;
+      background: rgba(10, 10, 10, 0.55);
+      backdrop-filter: blur(8px);
+    }
+
+    .freelance-media-tab {
+      border: 0;
+      border-radius: 999px;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .freelance-media-tab.is-active,
+    .freelance-media-tab:hover {
+      color: var(--color-primary);
+      background: color-mix(in srgb, var(--color-accent) 92%, white);
+    }
+
+    .freelance-media-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      width: 2.15rem;
+      height: 2.15rem;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      background: rgba(26, 26, 26, 0.72);
+      color: var(--color-text);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+    }
+
+    .freelance-media-nav:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    .freelance-media-prev {
+      left: 0.75rem;
+    }
+
+    .freelance-media-next {
+      right: 0.75rem;
+    }
+
+    .freelance-media-nav span {
+      font-size: 1.3rem;
+      line-height: 1;
+      margin-top: -0.1rem;
     }
 
     .freelance-media-fallback-mark {
@@ -666,6 +880,19 @@ const terranima = {
         linear-gradient(145deg, rgba(123, 63, 94, 0.12), transparent 42%),
         linear-gradient(320deg, rgba(217, 164, 65, 0.1), transparent 50%),
         #F7F0E3;
+    }
+
+    [data-theme="light"] .freelance-media-tabs {
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    [data-theme="light"] .freelance-media-tab {
+      color: rgba(15, 23, 42, 0.65);
+    }
+
+    [data-theme="light"] .freelance-media-nav {
+      background: rgba(255, 255, 255, 0.84);
+      color: var(--color-text);
     }
 
     [data-theme="light"] .freelance-modal-content,
