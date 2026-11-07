@@ -1,0 +1,645 @@
+---
+import { t } from '../utils/i18n.ts';
+
+const terranima = {
+  id: 'terranima',
+  // Stack oculto de momento; descomentar para mostrarlo otra vez.
+  // tech: [
+  //   'React 18',
+  //   'TypeScript',
+  //   'Vite',
+  //   'Tailwind',
+  //   'WordPress',
+  //   'PHP 8.2',
+  //   'MySQL',
+  //   'WP REST',
+  // ],
+  video: {
+    src: '/freelance/terranima/portal-overview.mp4',
+    poster: '/freelance/terranima/portal-overview-poster.jpg',
+    altKey: 'freelance.items.terranima.media.portal',
+  },
+  featureKeys: [
+    'roles',
+    'assignment',
+    'animals',
+    'agenda',
+    'credits',
+    'docs',
+    'chats',
+    'emergencies',
+  ] as const,
+  familyKeys: ['home', 'animals', 'appointments', 'docs', 'chats'] as const,
+  proKeys: ['cases', 'appointments', 'docs', 'chats'] as const,
+};
+---
+
+<section id="freelance" class="py-16 sm:py-24 bg-secondary/40 overflow-x-clip">
+  <div class="max-w-5xl mx-auto">
+    <div class="flex items-baseline justify-between gap-4 mb-10 sm:mb-14">
+      <div>
+        <p
+          class="text-xs sm:text-sm uppercase tracking-[0.2em] text-accent font-mono mb-2"
+          data-i18n="freelance.title"
+        >
+          {t('freelance.title')}
+        </p>
+        <h2
+          class="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight"
+          data-i18n="freelance.subtitle"
+        >
+          {t('freelance.subtitle')}
+        </h2>
+      </div>
+    </div>
+
+    <article
+      class="freelance-card group cursor-pointer rounded-2xl border border-accent/15 bg-secondary overflow-hidden flex flex-col hover:border-accent hover:shadow-xl transition-all duration-300"
+      data-freelance-id={terranima.id}
+      data-freelance-open
+      role="button"
+      tabindex="0"
+      aria-haspopup="dialog"
+    >
+      <div class="freelance-media relative bg-primary/80" data-freelance-media>
+        <video
+          class="freelance-media-asset"
+          muted
+          playsinline
+          loop
+          preload="none"
+          poster={terranima.video.poster}
+          data-video-src={terranima.video.src}
+          aria-label={t(terranima.video.altKey)}
+          data-i18n-aria={terranima.video.altKey}
+          data-freelance-video
+        />
+        <div class="freelance-media-fallback" aria-hidden="true">
+          <span class="freelance-media-fallback-mark">TA</span>
+          <span class="freelance-media-fallback-label" data-i18n={terranima.video.altKey}>
+            {t(terranima.video.altKey)}
+          </span>
+        </div>
+        <div class="absolute inset-0 opacity-30 mix-blend-screen pointer-events-none freelance-card-glow" />
+      </div>
+
+      <div class="flex flex-col gap-5 p-5 sm:p-7 md:p-8 md:flex-row md:items-start md:justify-between md:gap-10">
+        <div class="min-w-0 flex-1">
+          <p
+            class="text-[0.7rem] uppercase tracking-[0.18em] text-accent font-mono mb-2"
+            data-i18n={`freelance.items.${terranima.id}.role`}
+          >
+            {t(`freelance.items.${terranima.id}.role`)}
+          </p>
+          <h3
+            class="text-xl sm:text-2xl font-semibold mb-3 group-hover:text-accent transition-colors"
+            data-i18n={`freelance.items.${terranima.id}.name`}
+          >
+            {t(`freelance.items.${terranima.id}.name`)}
+          </h3>
+          <p
+            class="text-sm sm:text-base text-muted leading-relaxed max-w-3xl"
+            data-i18n={`freelance.items.${terranima.id}.description`}
+          >
+            {t(`freelance.items.${terranima.id}.description`)}
+          </p>
+          <p
+            class="mt-4 text-sm font-medium text-accent"
+            data-i18n="freelance.ui.modalOpen"
+          >
+            {t('freelance.ui.modalOpen')}
+          </p>
+        </div>
+
+        {/* Stack comentado de momento
+        <div class="flex flex-wrap gap-1.5 md:max-w-xs md:justify-end shrink-0">
+          {terranima.tech.map((tag) => (
+            <span class="tag">{tag}</span>
+          ))}
+        </div>
+        */}
+      </div>
+    </article>
+  </div>
+
+  <div
+    id="freelance-modal"
+    class="fixed inset-0 z-40 hidden freelance-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-label={t('freelance.ui.cardModalLabel')}
+    aria-hidden="true"
+  >
+    <button
+      type="button"
+      id="freelance-modal-backdrop"
+      class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+      aria-label={t('freelance.ui.modalBack')}
+      data-i18n-aria="freelance.ui.modalBack"
+    />
+    <div class="relative z-10 flex min-h-full items-center justify-center px-7 sm:px-8 md:px-4 py-6 sm:py-8 pointer-events-none">
+      <div class="freelance-modal-content pointer-events-auto relative max-w-3xl w-full bg-secondary rounded-2xl border border-accent/25 shadow-2xl flex flex-col overflow-hidden">
+        <div class="freelance-modal-scroll flex-1 min-h-0 overflow-y-auto overscroll-y-contain">
+          <div class="freelance-modal-header relative p-6 sm:p-8 overflow-hidden">
+            <div class="absolute inset-0 opacity-55 pointer-events-none freelance-modal-header-glow" />
+            <div class="relative z-10">
+              <p
+                class="text-[0.7rem] uppercase tracking-[0.18em] text-accent font-mono mb-2"
+                data-i18n={`freelance.items.${terranima.id}.role`}
+              >
+                {t(`freelance.items.${terranima.id}.role`)}
+              </p>
+              <h3
+                class="text-2xl sm:text-3xl font-semibold mb-3"
+                data-i18n={`freelance.items.${terranima.id}.name`}
+              >
+                {t(`freelance.items.${terranima.id}.name`)}
+              </h3>
+              <p
+                class="text-sm text-muted max-w-2xl leading-relaxed"
+                data-i18n={`freelance.items.${terranima.id}.description`}
+              >
+                {t(`freelance.items.${terranima.id}.description`)}
+              </p>
+            </div>
+          </div>
+
+          <div class="p-6 sm:p-7 flex flex-col gap-6">
+            <section class="space-y-2">
+              <h4
+                class="text-sm font-semibold text-accent tracking-[0.18em] uppercase"
+                data-i18n="freelance.ui.modalOverview"
+              >
+                {t('freelance.ui.modalOverview')}
+              </h4>
+              <p
+                class="text-sm text-muted leading-relaxed"
+                data-i18n={`freelance.items.${terranima.id}.overview`}
+              >
+                {t(`freelance.items.${terranima.id}.overview`)}
+              </p>
+            </section>
+
+            <section class="space-y-3">
+              <h4
+                class="text-sm font-semibold text-accent tracking-[0.18em] uppercase"
+                data-i18n="freelance.ui.modalSections"
+              >
+                {t('freelance.ui.modalSections')}
+              </h4>
+              <div class="grid gap-4 sm:grid-cols-2">
+                <div class="freelance-section-panel rounded-xl border border-accent/15 p-4">
+                  <p
+                    class="text-[0.7rem] uppercase tracking-[0.18em] text-accent font-mono mb-3"
+                    data-i18n={`freelance.items.${terranima.id}.familyTitle`}
+                  >
+                    {t(`freelance.items.${terranima.id}.familyTitle`)}
+                  </p>
+                  <ul class="space-y-2">
+                    {terranima.familyKeys.map((key) => (
+                      <li
+                        class="text-sm text-muted leading-relaxed pl-3 border-l border-accent/25"
+                        data-i18n={`freelance.items.${terranima.id}.family.${key}`}
+                      >
+                        {t(`freelance.items.${terranima.id}.family.${key}`)}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div class="freelance-section-panel rounded-xl border border-accent/15 p-4">
+                  <p
+                    class="text-[0.7rem] uppercase tracking-[0.18em] text-accent font-mono mb-3"
+                    data-i18n={`freelance.items.${terranima.id}.proTitle`}
+                  >
+                    {t(`freelance.items.${terranima.id}.proTitle`)}
+                  </p>
+                  <ul class="space-y-2">
+                    {terranima.proKeys.map((key) => (
+                      <li
+                        class="text-sm text-muted leading-relaxed pl-3 border-l border-accent/25"
+                        data-i18n={`freelance.items.${terranima.id}.pro.${key}`}
+                      >
+                        {t(`freelance.items.${terranima.id}.pro.${key}`)}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            <section class="space-y-3">
+              <h4
+                class="text-sm font-semibold text-accent tracking-[0.18em] uppercase"
+                data-i18n="freelance.ui.modalFeatures"
+              >
+                {t('freelance.ui.modalFeatures')}
+              </h4>
+              <ul class="space-y-2">
+                {terranima.featureKeys.map((key) => (
+                  <li class="text-sm text-muted leading-relaxed flex gap-2">
+                    <span class="text-accent shrink-0" aria-hidden="true">▸</span>
+                    <span data-i18n={`freelance.items.${terranima.id}.features.${key}`}>
+                      {t(`freelance.items.${terranima.id}.features.${key}`)}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            {/* Stack comentado de momento
+            <section>
+              <h4
+                class="text-xs font-semibold text-muted/80 tracking-[0.22em] uppercase mb-2"
+                data-i18n="freelance.ui.modalTechnologies"
+              >
+                {t('freelance.ui.modalTechnologies')}
+              </h4>
+              <div class="flex flex-wrap gap-1.5">
+                {terranima.tech.map((tag) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            </section>
+            */}
+          </div>
+        </div>
+
+        <div class="freelance-modal-actions shrink-0 flex flex-wrap justify-end gap-3 p-4 sm:p-5 border-t border-accent/15 bg-secondary rounded-b-2xl">
+          <button
+            type="button"
+            id="freelance-modal-close"
+            class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-secondary text-muted text-xs sm:text-sm font-semibold border border-accent/40 hover:border-accent hover:text-accent hover:bg-primary/60 cursor-pointer transition-all hover:shadow-md hover:scale-[1.02] active:scale-[0.98]"
+            data-i18n="freelance.ui.modalBack"
+          >
+            {t('freelance.ui.modalBack')}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    (function () {
+      var section = document.getElementById('freelance');
+      var modal = document.getElementById('freelance-modal');
+      if (!section) return;
+
+      var media = section.querySelector('[data-freelance-media]');
+      var video = section.querySelector('[data-freelance-video]');
+      var card = section.querySelector('[data-freelance-open]');
+      var videoLoaded = false;
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var scrollLockY = 0;
+
+      if (video) {
+        video.addEventListener('error', function () {
+          if (media && !video.getAttribute('poster')) media.classList.add('is-broken');
+        });
+        video.addEventListener('loadeddata', function () {
+          if (media) media.classList.remove('is-broken');
+        });
+      }
+
+      function loadAndPlayVideo() {
+        if (!video || reduceMotion || videoLoaded) return;
+        var src = video.getAttribute('data-video-src');
+        if (!src) return;
+        videoLoaded = true;
+        video.src = src;
+        video.load();
+        var playPromise = video.play();
+        if (playPromise && typeof playPromise.catch === 'function') {
+          playPromise.catch(function () {});
+        }
+      }
+
+      function pauseVideo() {
+        if (!video) return;
+        try { video.pause(); } catch (e) {}
+      }
+
+      function lockBodyScroll() {
+        scrollLockY = window.scrollY || window.pageYOffset || 0;
+        document.documentElement.classList.add('overflow-hidden');
+        document.body.classList.add('overflow-hidden');
+        document.body.style.position = 'fixed';
+        document.body.style.top = '-' + scrollLockY + 'px';
+        document.body.style.left = '0';
+        document.body.style.right = '0';
+        document.body.style.width = '100%';
+      }
+
+      function unlockBodyScroll() {
+        document.documentElement.classList.remove('overflow-hidden');
+        document.body.classList.remove('overflow-hidden');
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollLockY);
+      }
+
+      function openModal() {
+        if (!modal) return;
+        pauseVideo();
+        modal.classList.remove('hidden');
+        modal.classList.remove('is-open');
+        void modal.offsetWidth;
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        lockBodyScroll();
+      }
+
+      function closeModal() {
+        if (!modal) return;
+        modal.classList.add('hidden');
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        unlockBodyScroll();
+        loadAndPlayVideo();
+      }
+
+      if (card) {
+        card.addEventListener('click', function () {
+          openModal();
+        });
+        card.addEventListener('keydown', function (event) {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openModal();
+          }
+        });
+      }
+
+      document.getElementById('freelance-modal-close')?.addEventListener('click', closeModal);
+      document.getElementById('freelance-modal-backdrop')?.addEventListener('click', closeModal);
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+          closeModal();
+        }
+      });
+
+      if (!reduceMotion) {
+        section.classList.add('freelance-pending');
+      } else {
+        section.classList.add('freelance-visible');
+      }
+
+      function showFreelance() {
+        section.classList.remove('freelance-pending');
+        section.classList.add('freelance-visible');
+      }
+
+      function isIntroComplete() {
+        return !document.body.classList.contains('preloader-active')
+          && !document.getElementById('page-curtain');
+      }
+
+      function whenIntroComplete(callback) {
+        if (isIntroComplete()) {
+          callback();
+          return;
+        }
+        var attempts = 0;
+        var timer = window.setInterval(function () {
+          attempts += 1;
+          if (isIntroComplete() || attempts > 160) {
+            window.clearInterval(timer);
+            callback();
+          }
+        }, 50);
+      }
+
+      function initReveal() {
+        if (!card) {
+          showFreelance();
+          return;
+        }
+
+        if (reduceMotion || !('IntersectionObserver' in window)) {
+          showFreelance();
+          loadAndPlayVideo();
+          return;
+        }
+
+        var revealObserver = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                showFreelance();
+                revealObserver.disconnect();
+              }
+            });
+          },
+          { threshold: 0.18, rootMargin: '0px 0px 60px 0px' }
+        );
+        revealObserver.observe(card);
+
+        var mediaTarget = media || card;
+        var videoObserver = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting && modal && modal.classList.contains('hidden')) {
+                loadAndPlayVideo();
+              } else if (!entry.isIntersecting) {
+                pauseVideo();
+              }
+            });
+          },
+          { threshold: 0.25, rootMargin: '120px 0px' }
+        );
+        videoObserver.observe(mediaTarget);
+      }
+
+      whenIntroComplete(initReveal);
+    })();
+  </script>
+
+  <style>
+    .freelance-card-glow {
+      background:
+        radial-gradient(circle at 12% 0%, rgba(56, 189, 248, 0.55), transparent 48%),
+        radial-gradient(circle at 88% 100%, rgba(123, 63, 94, 0.35), transparent 52%);
+    }
+
+    .freelance-media {
+      aspect-ratio: 16 / 9;
+      max-height: min(52vh, 420px);
+      overflow: hidden;
+      background:
+        linear-gradient(145deg, rgba(123, 63, 94, 0.22), transparent 42%),
+        linear-gradient(320deg, rgba(217, 164, 65, 0.16), transparent 50%),
+        #161616;
+    }
+
+    .freelance-media-asset {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .freelance-media-fallback {
+      position: absolute;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .freelance-media.is-broken .freelance-media-asset {
+      display: none;
+    }
+
+    .freelance-media.is-broken .freelance-media-fallback {
+      display: flex;
+    }
+
+    .freelance-media-fallback-mark {
+      width: 4.25rem;
+      height: 4.25rem;
+      border-radius: 1rem;
+      display: grid;
+      place-items: center;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: #F7F0E3;
+      background: #7B3F5E;
+      box-shadow: 0 12px 30px rgba(123, 63, 94, 0.35);
+    }
+
+    .freelance-media-fallback-label {
+      max-width: 18rem;
+      font-size: 0.85rem;
+      color: var(--color-muted);
+      line-height: 1.45;
+    }
+
+    .freelance-modal-header {
+      background:
+        linear-gradient(135deg, rgba(123, 63, 94, 0.28), transparent 55%),
+        linear-gradient(320deg, rgba(217, 164, 65, 0.18), transparent 50%),
+        var(--color-primary);
+    }
+
+    .freelance-modal-header-glow {
+      background:
+        radial-gradient(circle at 15% 20%, rgba(123, 63, 94, 0.55), transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(217, 164, 65, 0.35), transparent 50%);
+    }
+
+    .freelance-modal {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.34s ease-out;
+      overflow: hidden;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .freelance-modal.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .freelance-modal-content {
+      max-height: min(90dvh, 720px);
+      isolation: isolate;
+      transform: translate(0, 18px) scale(0.98);
+      transition: transform 0.42s cubic-bezier(0.22, 0.88, 0.3, 1);
+    }
+
+    .freelance-modal.is-open .freelance-modal-content {
+      transform: translate(0, 0) scale(1);
+    }
+
+    #freelance.freelance-pending .freelance-card {
+      opacity: 0;
+      transform: translateY(28px) scale(0.985);
+    }
+
+    #freelance.freelance-visible .freelance-card {
+      animation: freelance-card-enter 0.58s cubic-bezier(0.22, 0.88, 0.3, 1) forwards;
+    }
+
+    @keyframes freelance-card-enter {
+      from {
+        opacity: 0;
+        transform: translateY(28px) scale(0.985);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #freelance .freelance-card {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+      }
+
+      .freelance-modal-content {
+        transform: none !important;
+        transition: none !important;
+      }
+
+      .freelance-modal {
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .freelance-modal-content {
+        max-height: min(92dvh, 720px);
+      }
+
+      .freelance-modal-actions {
+        justify-content: stretch;
+      }
+
+      .freelance-modal-actions > * {
+        flex: 1 1 100%;
+      }
+    }
+
+    [data-theme="light"] #freelance {
+      background: var(--color-secondary);
+    }
+
+    [data-theme="light"] .freelance-card {
+      background: var(--color-surface);
+      border-color: var(--color-border);
+    }
+
+    [data-theme="light"] .freelance-card:hover {
+      border-color: var(--color-accent);
+      box-shadow: 0 10px 30px rgba(2, 132, 199, 0.14);
+    }
+
+    [data-theme="light"] .freelance-media {
+      background:
+        linear-gradient(145deg, rgba(123, 63, 94, 0.12), transparent 42%),
+        linear-gradient(320deg, rgba(217, 164, 65, 0.1), transparent 50%),
+        #F7F0E3;
+    }
+
+    [data-theme="light"] .freelance-modal-content,
+    [data-theme="light"] .freelance-modal-actions {
+      background: var(--color-surface);
+      border-color: var(--color-border);
+    }
+
+    [data-theme="light"] .freelance-section-panel {
+      background: color-mix(in srgb, var(--color-surface) 92%, #F7F0E3);
+    }
+  </style>
+</section>

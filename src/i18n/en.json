@@ -114,9 +114,58 @@
         "Automation & Integrations"
       ]
     },
+    "freelance": {
+      "title": "Freelance",
+      "subtitle": "Client work where I owned product and end-to-end development.",
+      "items": {
+        "terranima": {
+          "name": "Terrànima",
+          "role": "User portal",
+          "description": "Private portal for animal-care professionals and their clients.",
+          "overview": "A private area for a family animal-care service. Families manage pets, appointments, documents and conversations with their team, and professionals (educators / nutritionists) handle assigned cases, schedule, docs and chats — including an internal team chat.",
+          "familyTitle": "Family",
+          "proTitle": "Professional",
+          "family": {
+            "home": "Home — greeting, active pet, next appointment, credits and shortcuts",
+            "animals": "My pets — profiles (species, breed, weight, notes); tutor edits weight and notes",
+            "appointments": "Appointments — upcoming / new; status flow; credit consumption",
+            "docs": "Documents — file cabinet with search, filters and upload",
+            "chats": "Chats — conversations with professionals + emergencies"
+          },
+          "pro": {
+            "cases": "Cases — assigned families, profiles, create/edit pets",
+            "appointments": "Appointments — pending / schedule / new; confirm or reject",
+            "docs": "Documents — for assigned families",
+            "chats": "Chats — with families + internal team chat"
+          },
+          "features": {
+            "roles": "Dual roles family / educator / nutritionist, with their own permissions",
+            "assignment": "1:1 assignment — each family has one educator and one nutritionist",
+            "animals": "Pet profiles with photo and shared notes",
+            "agenda": "Appointment schedule with states: pending → confirmed / rejected / cancelled / completed",
+            "credits": "Session credits — packs (e.g. 8); consumed when booking, restored on cancel/reject",
+            "docs": "Private documents with categories",
+            "chats": "Family↔professional chats + internal team chat, with unread counts",
+            "emergencies": "Emergencies — urgent alerts from the family by email or WhatsApp"
+          },
+          "media": {
+            "portal": "Terrànima portal overview"
+          }
+        }
+      },
+      "ui": {
+        "cardModalLabel": "Terrànima details",
+        "modalOverview": "What it is",
+        "modalSections": "Portal sections",
+        "modalFeatures": "Highlights",
+        "modalTechnologies": "Stack",
+        "modalOpen": "View details",
+        "modalBack": "Back"
+      }
+    },
     "projects": {
-      "title": "Projects",
-      "subtitle": "Some recent projects I've been working on.",
+      "title": "Personal projects",
+      "subtitle": "Some recent personal projects I've been working on.",
       "items": {
         "mentorix": {
           "name": "Mentorix",

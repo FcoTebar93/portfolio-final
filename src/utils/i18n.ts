@@ -154,6 +154,39 @@ function updatePageContent() {
     'contact.form.subjectPlaceholder': t('contact.form.subjectPlaceholder'),
     'contact.form.messagePlaceholder': t('contact.form.messagePlaceholder'),
     'footer.copyright': t('footer.copyright'),
+    'freelance.title': t('freelance.title'),
+    'freelance.subtitle': t('freelance.subtitle'),
+    'freelance.items.terranima.name': t('freelance.items.terranima.name'),
+    'freelance.items.terranima.role': t('freelance.items.terranima.role'),
+    'freelance.items.terranima.description': t('freelance.items.terranima.description'),
+    'freelance.items.terranima.overview': t('freelance.items.terranima.overview'),
+    'freelance.items.terranima.familyTitle': t('freelance.items.terranima.familyTitle'),
+    'freelance.items.terranima.proTitle': t('freelance.items.terranima.proTitle'),
+    'freelance.items.terranima.family.home': t('freelance.items.terranima.family.home'),
+    'freelance.items.terranima.family.animals': t('freelance.items.terranima.family.animals'),
+    'freelance.items.terranima.family.appointments': t('freelance.items.terranima.family.appointments'),
+    'freelance.items.terranima.family.docs': t('freelance.items.terranima.family.docs'),
+    'freelance.items.terranima.family.chats': t('freelance.items.terranima.family.chats'),
+    'freelance.items.terranima.pro.cases': t('freelance.items.terranima.pro.cases'),
+    'freelance.items.terranima.pro.appointments': t('freelance.items.terranima.pro.appointments'),
+    'freelance.items.terranima.pro.docs': t('freelance.items.terranima.pro.docs'),
+    'freelance.items.terranima.pro.chats': t('freelance.items.terranima.pro.chats'),
+    'freelance.items.terranima.features.roles': t('freelance.items.terranima.features.roles'),
+    'freelance.items.terranima.features.assignment': t('freelance.items.terranima.features.assignment'),
+    'freelance.items.terranima.features.animals': t('freelance.items.terranima.features.animals'),
+    'freelance.items.terranima.features.agenda': t('freelance.items.terranima.features.agenda'),
+    'freelance.items.terranima.features.credits': t('freelance.items.terranima.features.credits'),
+    'freelance.items.terranima.features.docs': t('freelance.items.terranima.features.docs'),
+    'freelance.items.terranima.features.chats': t('freelance.items.terranima.features.chats'),
+    'freelance.items.terranima.features.emergencies': t('freelance.items.terranima.features.emergencies'),
+    'freelance.items.terranima.media.portal': t('freelance.items.terranima.media.portal'),
+    'freelance.ui.cardModalLabel': t('freelance.ui.cardModalLabel'),
+    'freelance.ui.modalOverview': t('freelance.ui.modalOverview'),
+    'freelance.ui.modalSections': t('freelance.ui.modalSections'),
+    'freelance.ui.modalFeatures': t('freelance.ui.modalFeatures'),
+    'freelance.ui.modalTechnologies': t('freelance.ui.modalTechnologies'),
+    'freelance.ui.modalOpen': t('freelance.ui.modalOpen'),
+    'freelance.ui.modalBack': t('freelance.ui.modalBack'),
     'projects.title': t('projects.title'),
     'projects.subtitle': t('projects.subtitle'),
     'projects.items.mentorix.name': t('projects.items.mentorix.name'),
@@ -180,6 +213,11 @@ function updatePageContent() {
     projectModal.setAttribute('aria-label', t('projects.ui.cardModalLabel'));
   }
 
+  const freelanceModal = document.getElementById('freelance-modal');
+  if (freelanceModal) {
+    freelanceModal.setAttribute('aria-label', t('freelance.ui.cardModalLabel'));
+  }
+
   Object.entries(translationsMap).forEach(([key, value]) => {
     const elements = document.querySelectorAll(`[data-i18n="${key}"]`);
     elements.forEach((el) => {
@@ -192,6 +230,16 @@ function updatePageContent() {
     if (key && (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement)) {
       el.placeholder = t(key);
     }
+  });
+
+  document.querySelectorAll('[data-i18n-aria]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-aria');
+    if (key) el.setAttribute('aria-label', t(key));
+  });
+
+  document.querySelectorAll('[data-i18n-alt]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-alt');
+    if (key && el instanceof HTMLImageElement) el.alt = t(key);
   });
 
   const typewriter = document.getElementById('typewriter');

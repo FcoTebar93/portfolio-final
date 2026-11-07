@@ -114,9 +114,58 @@
         "Automatización e Integraciones"
       ]
     },
+    "freelance": {
+      "title": "Freelance",
+      "subtitle": "Trabajo con clientes donde he llevado producto y desarrollo de extremo a extremo.",
+      "items": {
+        "terranima": {
+          "name": "Terrànima",
+          "role": "Portal de usuarios",
+          "description": "Portal privado para profesionales del mundo animal y sus clientes.",
+          "overview": "Área privada de un servicio de acompañamiento a familias con animales. Las familias gestionan animales, citas, documentos y charlas con su equipo, y los profesionales (educadores / nutricionistas) llevan casos asignados, agenda, docs y chats — incluido chat interno de equipo.",
+          "familyTitle": "Familia",
+          "proTitle": "Profesional",
+          "family": {
+            "home": "Inicio — saludo, animal activo, próxima cita, bonos y accesos rápidos",
+            "animals": "Mis animales — fichas (especie, raza, peso, notas); el tutor edita peso y notas",
+            "appointments": "Citas — próximas / nueva; flujo de estados; consumo de bono",
+            "docs": "Documentos — expediente con búsqueda, filtros y subida",
+            "chats": "Chats — conversaciones con profesionales + urgencias"
+          },
+          "pro": {
+            "cases": "Casos — familias asignadas, fichas, alta/edición de animales",
+            "appointments": "Citas — pendientes / agenda / nueva; confirmar o rechazar",
+            "docs": "Documentos — de las familias asignadas",
+            "chats": "Chats — con familias + chat interno del equipo"
+          },
+          "features": {
+            "roles": "Roles duales familia / educador / nutricionista, con permisos propios",
+            "assignment": "Asignación 1:1 — cada familia tiene un educador y un nutricionista",
+            "animals": "Fichas de animales con foto y notas compartidas",
+            "agenda": "Agenda de citas con estados: pendiente → confirmada / rechazada / cancelada / completada",
+            "credits": "Bonos de sesiones — pack (p. ej. 8); se consume al citar y se devuelve al cancelar/rechazar",
+            "docs": "Documentos privados con categorías",
+            "chats": "Chats familia↔profesional + interno de equipo, con no leídos",
+            "emergencies": "Urgencias — aviso urgente desde la familia por email o WhatsApp"
+          },
+          "media": {
+            "portal": "Vista general del portal Terrànima"
+          }
+        }
+      },
+      "ui": {
+        "cardModalLabel": "Detalles de Terrànima",
+        "modalOverview": "En qué consiste",
+        "modalSections": "Secciones del portal",
+        "modalFeatures": "Features destacables",
+        "modalTechnologies": "Stack",
+        "modalOpen": "Ver detalles",
+        "modalBack": "Volver"
+      }
+    },
     "projects": {
-      "title": "Proyectos",
-      "subtitle": "Algunos proyectos recientes en los que he trabajado.",
+      "title": "Proyectos personales",
+      "subtitle": "Algunos proyectos personales recientes en los que he trabajado.",
       "items": {
         "mentorix": {
           "name": "Mentorix",
